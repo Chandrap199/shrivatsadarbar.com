@@ -318,126 +318,241 @@ href="css/style.css">
                 SHOP BY COLLECTION
 ========================================================== -->
 
+<!-- =========================================================
+                PREMIUM COLLECTION SHOWCASE
+========================================================== -->
+
 <section class="collections-section">
 
     <div class="container">
 
         <div class="section-title">
 
-            <span>Our Divine Collection</span>
+            <span>OUR DIVINE COLLECTION</span>
 
             <h2>Shop by Collection</h2>
 
             <p>
-                Everything you need for your Laddu Gopal Ji,
-                beautifully handcrafted with devotion.
+                Handcrafted premium collections designed with devotion for
+                Laddu Gopal Ji.
             </p>
 
         </div>
 
-        <div class="collections-grid">
+        <div class="collection-showcase">
 
-            <a href="poshak.html" class="collection-card">
+            <!-- Large Poshak Card -->
 
-                <img src="images/products/poshak/poshak-001/poshak-001-hero.webp"
-                     alt="Poshak">
+            <a href="poshak.html" class="collection-card featured">
 
-                <h3>Poshak</h3>
+                <span class="collection-badge">
+                    ⭐ Best Seller
+                </span>
 
-                <p>Sizes 0 to 8</p>
+                <img
+                src="images/products/poshak/poshak-001/poshak-001-hero.webp"
+                alt="Premium Poshak">
 
-            </a>
+                <div class="collection-content">
 
-            <a href="mukut.html" class="collection-card">
+                    <h3>✨ Premium Poshak</h3>
 
-                <img src="images/products/mukut/mukut-001/mukut-001-front.webp"
-                     alt="Mukut">
+                    <p>Handcrafted Collection</p>
 
-                <h3>Mukut</h3>
+                    <p>Sizes 0–8 Available</p>
 
-                <p>Elegant Designs</p>
+                    <p>Multiple Colours</p>
 
-            </a>
+                    <span class="explore-btn">
+                        Explore Collection →
+                    </span>
 
-            <a href="necklace.html" class="collection-card">
-
-                <img src="images/products/necklace/necklace-001/necklace-001-hero.webp"
-                     alt="Necklace">
-
-                <h3>Jewellery</h3>
-
-                <p>Divine Ornaments</p>
+                </div>
 
             </a>
 
-            <a href="jhula.html" class="collection-card">
+            <!-- Two Cards -->
 
-                <img src="images/products/jhula/jhula-001/jhula-001-front.webp"
-                     alt="Jhula">
+            <div class="collection-row">
 
-                <h3>Jhula</h3>
+                <a href="mukut.html" class="collection-card">
 
-                <p>Beautiful & Strong</p>
+                    <img
+                    src="images/products/mukut/mukut-001/mukut-001-front.webp"
+                    alt="Mukut">
 
-            </a>
+                    <div class="collection-content">
 
-            <a href="earrings.html" class="collection-card">
+                        <h3>👑 Royal Mukut</h3>
 
-                <img src="images/products/earrings/earrings-001/earrings-001-front.webp"
-                     alt="Earrings">
+                        <p>Handcrafted Collection</p>
 
-                <h3>Earrings</h3>
+                        <p>Multiple Sizes</p>
 
-                <p>Traditional & Stylish</p>
+                        <p>Premium Finish</p>
 
-            </a>
+                        <span class="explore-btn">
+                            Explore Collection →
+                        </span>
 
-            <a href="flute.html" class="collection-card">
+                    </div>
 
-                <img src="images/products/flute/flute-001/flute-001-front.webp"
-                     alt="Flute">
+                </a>
 
-                <h3>Flute</h3>
+                <a href="necklace.html" class="collection-card">
 
-                <p>For Your Kanha</p>
+                    <img
+                    src="images/products/necklace/necklace-001/necklace-001-hero.webp"
+                    alt="Necklace">
 
-            </a>
+                    <div class="collection-content">
 
-            <a href="hair-accessories.html" class="collection-card">
+                        <h3>💎 Divine Necklace</h3>
 
-                <img src="images/products/hair-accessories/hair-001/hair-001-front.webp"
-                     alt="Hair Accessories">
+                        <p>Handcrafted Collection</p>
 
-                <h3>Hair Accessories</h3>
+                        <p>Multiple Styles</p>
 
-                <p>Elegant Finishing</p>
+                        <p>Elegant Finish</p>
 
-            </a>
+                        <span class="explore-btn">
+                            Explore Collection →
+                        </span>
 
-            <a href="rakhi.html" class="collection-card">
+                    </div>
 
-                <img src="images/products/rakhi/rakhi-001-front.webp"
-                     alt="Rakhi">
+                </a>
 
-                <h3>Rakhi</h3>
-
-                <p>Divine Threads</p>
-
-            </a>
-
-            <a href="accessories.html" class="collection-card">
-
-                <img src="images/products/accessories/accessories-001-front.webp"
-                     alt="Accessories">
-
-                <h3>Accessories</h3>
-
-                <p>Complete Shringar</p>
-
-            </a>
+            </div>
 
         </div>
 
     </div>
 
 </section>
+/*==========================================================
+PREMIUM COLLECTION SHOWCASE
+==========================================================*/
+
+.collections-section{
+    background:#fff;
+    padding:100px 0;
+}
+
+.collection-showcase{
+    display:flex;
+    flex-direction:column;
+    gap:35px;
+}
+
+.collection-row{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:35px;
+}
+
+.collection-card{
+    position:relative;
+    display:block;
+    overflow:hidden;
+    border-radius:24px;
+    background:#fff;
+    box-shadow:0 15px 40px rgba(0,0,0,.08);
+    transition:.4s ease;
+}
+
+.collection-card img{
+    width:100%;
+    height:420px;
+    object-fit:cover;
+    transition:.5s;
+}
+
+.collection-card:hover img{
+    transform:scale(1.08);
+}
+
+.collection-card:hover{
+    transform:translateY(-10px);
+    box-shadow:0 25px 60px rgba(0,0,0,.15);
+}
+
+.collection-content{
+    padding:30px;
+}
+
+.collection-content h3{
+    color:var(--primary);
+    margin-bottom:16px;
+    font-size:30px;
+}
+
+.collection-content p{
+    color:#666;
+    margin-bottom:10px;
+}
+
+.explore-btn{
+    display:inline-block;
+    margin-top:20px;
+    padding:12px 24px;
+    border:2px solid var(--gold);
+    border-radius:50px;
+    color:var(--primary);
+    font-weight:600;
+    transition:.3s;
+}
+
+.collection-card:hover .explore-btn{
+    background:var(--gold);
+    color:#fff;
+}
+
+.collection-badge{
+    position:absolute;
+    top:20px;
+    left:20px;
+    background:#caa24a;
+    color:#fff;
+    padding:10px 18px;
+    border-radius:50px;
+    font-size:14px;
+    font-weight:600;
+    z-index:2;
+}
+
+.featured img{
+    height:600px;
+}
+
+@media(max-width:992px){
+
+.collection-row{
+    grid-template-columns:1fr;
+}
+
+.featured img{
+    height:450px;
+}
+
+}
+
+@media(max-width:768px){
+
+.collection-content{
+    padding:22px;
+}
+
+.collection-content h3{
+    font-size:24px;
+}
+
+.collection-card img{
+    height:320px;
+}
+
+.featured img{
+    height:340px;
+}
+
+}
