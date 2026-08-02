@@ -472,11 +472,11 @@ overflow:hidden;
 
 display:grid;
 
-grid-template-columns:1.1fr .9fr;
+grid-template-columns:1fr 1fr;
 
 align-items:center;
 
-gap:70px;
+gap:90px;
 
 }
 
