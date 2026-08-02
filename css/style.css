@@ -944,10 +944,14 @@ PREMIUM COLLECTION SHOWCASE
 ==========================================================*/
 
 .collections-section{
-    background:#fff;
-    padding:100px 0;
-}
 
+    background:#ffffff;
+
+    padding:120px 0;
+
+    position:relative;
+
+}
 .collection-showcase{
     display:flex;
     flex-direction:column;
