@@ -1168,7 +1168,7 @@ position:absolute;
 
 left:50%;
 
-bottom:16px;
+bottom:-34px;
 
 transform:translateX(-50%);
 
@@ -1178,48 +1178,48 @@ align-items:center;
 
 justify-content:center;
 
-gap:10px;
-
-width:100%;
+gap:14px;
 
 z-index:50;
-
-pointer-events:auto;
 
 }
 
 .hero-dot{
 
-width:12px;
+width:11px;
 
-height:12px;
+height:11px;
 
 border-radius:50%;
 
-background:rgba(255,255,255,.45);
+background:rgba(202,162,74,.30);
 
-border:2px solid rgba(255,255,255,.75);
+border:2px solid rgba(202,162,74,.55);
 
 cursor:pointer;
 
-transition:.35s ease;
+transition:all .35s ease;
 
 }
-
 .hero-dot.active{
 
 background:#caa24a;
 
 border-color:#caa24a;
 
-transform:scale(1.25);
+transform:scale(1.45);
+
+box-shadow:
+0 0 14px rgba(202,162,74,.45);
 
 }
 
 .hero-dot:hover{
 
-background:#ffffff;
+background:#caa24a;
 
-transform:scale(1.15);
+border-color:#caa24a;
+
+transform:scale(1.25);
 
 }
