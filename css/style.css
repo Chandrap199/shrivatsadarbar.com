@@ -590,11 +590,13 @@ z-index:1;
 
 }
 
-.hero-image img{
+.hero-slide img{
 
 position:relative;
 
 z-index:2;
+
+display:block;
 
 width:100%;
 
@@ -609,7 +611,7 @@ drop-shadow(0 35px 60px rgba(0,0,0,.22));
 
 }
 
-.hero-image img:hover{
+.hero-slide.active img:hover{
 
 transform:scale(1.03);
 
@@ -618,7 +620,7 @@ drop-shadow(0 45px 80px rgba(0,0,0,.28));
 
 }
 
-.hero-image:hover img{
+.hero-slider:hover .hero-slide.active img{
 
 transform:
 translateY(-10px)
