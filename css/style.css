@@ -1533,3 +1533,106 @@ transform:scale(1.25);
     color:var(--primary);
 
 }
+
+/*======================================================
+        PREMIUM POSHAK COLLECTION PAGE
+======================================================*/
+
+.collection-hero{
+    padding:60px 0 40px;
+}
+
+.collection-hero-grid{
+    display:grid;
+    grid-template-columns:1.05fr .95fr;
+    gap:50px;
+    align-items:center;
+}
+
+.collection-tag{
+    display:inline-block;
+    background:#f6ecd5;
+    color:var(--primary);
+    padding:10px 18px;
+    border-radius:40px;
+    font-weight:600;
+    margin-bottom:18px;
+}
+
+.collection-hero-content h1{
+    font-size:56px;
+    line-height:1.05;
+    color:var(--primary);
+    margin-bottom:22px;
+}
+
+.collection-hero-content p{
+    font-size:18px;
+    color:#666;
+    line-height:1.9;
+    margin-bottom:35px;
+}
+
+.collection-features{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:18px;
+}
+
+.feature-card{
+    background:#fff;
+    border-radius:20px;
+    padding:20px;
+    display:flex;
+    gap:15px;
+    align-items:flex-start;
+    box-shadow:0 12px 30px rgba(0,0,0,.06);
+}
+
+.feature-card i{
+    font-size:22px;
+    color:var(--gold);
+}
+
+.feature-card h4{
+    margin:0 0 6px;
+    color:var(--primary);
+}
+
+.feature-card span{
+    color:#666;
+    font-size:14px;
+}
+
+.collection-hero-image img{
+    width:100%;
+    display:block;
+    border-radius:28px;
+    box-shadow:0 20px 45px rgba(0,0,0,.10);
+}
+
+.collection-products{
+    padding:60px 0;
+}
+
+.section-heading{
+    text-align:center;
+    margin-bottom:45px;
+}
+
+.section-heading span{
+    color:var(--gold);
+    font-weight:600;
+}
+
+.section-heading h2{
+    font-size:42px;
+    margin:12px 0;
+    color:var(--primary);
+}
+
+.section-heading p{
+    color:#666;
+    max-width:650px;
+    margin:auto;
+}
