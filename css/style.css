@@ -1006,10 +1006,10 @@ font-size:34px;
 }
 
 .featured .collection-content h3{
-    font-size:46px;
+    font-size:52px;
     color:var(--primary);
     margin-bottom:20px;
-    line-height:1.15;
+    line-height:1.1;
 }
 
 .featured .collection-content p{
