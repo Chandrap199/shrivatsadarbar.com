@@ -1801,3 +1801,122 @@ transform:scale(1.25);
 
 }
 
+/*======================================================
+        PREMIUM COLLECTION FINAL POLISH
+======================================================*/
+
+/* Premium Product Images */
+
+.collection-product-card .product-image{
+    aspect-ratio:4/5;
+    height:auto;
+    border-bottom:1px solid rgba(190,155,86,.15);
+}
+
+/* Luxury Card Hover */
+
+.collection-product-card{
+    border:1px solid transparent;
+}
+
+.collection-product-card:hover{
+    border-color:rgba(190,155,86,.35);
+}
+
+/* Premium Heart */
+
+.wishlist-btn{
+    width:42px;
+    height:42px;
+    background:#fff;
+    transition:.35s;
+}
+
+.wishlist-btn:hover{
+    background:var(--primary);
+    color:#fff;
+}
+
+/* Better Product Title */
+
+.product-content h3{
+
+    font-size:32px;
+
+    line-height:1.2;
+
+    margin-bottom:14px;
+
+}
+
+/* Better Product Description */
+
+.product-content p{
+
+    font-size:15px;
+
+    color:#777;
+
+}
+
+/* Luxury Button */
+
+.view-details-btn{
+
+    min-width:170px;
+
+}
+
+.view-details-btn::after{
+
+    content:" →";
+
+    transition:.3s;
+
+}
+
+.view-details-btn:hover::after{
+
+    margin-left:8px;
+
+}
+
+/* Premium CTA */
+
+.collection-cta{
+
+    margin-top:90px;
+
+    padding:70px;
+
+    border-radius:32px;
+
+    background:linear-gradient(135deg,#fffdf8,#f8f1e4);
+
+    text-align:center;
+
+    box-shadow:0 20px 50px rgba(0,0,0,.06);
+
+}
+
+.collection-cta h2{
+
+    font-size:44px;
+
+    color:var(--primary);
+
+    margin-bottom:20px;
+
+}
+
+.collection-cta p{
+
+    max-width:700px;
+
+    margin:auto auto 35px;
+
+    color:#666;
+
+    line-height:1.9;
+
+}
