@@ -116,24 +116,51 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const message = `🙏 Jai Shri Krishna
 
-Name: ${name}
+I would like to enquire about the following product.
 
-Mobile: ${phone}
+━━━━━━━━━━━━━━━━━━
 
-City / State: ${city}
+🛍 PRODUCT
+${productName}
 
-Product: ${productName}
+📏 SIZE
+${size}
 
-Size: ${size}
+🎨 PREFERRED COLOUR
+${colour || "Not specified"}
 
-Preferred Colour: ${colour || "Not specified"}
+━━━━━━━━━━━━━━━━━━
 
-Additional Notes:
+👤 CUSTOMER DETAILS
+
+Name:
+${name}
+
+📞 Mobile:
+${phone}
+
+📍 City / State:
+${city}
+
+━━━━━━━━━━━━━━━━━━
+
+📝 ADDITIONAL NOTES
+
 ${notes || "None"}
 
-Please share the price, availability and delivery timeline.
+━━━━━━━━━━━━━━━━━━
 
-Thank you. 🙏`;
+Kindly share:
+
+✅ Price
+
+✅ Availability
+
+✅ Estimated Dispatch Date (EDD)
+
+Thank you 🙏
+
+ShriVatsaDarbar`;
 
         const whatsappURL =
         "https://wa.me/918826196544?text=" +
