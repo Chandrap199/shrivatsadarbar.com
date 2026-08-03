@@ -1947,3 +1947,69 @@ transform:scale(1.25);
     line-height:1.9;
 
 }
+
+/* ========================================
+   PREMIUM CTA BUTTON
+======================================== */
+
+.collection-cta .whatsapp-btn{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    width:320px;
+
+    max-width:90%;
+
+    height:58px;
+
+    margin:30px auto;
+
+    border-radius:50px;
+
+    font-size:17px;
+
+    font-weight:600;
+
+}
+
+.cta-features{
+
+    display:flex;
+
+    justify-content:center;
+
+    gap:28px;
+
+    flex-wrap:wrap;
+
+    margin-top:25px;
+
+}
+
+.cta-features span{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:8px;
+
+    padding:12px 18px;
+
+    background:#fff;
+
+    border:1px solid rgba(190,155,86,.25);
+
+    border-radius:50px;
+
+    box-shadow:0 8px 18px rgba(0,0,0,.05);
+
+    font-size:14px;
+
+    color:var(--primary);
+
+}
