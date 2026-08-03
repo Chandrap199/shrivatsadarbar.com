@@ -961,7 +961,7 @@ font-size:34px;
 
 .featured{
     display:grid;
-    grid-template-columns:58% 42%;
+    grid-template-columns:62% 38%;
     align-items:center;
     overflow:hidden;
     border-radius:30px;
@@ -984,7 +984,7 @@ font-size:34px;
 }
 
 .featured .collection-content{
-    padding:60px;
+    padding:70px;
     display:flex;
     flex-direction:column;
     justify-content:center;
