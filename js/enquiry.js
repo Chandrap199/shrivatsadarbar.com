@@ -111,7 +111,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         const productName =
-            document.querySelector(".product-name")?.innerText ||
+    document.getElementById("popupProductName").innerText;
             "Premium Handmade Poshak";
 
         const message = `🙏 Jai Shri Krishna
