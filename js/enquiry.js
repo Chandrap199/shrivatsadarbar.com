@@ -150,7 +150,7 @@ ${notes || "None"}
 
 ━━━━━━━━━━━━━━━━━━
 
-Kindly share:
+Please share:
 
 ✅ Price
 
