@@ -74,3 +74,66 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
 });
+/*====================================================
+        WHATSAPP FORM SUBMISSION
+====================================================*/
+
+document.addEventListener("DOMContentLoaded", () => {
+
+    const form = document.getElementById("whatsappEnquiryForm");
+
+    if (!form) return;
+
+    form.addEventListener("submit", function(e){
+
+        e.preventDefault();
+
+        const name = document.getElementById("customerName").value.trim();
+        const phone = document.getElementById("customerPhone").value.trim();
+        const city = document.getElementById("customerCity").value.trim();
+        const size = document.getElementById("customerSize").value;
+        const colour = document.getElementById("customerColour").value.trim();
+        const notes = document.getElementById("customerMessage").value.trim();
+
+        if(name === "" || phone === "" || city === "" || size === ""){
+
+            alert("Please complete all required fields.");
+
+            return;
+
+        }
+
+        const productName =
+            document.querySelector(".product-name")?.innerText ||
+            "Premium Handmade Poshak";
+
+        const message = `🙏 Jai Shri Krishna
+
+Name: ${name}
+
+Mobile: ${phone}
+
+City / State: ${city}
+
+Product: ${productName}
+
+Size: ${size}
+
+Preferred Colour: ${colour || "Not specified"}
+
+Additional Notes:
+${notes || "None"}
+
+Please share the price, availability and delivery timeline.
+
+Thank you. 🙏`;
+
+        const whatsappURL =
+        "https://wa.me/918826196544?text=" +
+        encodeURIComponent(message);
+
+        window.open(whatsappURL, "_blank");
+
+    });
+
+});
