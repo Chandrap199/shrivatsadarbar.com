@@ -167,7 +167,8 @@ ShriVatsaDarbar`;
         encodeURIComponent(message);
 
         window.open(whatsappURL, "_blank");
-
+closeEnquiry();
+form.reset();
     });
 
 });
