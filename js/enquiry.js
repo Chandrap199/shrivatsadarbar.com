@@ -65,11 +65,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
         button.addEventListener("click", (e) => {
 
-            e.preventDefault();
+    e.preventDefault();
 
-            openEnquiry();
+    const productName = button.dataset.product;
+    const productImage = button.dataset.image;
 
-        });
+    document.getElementById("popupProductName").innerText = productName;
+
+    document.getElementById("popupProductImage").src = productImage;
+
+    openEnquiry();
+
+});
 
     });
 
