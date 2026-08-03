@@ -120,18 +120,18 @@ I would like to enquire about the following product.
 
 ━━━━━━━━━━━━━━━━━━
 
-🛍 PRODUCT
+🛍 Product
 ${productName}
 
-📏 SIZE
+📏 Size
 ${size}
 
-🎨 PREFERRED COLOUR
+🎨 Preferred Colour
 ${colour || "Not specified"}
 
 ━━━━━━━━━━━━━━━━━━
 
-👤 CUSTOMER DETAILS
+👤 Customer Details
 
 Name:
 ${name}
@@ -144,7 +144,7 @@ ${city}
 
 ━━━━━━━━━━━━━━━━━━
 
-📝 ADDITIONAL NOTES
+📝 Additional Notes
 
 ${notes || "None"}
 
