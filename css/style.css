@@ -1869,15 +1869,17 @@ transform:scale(1.25);
 
 .view-details-btn::after{
 
-    content:" →";
+    content:"→";
 
-    transition:.3s;
+    margin-left:8px;
+
+    transition:.3s ease;
 
 }
 
 .view-details-btn:hover::after{
 
-    margin-left:8px;
+    margin-left:12px;
 
 }
 
