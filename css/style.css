@@ -1420,7 +1420,7 @@ transform:scale(1.25);
 
 .product-layout{
     display:grid;
-    grid-template-columns:110px 1fr 460px;
+    grid-template-columns:100px 1fr 520px;
     gap:40px;
     align-items:start;
 }
