@@ -1484,3 +1484,76 @@ transform:scale(1.25);
 .product-highlights div{
     font-weight:500;
 }
+
+/*=========================================
+      PRODUCT INFO - PREMIUM DESIGN
+=========================================*/
+
+.product-info{
+
+    background:#ffffff;
+
+    border-radius:28px;
+
+    padding:55px;
+
+    box-shadow:0 25px 60px rgba(0,0,0,.08);
+
+}
+
+.product-name{
+
+    font-size:52px;
+
+    line-height:1.05;
+
+    color:var(--primary);
+
+    margin:18px 0 22px;
+
+    letter-spacing:-1px;
+
+}
+
+.product-short-description{
+
+    font-size:18px;
+
+    color:#666;
+
+    line-height:1.9;
+
+    margin-bottom:35px;
+
+}
+
+.product-features{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:18px;
+
+    margin-bottom:38px;
+
+}
+
+.feature-item{
+
+    font-size:17px;
+
+    color:#333;
+
+}
+
+.product-size h4{
+
+    font-size:20px;
+
+    margin-bottom:18px;
+
+    color:var(--primary);
+
+}
+
