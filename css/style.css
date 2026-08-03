@@ -1462,29 +1462,6 @@ transform:scale(1.25);
     box-shadow:0 15px 40px rgba(0,0,0,.08);
 }
 
-.product-info h2{
-    font-size:42px;
-    color:var(--primary);
-    margin:18px 0;
-    line-height:1.1;
-}
-
-.product-description{
-    color:#666;
-    line-height:1.8;
-    margin-bottom:28px;
-}
-
-.product-highlights{
-    display:grid;
-    gap:14px;
-    margin-bottom:30px;
-}
-
-.product-highlights div{
-    font-weight:500;
-}
-
 /*=========================================
       PRODUCT INFO - PREMIUM DESIGN
 =========================================*/
