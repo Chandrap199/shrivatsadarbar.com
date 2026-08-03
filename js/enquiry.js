@@ -112,6 +112,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const productName =
     document.getElementById("popupProductName").innerText;
+            
             "Premium Handmade Poshak";
 
         const message = `🙏 Jai Shri Krishna
@@ -160,15 +161,17 @@ Please share:
 
 Thank you 🙏
 
-ShriVatsaDarbar`;
-We look forward to serving you. 🌸
+ShriVatsaDarbar
+
+We look forward to serving you. 🌸`;
             
         const whatsappURL =
         "https://wa.me/918826196544?text=" +
         encodeURIComponent(message);
 
         window.open(whatsappURL, "_blank");
-closeEnquiry();
+enquiryModal.classList.remove("active");
+document.body.style.overflow = "";
 form.reset();
     });
 
