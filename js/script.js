@@ -98,3 +98,55 @@ document.addEventListener("DOMContentLoaded", () => {
     }, 4000);
 
 });
+
+/* ===========================================
+   PRODUCT WHATSAPP ORDER
+=========================================== */
+
+const whatsappButton = document.getElementById("whatsapp-order");
+
+if (whatsappButton) {
+
+    whatsappButton.addEventListener("click", function (e) {
+
+        e.preventDefault();
+
+        const productName = "Premium Handmade Poshak";
+        const price = "₹799";
+
+        let selectedSize = "Not Selected";
+
+        const activeSize = document.querySelector(".size-option.active");
+
+        if (activeSize) {
+            selectedSize = activeSize.textContent.trim();
+        }
+
+        const message =
+`🙏 Jai Shri Krishna
+
+I would like to order:
+
+Product: ${productName}
+
+Size: ${selectedSize}
+
+Price: ${price}
+
+Product Link:
+${window.location.href}
+
+Please share the payment details.
+
+Thank you.`;
+
+        const phone = "918826196544";
+
+        window.open(
+            `https://wa.me/${phone}?text=${encodeURIComponent(message)}`,
+            "_blank"
+        );
+
+    });
+
+}
