@@ -2075,9 +2075,9 @@ transform:scale(1.25);
 
     display:grid;
 
-    grid-template-columns:110px minmax(520px,1fr) 480px;
+    grid-template-columns:90px minmax(600px,1fr) 360px;
 
-    gap:35px;
+    gap:30px;
 
     align-items:flex-start;
 
@@ -2182,6 +2182,12 @@ transform:scale(1.25);
     position:sticky;
 
     top:120px;
+
+    width:100%;
+
+    max-width:360px;
+
+    align-self:start;
 
 }
 
