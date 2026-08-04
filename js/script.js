@@ -174,7 +174,9 @@ sizeButtons.forEach(button => {
 =========================================== */
 
 const thumbnails = document.querySelectorAll(".product-gallery img");
+console.log("Thumbnails found:", thumbnails.length);
 const mainImage = document.getElementById("mainProductImage");
+console.log("Main image:", mainImage);
 
 if (thumbnails.length && mainImage) {
 
