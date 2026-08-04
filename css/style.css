@@ -2075,7 +2075,7 @@ transform:scale(1.25);
 
     display:grid;
 
-    grid-template-columns:110px 1fr 430px;
+    grid-template-columns:110px minmax(520px,1fr) 480px;
 
     gap:35px;
 
