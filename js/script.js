@@ -169,3 +169,30 @@ sizeButtons.forEach(button => {
     });
 
 });
+/* ===========================================
+   PRODUCT IMAGE GALLERY
+=========================================== */
+
+const thumbnails = document.querySelectorAll(".product-gallery img");
+const mainImage = document.getElementById("mainProductImage");
+
+if (thumbnails.length && mainImage) {
+
+    thumbnails.forEach((thumb) => {
+
+        thumb.addEventListener("click", function () {
+
+            thumbnails.forEach((item) => {
+                item.classList.remove("active-thumb");
+            });
+
+            this.classList.add("active-thumb");
+
+            mainImage.src = this.dataset.image;
+            mainImage.alt = this.alt;
+
+        });
+
+    });
+
+}
