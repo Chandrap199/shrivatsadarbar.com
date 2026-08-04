@@ -2075,7 +2075,7 @@ transform:scale(1.25);
 
     display:grid;
 
-    grid-template-columns:90px minmax(600px,1fr) 360px;
+    grid-template-columns:90px minmax(600px,1fr) 340px;
 
     gap:30px;
 
@@ -2185,7 +2185,7 @@ transform:scale(1.25);
 
     width:100%;
 
-    max-width:360px;
+    max-width:340px;
 
     align-self:start;
 
@@ -2249,7 +2249,7 @@ transform:scale(1.25);
 
     flex-direction:column;
 
-    gap:24px;
+    gap:20px;
 
 }
 .feature-row{
@@ -2258,7 +2258,7 @@ transform:scale(1.25);
 
     align-items:flex-start;
 
-    gap:18px;
+    gap:16px;
 
 }
 
