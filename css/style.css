@@ -2364,7 +2364,17 @@ padding:35px;
 box-shadow:0 12px 35px rgba(0,0,0,.08);
 
 }
+.whatsapp-preview{
 
+    flex:0 0 340px;
+
+    max-width:340px;
+
+    margin:0 auto;
+
+    align-self:flex-start;
+
+}
 .how-it-works h2,
 .whatsapp-preview h2{
 
