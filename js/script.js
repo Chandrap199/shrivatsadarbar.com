@@ -196,4 +196,3 @@ if (thumbnails.length && mainImage) {
     });
 
 }
-alert("Script Loaded");
