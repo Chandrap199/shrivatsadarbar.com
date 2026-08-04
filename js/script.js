@@ -122,8 +122,7 @@ if (whatsappButton) {
             selectedSize = activeSize.textContent.trim();
         }
 
-        const message =
-Jai Shri Krishna 🙏
+        const message = `Jai Shri Krishna 🙏
 
 I would like to order:
 
@@ -139,7 +138,6 @@ ${window.location.href}
 Please share the payment details.
 
 Thank you.`;
-
         const phone = "918826196544";
 
         window.open(
