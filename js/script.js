@@ -57,3 +57,44 @@ document.addEventListener("DOMContentLoaded", () => {
     startSlider();
 
 });
+/*======================================================
+        ANNOUNCEMENT BAR ROTATION
+======================================================*/
+
+document.addEventListener("DOMContentLoaded", () => {
+
+    const announcement = document.getElementById("announcementText");
+
+    if (!announcement) return;
+
+    const messages = [
+
+        "🚚 Free Shipping on Orders Above ₹999",
+
+        "🪔 Handcrafted with Devotion in Varanasi",
+
+        "🇮🇳 Pan India Delivery Available",
+
+        "🔒 Secure WhatsApp Ordering"
+
+    ];
+
+    let index = 0;
+
+    setInterval(() => {
+
+        announcement.classList.add("fade");
+
+        setTimeout(() => {
+
+            index = (index + 1) % messages.length;
+
+            announcement.textContent = messages[index];
+
+            announcement.classList.remove("fade");
+
+        }, 600);
+
+    }, 4000);
+
+});
