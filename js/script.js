@@ -123,7 +123,7 @@ if (whatsappButton) {
         }
 
         const message =
-`🙏 Jai Shri Krishna
+Jai Shri Krishna 🙏
 
 I would like to order:
 
