@@ -116,7 +116,7 @@ if (whatsappButton) {
 
         let selectedSize = "Not Selected";
 
-        const activeSize = document.querySelector(".size-option.active");
+        const activeSize = document.querySelector(".size.active");
 
         if (activeSize) {
             selectedSize = activeSize.textContent.trim();
@@ -150,3 +150,22 @@ Thank you.`;
     });
 
 }
+/* ===========================================
+   PRODUCT SIZE SELECTION
+=========================================== */
+
+const sizeButtons = document.querySelectorAll(".size");
+
+sizeButtons.forEach(button => {
+
+    button.addEventListener("click", function () {
+
+        sizeButtons.forEach(btn => {
+            btn.classList.remove("active");
+        });
+
+        this.classList.add("active");
+
+    });
+
+});
