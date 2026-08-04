@@ -2061,6 +2061,79 @@ transform:scale(1.25);
     color:var(--primary);
 
 }
+/*======================================================
+        PREMIUM PRODUCT HERO
+======================================================*/
+
+.product-hero{
+
+    padding:40px 0 80px;
+
+}
+
+.product-hero-grid{
+
+    display:grid;
+
+    grid-template-columns:110px 1fr 430px;
+
+    gap:35px;
+
+    align-items:flex-start;
+
+}
+
+/*======================================================
+        PRODUCT THUMBNAIL GALLERY
+======================================================*/
+
+.product-gallery{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:16px;
+
+}
+
+.product-gallery img{
+
+    width:100%;
+
+    aspect-ratio:1/1;
+
+    object-fit:cover;
+
+    border-radius:18px;
+
+    background:#fff;
+
+    border:2px solid transparent;
+
+    cursor:pointer;
+
+    transition:all .35s ease;
+
+    box-shadow:0 8px 20px rgba(0,0,0,.08);
+
+}
+
+.product-gallery img:hover{
+
+    transform:translateY(-3px);
+
+    border-color:var(--gold);
+
+    box-shadow:0 15px 35px rgba(0,0,0,.12);
+
+}
+
+.product-gallery img.active-thumb{
+
+    border-color:var(--gold);
+
+}
 
 /*======================================================
         PREMIUM ENQUIRY POPUP
