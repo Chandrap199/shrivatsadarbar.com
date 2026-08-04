@@ -2237,6 +2237,98 @@ transform:scale(1.25);
 
 }
 
+/*==========================================
+            PRODUCT PURCHASE
+==========================================*/
+
+.product-price-box{
+    padding:26px 0;
+    border-top:1px solid #eee;
+    border-bottom:1px solid #eee;
+    margin:30px 0;
+}
+
+.product-price{
+    font-size:42px;
+    font-weight:700;
+    color:var(--primary);
+    line-height:1;
+}
+
+.product-mrp{
+    margin-top:10px;
+    color:#888;
+    font-size:15px;
+}
+
+.product-mrp span{
+    text-decoration:line-through;
+}
+
+.product-save{
+    display:inline-block;
+    margin-top:12px;
+    background:#edf8ef;
+    color:#1b7f3c;
+    padding:7px 14px;
+    border-radius:30px;
+    font-size:14px;
+    font-weight:600;
+}
+
+.product-option{
+    margin-bottom:30px;
+}
+
+.product-option h3{
+    font-size:16px;
+    margin-bottom:15px;
+    color:#333;
+}
+
+.size-options{
+    display:flex;
+    flex-wrap:wrap;
+    gap:12px;
+}
+
+.size{
+    width:46px;
+    height:46px;
+    border:1px solid #ddd;
+    border-radius:12px;
+    background:#fff;
+    cursor:pointer;
+    transition:.3s;
+    font-weight:600;
+}
+
+.size:hover,
+.size.active{
+    background:var(--primary);
+    color:#fff;
+    border-color:var(--primary);
+}
+
+.buy-whatsapp{
+    display:block;
+    width:100%;
+    text-align:center;
+    background:#25D366;
+    color:#fff;
+    text-decoration:none;
+    padding:18px;
+    border-radius:16px;
+    font-size:18px;
+    font-weight:700;
+    transition:.3s;
+}
+
+.buy-whatsapp:hover{
+    transform:translateY(-2px);
+    box-shadow:0 15px 35px rgba(37,211,102,.28);
+}
+
 /*======================================================
         PRODUCT FEATURES
 ======================================================*/
