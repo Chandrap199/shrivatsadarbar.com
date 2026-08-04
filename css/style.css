@@ -249,6 +249,55 @@ padding:10px 0;
 font-weight:500;
 
 }
+/*======================================================
+        GLOBAL ANNOUNCEMENT BAR
+======================================================*/
+
+.announcement-bar{
+
+    background:linear-gradient(90deg,#6D1B1B,#8B2E2E);
+
+    color:#fff;
+
+    height:38px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    overflow:hidden;
+
+    position:relative;
+
+    z-index:1001;
+
+}
+
+.announcement-text{
+
+    font-size:14px;
+
+    font-weight:600;
+
+    letter-spacing:.3px;
+
+    opacity:1;
+
+    transition:opacity .6s ease;
+
+    text-align:center;
+
+    padding:0 20px;
+
+}
+
+.announcement-text.fade{
+
+    opacity:0;
+
+}
 
 /*==============================
 HEADER
