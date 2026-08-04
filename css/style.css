@@ -2237,23 +2237,22 @@ transform:scale(1.25);
 
 .product-features{
 
-    margin:35px 0;
+    margin:36px 0;
 
     display:flex;
 
     flex-direction:column;
 
-    gap:18px;
+    gap:24px;
 
 }
-
 .feature-row{
 
     display:flex;
 
     align-items:flex-start;
 
-    gap:16px;
+    gap:18px;
 
 }
 
@@ -2287,7 +2286,7 @@ transform:scale(1.25);
 
     color:var(--primary);
 
-    margin-bottom:4px;
+    margin-bottom:6px;
 
 }
 
@@ -2297,7 +2296,9 @@ transform:scale(1.25);
 
     color:#777;
 
-    line-height:1.6;
+    line-height:1.5;
+
+margin:0;
 
 }
 
