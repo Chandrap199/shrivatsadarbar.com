@@ -112,8 +112,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const productName =
     document.getElementById("popupProductName").innerText;
-            
-            "Premium Handmade Poshak";
 
         const message = `🙏 Jai Shri Krishna
 
