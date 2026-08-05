@@ -98,7 +98,8 @@ document.addEventListener("DOMContentLoaded", () => {
         const name = document.getElementById("customerName").value.trim();
         const phone = document.getElementById("customerPhone").value.trim();
         const city = document.getElementById("customerCity").value.trim();
-        const size = document.getElementById("customerSize").value;
+        const sizeField = document.getElementById("customerSize");
+const size = sizeField ? sizeField.value : "";
         const colour = document.getElementById("customerColour").value.trim();
         const notes = document.getElementById("customerMessage").value.trim();
 
