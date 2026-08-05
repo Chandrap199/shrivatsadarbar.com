@@ -10,9 +10,12 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!enquiryModal) return;
 
     const overlay = enquiryModal.querySelector(".enquiry-overlay");
+const closeBtn = document.getElementById("closeEnquiry");
 
-    const closeBtn = document.getElementById("closeEnquiry");
-
+if (!overlay || !closeBtn) {
+    console.error("Enquiry popup HTML is incomplete.");
+    return;
+}
     /* ======================================
             OPEN POPUP
     ====================================== */
