@@ -63,7 +63,7 @@ if (!overlay || !closeBtn) {
     ====================================== */
 
     const enquiryButtons = document.querySelectorAll(".enquiry-btn");
-
+console.log("Buttons found:", enquiryButtons.length);
     enquiryButtons.forEach(button => {
 
         button.addEventListener("click", (e) => {
