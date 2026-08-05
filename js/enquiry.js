@@ -103,14 +103,21 @@ const size = sizeField ? sizeField.value : "";
         const colour = document.getElementById("customerColour").value.trim();
         const notes = document.getElementById("customerMessage").value.trim();
 
-        if(name === "" || phone === "" || city === "" || size === ""){
+        if (name === "" || phone === "" || city === "") {
 
-            alert("Please complete all required fields.");
+    alert("Please complete all required fields.");
 
-            return;
+    return;
 
-        }
+}
 
+if (sizeField && size === "") {
+
+    alert("Please select a size.");
+
+    return;
+
+}
         const productName =
     document.getElementById("popupProductName").innerText;
 
