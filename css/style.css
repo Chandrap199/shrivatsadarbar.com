@@ -1723,6 +1723,15 @@ transform:scale(1.25);
     gap:30px;
 
 }
+/* Single Product Collection */
+
+.collection-grid:has(.collection-product-card:only-child){
+
+    grid-template-columns:420px;
+
+    justify-content:center;
+
+}
 
 .collection-product-card{
 
