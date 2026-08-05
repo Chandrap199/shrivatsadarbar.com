@@ -121,7 +121,14 @@ if (sizeField && size === "") {
         const productName =
     document.getElementById("popupProductName").innerText;
 
-        const message = `🙏 Jai Shri Krishna
+ const sizeText = size
+    ? `📏 Size
+${size}
+
+`
+    : "";
+
+const message = `🙏 Jai Shri Krishna
 
 I would like to enquire about the following product.
 
@@ -130,10 +137,7 @@ I would like to enquire about the following product.
 🛍 Product
 ${productName}
 
-📏 Size
-${size}
-
-🎨 Preferred Colour
+${sizeText}🎨 Preferred Colour
 ${colour || "Not specified"}
 
 ━━━━━━━━━━━━━━━━━━
