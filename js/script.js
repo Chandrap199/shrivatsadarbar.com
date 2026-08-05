@@ -51,11 +51,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const hero = document.querySelector(".hero-slider");
 
+if (hero && slides.length && dots.length) {
+
     hero.addEventListener("mouseenter", stopSlider);
+
     hero.addEventListener("mouseleave", startSlider);
 
     startSlider();
 
+}
 });
 /*======================================================
         ANNOUNCEMENT BAR ROTATION
