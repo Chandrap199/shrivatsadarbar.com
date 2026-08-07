@@ -3186,6 +3186,7 @@ justify-content:center;
     align-items:center;
     cursor:pointer;
     text-align:left;
+    transition:.35s ease;
 }
 
 .faq-question span{
