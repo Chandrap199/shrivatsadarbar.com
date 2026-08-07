@@ -200,9 +200,9 @@ if (thumbnails.length && mainImage) {
     });
 
 }
-/*==========================================================
-                    FAQ ACCORDION
-==========================================================*/
+/* ==========================================
+   FAQ Accordion
+========================================== */
 
 const faqQuestions = document.querySelectorAll(".faq-question");
 
@@ -210,17 +210,33 @@ faqQuestions.forEach(question => {
 
     question.addEventListener("click", () => {
 
-        const faqItem = question.parentElement;
+        const item = question.parentElement;
 
-        // Close all other FAQ items
-        document.querySelectorAll(".faq-item").forEach(item => {
-            if (item !== faqItem) {
-                item.classList.remove("active");
+        document.querySelectorAll(".faq-item").forEach(faq => {
+
+            if (faq !== item) {
+
+                faq.classList.remove("active");
+
+                faq.querySelector("i").className = "fa-solid fa-plus";
+
             }
+
         });
 
-        // Toggle current item
-        faqItem.classList.toggle("active");
+        item.classList.toggle("active");
+
+        const icon = question.querySelector("i");
+
+        if (item.classList.contains("active")) {
+
+            icon.className = "fa-solid fa-minus";
+
+        } else {
+
+            icon.className = "fa-solid fa-plus";
+
+        }
 
     });
 
