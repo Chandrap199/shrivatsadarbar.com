@@ -224,7 +224,6 @@ faqItems.forEach(item => {
             }
 
         });
-
         item.classList.toggle("active");
 
         if(item.classList.contains("active")){
@@ -238,5 +237,59 @@ faqItems.forEach(item => {
         }
 
     });
+
+
+    /* ==========================================
+   FAQ CALLBACK WHATSAPP
+========================================== */
+
+document.addEventListener("DOMContentLoaded", () => {
+
+    const callbackForm = document.getElementById("callbackForm");
+
+    if (!callbackForm) return;
+
+    callbackForm.addEventListener("submit", function(e){
+
+        e.preventDefault();
+
+        const name = document.getElementById("cb-name").value.trim();
+        const phone = document.getElementById("cb-phone").value.trim();
+        const email = document.getElementById("cb-email").value.trim();
+        const message = document.getElementById("cb-message").value.trim();
+
+        const whatsappMessage =
+`🙏 Jai Shri Krishna
+
+Callback Request
+
+👤 Name:
+${name}
+
+📞 Mobile:
+${phone}
+
+📧 Email:
+${email || "Not Provided"}
+
+📝 Message:
+${message || "No additional message"}
+
+Please contact me as soon as possible.
+
+Thank you.
+`;
+
+        window.open(
+            "https://wa.me/918826196544?text=" +
+            encodeURIComponent(whatsappMessage),
+            "_blank"
+        );
+
+        callbackForm.reset();
+
+    });
+
+});
 
 });
