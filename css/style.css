@@ -1892,18 +1892,35 @@ transform:scale(1.25);
 .collection-product-card .product-image{
     aspect-ratio:4/5;
     height:auto;
+    overflow:hidden;
     border-bottom:1px solid rgba(190,155,86,.15);
 }
 
-/* Luxury Card Hover */
+/* Premium Card */
 
 .collection-product-card{
-    border:1px solid transparent;
+    border:1px solid rgba(190,155,86,.12);
+    transition:.35s ease;
 }
 
+/* Luxury Hover */
+
 .collection-product-card:hover{
+    transform:translateY(-10px);
     border-color:rgba(190,155,86,.35);
+    box-shadow:0 28px 60px rgba(0,0,0,.16);
 }
+
+/* Image Zoom */
+
+.collection-product-card img{
+    transition:.5s ease;
+}
+
+.collection-product-card:hover img{
+    transform:scale(1.05);
+}
+
 
 /* Premium Heart */
 
@@ -3336,7 +3353,7 @@ justify-content:center;
 /* COLLECTIONS PAGE HERO */
 
 .collection-hero{
-    padding:60px 0 40px;
+    padding:90px 0 50px;
 }
 
 .collection-hero-content{
