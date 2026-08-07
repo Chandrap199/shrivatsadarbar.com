@@ -3382,6 +3382,7 @@ justify-content:center;
     justify-content:flex-end;
     align-items:center;
     position:relative;
+    isolation:isolate;
 }
 .collection-hero-image img{
     width:100%;
