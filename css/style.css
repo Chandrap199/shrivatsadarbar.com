@@ -3336,7 +3336,7 @@ justify-content:center;
 /* COLLECTIONS PAGE HERO */
 
 .collection-hero{
-    padding:70px 0 90px;
+    padding:35px 0 70px;
 }
 
 .collection-hero-content{
@@ -3367,26 +3367,47 @@ justify-content:center;
 
 .collection-hero-image img{
     width:100%;
-    max-width:620px;
-    border-radius:24px;
-    box-shadow:0 25px 60px rgba(0,0,0,.15);
+    max-width:700px;
+    border-radius:28px;
+    box-shadow:0 30px 70px rgba(0,0,0,.18);
 }
 
 .hero-features{
     display:flex;
-    gap:40px;
-    margin-top:30px;
+    gap:28px;
+    margin-top:45px;
+    flex-wrap:wrap;
+}
+
+.hero-feature{
+    min-width:170px;
+    background:#fff;
+    border:1px solid rgba(202,162,74,.18);
+    border-radius:18px;
+    padding:20px;
+    text-align:center;
+    box-shadow:0 12px 28px rgba(0,0,0,.05);
+    transition:.35s ease;
+}
+
+.hero-feature:hover{
+    transform:translateY(-5px);
+    border-color:var(--gold);
+    box-shadow:0 18px 38px rgba(202,162,74,.18);
 }
 
 .hero-feature strong{
     display:block;
-    font-size:28px;
+    font-size:32px;
     color:var(--primary);
+    margin-bottom:8px;
 }
 
 .hero-feature span{
+    display:block;
     color:#666;
-    font-size:15px;
+    font-size:14px;
+    line-height:1.5;
 }
 
 @media(max-width:992px){
