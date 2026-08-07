@@ -201,24 +201,25 @@ if (thumbnails.length && mainImage) {
 
 }
 /* ==========================================
-   FAQ Accordion
+   PREMIUM FAQ ACCORDION
 ========================================== */
 
-const faqQuestions = document.querySelectorAll(".faq-question");
+const faqItems = document.querySelectorAll(".faq-item");
 
-faqQuestions.forEach(question => {
+faqItems.forEach(item => {
+
+    const question = item.querySelector(".faq-question");
+    const icon = item.querySelector("i");
 
     question.addEventListener("click", () => {
 
-        const item = question.parentElement;
+        faqItems.forEach(other => {
 
-        document.querySelectorAll(".faq-item").forEach(faq => {
+            if(other !== item){
 
-            if (faq !== item) {
+                other.classList.remove("active");
 
-                faq.classList.remove("active");
-
-                faq.querySelector("i").className = "fa-solid fa-plus";
+                other.querySelector("i").className="fa-solid fa-plus";
 
             }
 
@@ -226,15 +227,13 @@ faqQuestions.forEach(question => {
 
         item.classList.toggle("active");
 
-        const icon = question.querySelector("i");
+        if(item.classList.contains("active")){
 
-        if (item.classList.contains("active")) {
+            icon.className="fa-solid fa-minus";
 
-            icon.className = "fa-solid fa-minus";
+        }else{
 
-        } else {
-
-            icon.className = "fa-solid fa-plus";
+            icon.className="fa-solid fa-plus";
 
         }
 
