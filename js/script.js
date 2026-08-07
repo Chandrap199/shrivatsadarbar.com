@@ -216,30 +216,26 @@ faqItems.forEach(item => {
         faqItems.forEach(other => {
 
             if(other !== item){
-
                 other.classList.remove("active");
-
-                other.querySelector("i").className="fa-solid fa-plus";
-
+                other.querySelector("i").className = "fa-solid fa-plus";
             }
 
         });
+
         item.classList.toggle("active");
 
         if(item.classList.contains("active")){
-
-            icon.className="fa-solid fa-minus";
-
-        }else{
-
-            icon.className="fa-solid fa-plus";
-
+            icon.className = "fa-solid fa-minus";
+        } else {
+            icon.className = "fa-solid fa-plus";
         }
 
     });
 
+});
 
-    /* ==========================================
+
+/* ==========================================
    FAQ CALLBACK WHATSAPP
 ========================================== */
 
@@ -249,7 +245,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (!callbackForm) return;
 
-    callbackForm.addEventListener("submit", function(e){
+    callbackForm.addEventListener("submit", function (e) {
 
         e.preventDefault();
 
@@ -261,16 +257,11 @@ document.addEventListener("DOMContentLoaded", () => {
         const whatsappMessage =
 `🙏 Jai Shri Krishna
 
-Callback Request
+📞 Callback Request
 
-👤 Name:
-${name}
-
-📞 Mobile:
-${phone}
-
-📧 Email:
-${email || "Not Provided"}
+👤 Name: ${name}
+📱 Mobile: ${phone}
+📧 Email: ${email || "Not Provided"}
 
 📝 Message:
 ${message || "No additional message"}
@@ -280,16 +271,14 @@ Please contact me as soon as possible.
 Thank you.
 `;
 
-        window.open(
+        const whatsappURL =
             "https://wa.me/918826196544?text=" +
-            encodeURIComponent(whatsappMessage),
-            "_blank"
-        );
+            encodeURIComponent(whatsappMessage);
+
+        window.open(whatsappURL, "_blank");
 
         callbackForm.reset();
 
     });
-
-});
 
 });
