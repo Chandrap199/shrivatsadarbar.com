@@ -3227,3 +3227,108 @@ justify-content:center;
 .faq-item.active .faq-question i{
     transform:rotate(180deg);
 }
+
+/*==========================================================
+                FAQ CALLBACK SECTION
+==========================================================*/
+
+.faq-callback{
+    padding:80px 20px;
+    background:#fffdf8;
+}
+
+.callback-box{
+    max-width:760px;
+    margin:auto;
+    background:#fff;
+    border:1px solid #eee;
+    border-radius:20px;
+    padding:50px;
+    box-shadow:0 15px 40px rgba(0,0,0,.06);
+    text-align:center;
+}
+
+.callback-box span{
+    display:block;
+    color:#c9a227;
+    font-size:14px;
+    font-weight:600;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    margin-bottom:10px;
+}
+
+.callback-box h2{
+    font-family:'Cinzel',serif;
+    color:#6b0f1a;
+    font-size:38px;
+    margin-bottom:15px;
+}
+
+.callback-box p{
+    color:#666;
+    line-height:1.8;
+    margin-bottom:35px;
+}
+
+#callbackForm{
+    display:flex;
+    flex-direction:column;
+    gap:18px;
+}
+
+#callbackForm input,
+#callbackForm textarea{
+    width:100%;
+    padding:16px 18px;
+    border:1px solid #ddd;
+    border-radius:12px;
+    font-size:15px;
+    font-family:'Poppins',sans-serif;
+    transition:.3s;
+}
+
+#callbackForm input:focus,
+#callbackForm textarea:focus{
+    outline:none;
+    border-color:#d4af37;
+    box-shadow:0 0 0 4px rgba(212,175,55,.15);
+}
+
+#callbackForm textarea{
+    min-height:120px;
+    resize:vertical;
+}
+
+#callbackBtn{
+    background:#6b0f1a;
+    color:#fff;
+    border:none;
+    padding:18px;
+    border-radius:12px;
+    font-size:16px;
+    font-weight:600;
+    cursor:pointer;
+    transition:.3s;
+}
+
+#callbackBtn:hover{
+    background:#8a1823;
+    transform:translateY(-2px);
+}
+
+#callbackBtn i{
+    margin-right:8px;
+}
+
+@media(max-width:768px){
+
+.callback-box{
+    padding:30px 22px;
+}
+
+.callback-box h2{
+    font-size:28px;
+}
+
+}
