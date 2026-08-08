@@ -4493,14 +4493,21 @@ justify-content:center;
 
 
 /* ==========================================================
-   FAQ ANSWER
+   FAQ ANSWER — PREMIUM ACCORDION
 ========================================================== */
 
 .faq-answer{
-    padding:0 30px 26px;
+    max-height:0;
+    overflow:hidden;
+    padding:0 30px;
     color:#666;
     font-size:15px;
     line-height:1.85;
+    opacity:0;
+    transition:
+        max-height .4s ease,
+        padding .4s ease,
+        opacity .3s ease;
 }
 
 .faq-answer p{
@@ -4514,6 +4521,14 @@ justify-content:center;
 .faq-answer strong{
     color:#7a1f2b;
     font-weight:600;
+}
+
+/* OPEN FAQ ANSWER */
+
+.faq-item.active .faq-answer{
+    max-height:600px;
+    padding:0 30px 26px;
+    opacity:1;
 }
 
 
