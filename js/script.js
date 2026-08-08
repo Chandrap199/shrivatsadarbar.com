@@ -321,6 +321,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const searchOverlay = document.getElementById("searchOverlay");
     const searchClose = document.getElementById("searchClose");
     const searchInput = document.getElementById("siteSearchInput");
+    const searchResults = document.getElementById("searchResults");
 
     if (!searchToggle || !searchOverlay || !searchClose) {
         return;
@@ -390,3 +391,129 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
 });
+
+    /* =====================================================
+   SEARCH DATA
+===================================================== */
+
+const searchItems = [
+
+    {
+        name: "Premium Poshak",
+        keywords: "poshak dress clothes laddu gopal krishna bal gopal",
+        url: "collections/poshak.html"
+    },
+
+    {
+        name: "Royal Mukut",
+        keywords: "mukut crown kirti mukut laddu gopal krishna",
+        url: "collections/mukut.html"
+    },
+
+    {
+        name: "Necklace Collection",
+        keywords: "necklace jewellery jewelry haar laddu gopal krishna",
+        url: "collections/necklace.html"
+    },
+
+    {
+        name: "Earrings Collection",
+        keywords: "earrings jewellery jewelry kundan laddu gopal krishna",
+        url: "collections/earrings.html"
+    },
+
+    {
+        name: "Hair Accessories",
+        keywords: "hair accessories gajra laddu gopal krishna",
+        url: "collections/hair-accessories.html"
+    },
+
+    {
+        name: "Flute Collection",
+        keywords: "flute bansuri krishna laddu gopal",
+        url: "collections/flute.html"
+    },
+
+    {
+        name: "Jhula Collection",
+        keywords: "jhula swing palna hindola laddu gopal krishna",
+        url: "collections/jhula.html"
+    },
+
+    {
+        name: "Accessories",
+        keywords: "accessories shringar devotional laddu gopal krishna",
+        url: "collections/accessories.html"
+    },
+
+    {
+        name: "Rakhi Collection",
+        keywords: "rakhi raksha bandhan festival devotional krishna",
+        url: "collections/rakhi.html"
+    }
+
+];
+
+/* =====================================================
+   SEARCH FUNCTION
+===================================================== */
+
+if (searchInput && searchResults) {
+
+    searchInput.addEventListener("input", function () {
+
+        const query = this.value.trim().toLowerCase();
+
+        if (!query) {
+
+            searchResults.innerHTML = `
+                <p class="search-empty">
+                    Start typing to discover our collections.
+                </p>
+            `;
+
+            return;
+        }
+
+
+        const results = searchItems.filter(function (item) {
+
+            return (
+                item.name.toLowerCase().includes(query) ||
+                item.keywords.toLowerCase().includes(query)
+            );
+
+        });
+
+
+        if (results.length === 0) {
+
+            searchResults.innerHTML = `
+                <p class="search-empty">
+                    No matching collection found.
+                </p>
+            `;
+
+            return;
+        }
+
+
+        searchResults.innerHTML = results.map(function (item) {
+
+            return `
+                <a
+                    href="${item.url}"
+                    class="search-result-item">
+
+                    <i class="fa-solid fa-arrow-right"></i>
+
+                    <span>${item.name}</span>
+
+                </a>
+            `;
+
+        }).join("");
+
+    });
+
+}
