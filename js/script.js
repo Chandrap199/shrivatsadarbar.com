@@ -308,3 +308,85 @@ Thank you.
     }
 
 });
+
+
+
+/* =========================================================
+   PREMIUM SEARCH OVERLAY
+========================================================= */
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const searchToggle = document.getElementById("searchToggle");
+    const searchOverlay = document.getElementById("searchOverlay");
+    const searchClose = document.getElementById("searchClose");
+    const searchInput = document.getElementById("siteSearchInput");
+
+    if (!searchToggle || !searchOverlay || !searchClose) {
+        return;
+    }
+
+
+    /* Open Search */
+
+    searchToggle.addEventListener("click", function () {
+
+        searchOverlay.classList.add("active");
+
+        document.body.classList.add("search-open");
+
+        setTimeout(function () {
+
+            if (searchInput) {
+                searchInput.focus();
+            }
+
+        }, 300);
+
+    });
+
+
+    /* Close Search */
+
+    searchClose.addEventListener("click", function () {
+
+        searchOverlay.classList.remove("active");
+
+        document.body.classList.remove("search-open");
+
+    });
+
+
+    /* Close when clicking outside the panel */
+
+    searchOverlay.addEventListener("click", function (event) {
+
+        if (event.target === searchOverlay) {
+
+            searchOverlay.classList.remove("active");
+
+            document.body.classList.remove("search-open");
+
+        }
+
+    });
+
+
+    /* Close with Escape key */
+
+    document.addEventListener("keydown", function (event) {
+
+        if (
+            event.key === "Escape" &&
+            searchOverlay.classList.contains("active")
+        ) {
+
+            searchOverlay.classList.remove("active");
+
+            document.body.classList.remove("search-open");
+
+        }
+
+    });
+
+});
