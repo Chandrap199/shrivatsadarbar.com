@@ -5407,6 +5407,14 @@ justify-content:center;
     margin:0;
 }
 
+.contact-option-card small{
+    display:block;
+    margin-top:8px;
+    color:#8a1823;
+    font-size:12px;
+    font-weight:500;
+}
+
 
 /* ==========================================================
                 FINAL CTA
