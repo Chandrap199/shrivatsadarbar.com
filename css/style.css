@@ -6176,3 +6176,416 @@ justify-content:center;
     }
 
 }
+
+
+
+/* ==========================================================
+   PREMIUM SHIPPING POLICY
+========================================================== */
+
+.policy-hero{
+    padding:90px 20px 80px;
+    background:#fffdf8;
+    text-align:center;
+}
+
+.policy-hero .container{
+    max-width:900px;
+    margin:auto;
+}
+
+.policy-eyebrow{
+    display:inline-block;
+    margin-bottom:18px;
+    color:#b28b25;
+    font-size:13px;
+    font-weight:600;
+    letter-spacing:2px;
+}
+
+.policy-hero h1{
+    font-family:'Cinzel',serif;
+    color:#6b0f1a;
+    font-size:52px;
+    margin:0 0 18px;
+}
+
+.policy-hero p{
+    max-width:700px;
+    margin:0 auto 18px;
+    color:#666;
+    line-height:1.8;
+    font-size:16px;
+}
+
+.policy-hero small{
+    color:#777;
+}
+
+
+/* ==========================================================
+   POLICY LAYOUT
+========================================================== */
+
+.policy-section{
+    padding:80px 20px;
+    background:#fff;
+}
+
+.policy-layout{
+    max-width:1100px;
+    margin:auto;
+    display:grid;
+    grid-template-columns:minmax(0, 1fr) 300px;
+    gap:55px;
+    align-items:start;
+}
+
+.policy-content{
+    min-width:0;
+}
+
+.policy-block{
+    padding:0 0 55px;
+    margin-bottom:55px;
+    border-bottom:1px solid #eee;
+}
+
+.policy-block:last-child{
+    margin-bottom:0;
+}
+
+.policy-number{
+    display:block;
+    margin-bottom:12px;
+    color:#c9a227;
+    font-size:12px;
+    font-weight:600;
+    letter-spacing:2px;
+}
+
+.policy-block h2{
+    font-family:'Cinzel',serif;
+    color:#6b0f1a;
+    font-size:28px;
+    margin:0 0 20px;
+}
+
+.policy-block p{
+    color:#666;
+    font-size:15px;
+    line-height:1.9;
+    margin:0 0 18px;
+}
+
+.policy-block p:last-child{
+    margin-bottom:0;
+}
+
+.policy-block strong{
+    color:#6b0f1a;
+    font-weight:600;
+}
+
+.policy-block a{
+    color:#6b0f1a;
+    font-weight:600;
+    text-decoration:none;
+}
+
+.policy-block a:hover{
+    color:#c9a227;
+}
+
+
+/* ==========================================================
+   SHIPPING CHARGES
+========================================================== */
+
+.shipping-highlight{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:18px;
+    margin:28px 0;
+}
+
+.shipping-highlight > div{
+    padding:24px;
+    background:#fffdf8;
+    border:1px solid #eee4c8;
+    border-radius:14px;
+}
+
+.shipping-highlight strong{
+    display:block;
+    color:#6b0f1a;
+    font-family:'Cinzel',serif;
+    font-size:15px;
+    margin-bottom:8px;
+}
+
+.shipping-highlight span{
+    display:block;
+    color:#b28b25;
+    font-size:16px;
+    font-weight:600;
+}
+
+
+/* ==========================================================
+   POLICY SIDEBAR
+========================================================== */
+
+.policy-sidebar{
+    position:sticky;
+    top:120px;
+}
+
+.policy-card{
+    background:#fffdf8;
+    border:1px solid #eee4c8;
+    border-radius:18px;
+    padding:28px;
+    box-shadow:0 12px 35px rgba(0,0,0,.05);
+    margin-bottom:22px;
+}
+
+.policy-card > span,
+.policy-help-card > span{
+    display:block;
+    color:#b28b25;
+    font-size:11px;
+    font-weight:600;
+    letter-spacing:2px;
+    margin-bottom:12px;
+}
+
+.policy-card h3,
+.policy-help-card h3{
+    font-family:'Cinzel',serif;
+    color:#6b0f1a;
+    font-size:20px;
+    line-height:1.4;
+    margin:0 0 18px;
+}
+
+.policy-card ul{
+    list-style:none;
+    padding:0;
+    margin:0;
+}
+
+.policy-card li{
+    display:flex;
+    align-items:flex-start;
+    gap:10px;
+    color:#666;
+    font-size:14px;
+    line-height:1.7;
+    margin-bottom:14px;
+}
+
+.policy-card li:last-child{
+    margin-bottom:0;
+}
+
+.policy-card li i{
+    color:#c9a227;
+    margin-top:4px;
+}
+
+
+/* ==========================================================
+   HELP CARD
+========================================================== */
+
+.policy-help-card{
+    background:#6b0f1a;
+    border-radius:18px;
+    padding:30px;
+    color:#fff;
+    box-shadow:0 15px 35px rgba(107,15,26,.18);
+}
+
+.policy-help-card h3{
+    color:#fff;
+}
+
+.policy-help-card p{
+    color:rgba(255,255,255,.85);
+    font-size:14px;
+    line-height:1.7;
+    margin-bottom:22px;
+}
+
+.policy-help-card a{
+    display:inline-block;
+    background:#fff;
+    color:#6b0f1a;
+    padding:11px 18px;
+    border-radius:8px;
+    font-size:13px;
+    font-weight:600;
+    text-decoration:none;
+    transition:.3s ease;
+}
+
+.policy-help-card a:hover{
+    background:#f5ead0;
+}
+
+
+/* ==========================================================
+   POLICY CONTACT BOX
+========================================================== */
+
+.policy-contact-box{
+    margin-top:25px;
+    border:1px solid #eee;
+    border-radius:16px;
+    overflow:hidden;
+    background:#fffdf8;
+}
+
+.policy-contact-box > div{
+    display:flex;
+    align-items:center;
+    gap:15px;
+    padding:16px 20px;
+    border-bottom:1px solid #eee;
+}
+
+.policy-contact-box > div:last-child{
+    border-bottom:none;
+}
+
+.policy-contact-box i{
+    width:22px;
+    color:#6b0f1a;
+}
+
+.policy-contact-box span{
+    color:#777;
+    font-size:13px;
+    min-width:70px;
+}
+
+.policy-contact-box strong{
+    color:#555;
+    font-family:'Poppins',sans-serif;
+    font-size:14px;
+}
+
+
+/* ==========================================================
+   POLICY CTA
+========================================================== */
+
+.policy-cta{
+    padding:80px 20px;
+    background:#fffdf8;
+    text-align:center;
+}
+
+.policy-cta .container{
+    max-width:900px;
+    margin:auto;
+}
+
+.policy-cta > .container > span{
+    display:block;
+    color:#b28b25;
+    font-size:12px;
+    font-weight:600;
+    letter-spacing:2px;
+    margin-bottom:15px;
+}
+
+.policy-cta h2{
+    font-family:'Cinzel',serif;
+    color:#6b0f1a;
+    font-size:32px;
+    margin:0 0 18px;
+}
+
+.policy-cta p{
+    max-width:650px;
+    margin:0 auto 28px;
+    color:#666;
+    line-height:1.8;
+}
+
+.policy-cta .container > div{
+    display:flex;
+    justify-content:center;
+    gap:14px;
+    flex-wrap:wrap;
+}
+
+
+/* ==========================================================
+   MOBILE
+========================================================== */
+
+@media(max-width:900px){
+
+    .policy-layout{
+        grid-template-columns:1fr;
+        gap:40px;
+    }
+
+    .policy-sidebar{
+        position:static;
+    }
+
+}
+
+
+@media(max-width:600px){
+
+    .policy-hero{
+        padding:65px 20px 55px;
+    }
+
+    .policy-hero h1{
+        font-size:36px;
+    }
+
+    .policy-hero p{
+        font-size:14px;
+    }
+
+    .policy-section{
+        padding:55px 18px;
+    }
+
+    .policy-block{
+        padding-bottom:40px;
+        margin-bottom:40px;
+    }
+
+    .policy-block h2{
+        font-size:23px;
+    }
+
+    .shipping-highlight{
+        grid-template-columns:1fr;
+    }
+
+    .policy-contact-box > div{
+        align-items:flex-start;
+    }
+
+    .policy-contact-box span{
+        min-width:65px;
+    }
+
+    .policy-cta{
+        padding:60px 20px;
+    }
+
+    .policy-cta h2{
+        font-size:26px;
+    }
+
+}
