@@ -6524,6 +6524,52 @@ justify-content:center;
 
 
 /* ==========================================================
+   SHIPPING POLICY CTA BUTTONS
+========================================================== */
+
+.policy-cta .btn-primary,
+.policy-cta .btn-secondary{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+    min-height:46px;
+    padding:13px 24px;
+    border-radius:10px;
+    font-family:'Poppins',sans-serif;
+    font-size:13px;
+    font-weight:600;
+    text-decoration:none;
+    transition:.3s ease;
+}
+
+.policy-cta .btn-primary{
+    background:#6b0f1a;
+    color:#fff;
+    border:1px solid #6b0f1a;
+}
+
+.policy-cta .btn-primary:hover{
+    background:#8a1823;
+    transform:translateY(-2px);
+}
+
+.policy-cta .btn-secondary{
+    background:#fff;
+    color:#6b0f1a;
+    border:1px solid #d4af37;
+}
+
+.policy-cta .btn-secondary:hover{
+    background:#fffdf8;
+    transform:translateY(-2px);
+}
+
+.policy-cta .btn-secondary i{
+    color:#6b0f1a;
+}
+
+/* ==========================================================
    MOBILE
 ========================================================== */
 
