@@ -200,61 +200,83 @@ if (thumbnails.length && mainImage) {
     });
 
 }
+
 /* ==========================================
    PREMIUM FAQ ACCORDION
 ========================================== */
 
-const faqItems = document.querySelectorAll(".faq-item");
+document.addEventListener("DOMContentLoaded", () => {
 
-faqItems.forEach(item => {
+    const faqItems = document.querySelectorAll(".faq-item");
 
-    const question = item.querySelector(".faq-question");
-    const icon = item.querySelector("i");
+    faqItems.forEach(item => {
 
-    question.addEventListener("click", () => {
+        const question = item.querySelector(".faq-question");
+        const icon = question ? question.querySelector("i") : null;
 
-        faqItems.forEach(other => {
+        if (!question) return;
 
-            if(other !== item){
+        question.addEventListener("click", () => {
+
+            const isActive = item.classList.contains("active");
+
+            /* Close all FAQ items */
+            faqItems.forEach(other => {
+
                 other.classList.remove("active");
-                other.querySelector("i").className = "fa-solid fa-plus";
+
+                const otherIcon =
+                    other.querySelector(".faq-question i");
+
+                if (otherIcon) {
+                    otherIcon.className = "fa-solid fa-plus";
+                }
+
+            });
+
+            /* Open clicked item if it was closed */
+            if (!isActive) {
+
+                item.classList.add("active");
+
+                if (icon) {
+                    icon.className = "fa-solid fa-minus";
+                }
+
             }
 
         });
 
-        item.classList.toggle("active");
-
-        if(item.classList.contains("active")){
-            icon.className = "fa-solid fa-minus";
-        } else {
-            icon.className = "fa-solid fa-plus";
-        }
-
     });
 
-});
+
+    /* ==========================================
+       FAQ CALLBACK WHATSAPP
+    ========================================== */
+
+    const callbackForm =
+        document.getElementById("callbackForm");
+
+    if (callbackForm) {
+
+        callbackForm.addEventListener("submit", function (e) {
+
+            e.preventDefault();
+
+            const name =
+                document.getElementById("cb-name").value.trim();
+
+            const phone =
+                document.getElementById("cb-phone").value.trim();
+
+            const email =
+                document.getElementById("cb-email").value.trim();
+
+            const message =
+                document.getElementById("cb-message").value.trim();
 
 
-/* ==========================================
-   FAQ CALLBACK WHATSAPP
-========================================== */
-
-document.addEventListener("DOMContentLoaded", () => {
-
-    const callbackForm = document.getElementById("callbackForm");
-
-    if (!callbackForm) return;
-
-    callbackForm.addEventListener("submit", function (e) {
-
-        e.preventDefault();
-
-        const name = document.getElementById("cb-name").value.trim();
-        const phone = document.getElementById("cb-phone").value.trim();
-        const email = document.getElementById("cb-email").value.trim();
-        const message = document.getElementById("cb-message").value.trim();
-
-        const whatsappMessage =
+            const whatsappMessage =
 `🙏 Jai Shri Krishna
 
 📞 Callback Request
@@ -271,14 +293,18 @@ Please contact me as soon as possible.
 Thank you.
 `;
 
-        const whatsappURL =
-            "https://wa.me/918826196544?text=" +
-            encodeURIComponent(whatsappMessage);
 
-        window.open(whatsappURL, "_blank");
+            const whatsappURL =
+                "https://wa.me/918826196544?text=" +
+                encodeURIComponent(whatsappMessage);
 
-        callbackForm.reset();
 
-    });
+            window.open(whatsappURL, "_blank");
+
+            callbackForm.reset();
+
+        });
+
+    }
 
 });
