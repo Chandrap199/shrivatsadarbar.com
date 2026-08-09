@@ -1,1 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <title>Login | ShriVatsaDarbar</title>
+
+    <meta
+        name="description"
+        content="Login to your ShriVatsaDarbar account."
+    >
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+
+            font-family: Arial, sans-serif;
+
+            background:
+                linear-gradient(
+                    rgba(250, 247, 240, 0.94),
+                    rgba(250, 247, 240, 0.94)
+                );
+
+            color: #4b1717;
+        }
+
+        .auth-container {
+            width: 100%;
+            max-width: 440px;
+        }
+
+        .auth-card {
+            background: #ffffff;
+            border-radius: 18px;
+            padding: 38px 32px;
+
+            box-shadow:
+                0 18px 50px rgba(80, 40, 20, 0.12);
+
+            border: 1px solid rgba(190, 160, 90, 0.22);
+        }
+
+        .brand {
+            text-align: center;
+            margin-bottom: 28px;
+        }
+
+        .brand h1 {
+            font-family: Georgia, serif;
+            font-size: 30px;
+            letter-spacing: 1px;
+            color: #7c1717;
+        }
+
+        .brand p {
+            margin-top: 8px;
+            font-size: 13px;
+            color: #777;
+        }
+
+        .auth-title {
+            text-align: center;
+            margin-bottom: 26px;
+        }
+
+        .auth-title h2 {
+            font-family: Georgia, serif;
+            font-size: 26px;
+            color: #641616;
+        }
+
+        .auth-title p {
+            margin-top: 8px;
+            font-size: 14px;
+            color: #777;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 7px;
+            font-size: 13px;
+            font-weight: 600;
+            color: #5b3b32;
+        }
+
+        .input-wrapper {
+            position: relative;
+        }
+
+        .input-wrapper i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #b79643;
+        }
+
+        .input-wrapper input {
+            width: 100%;
+            padding: 13px 14px 13px 42px;
+
+            border: 1px solid #d9c79a;
+            border-radius: 9px;
+
+            outline: none;
+            font-size: 14px;
+
+            transition: 0.2s ease;
+        }
+
+        .input-wrapper input:focus {
+            border-color: #b79643;
+            box-shadow: 0 0 0 3px rgba(183, 150, 67, 0.10);
+        }
+
+        .password-toggle {
+            position: absolute;
+            right: 13px;
+            top: 50%;
+            transform: translateY(-50%);
+
+            border: none;
+            background: transparent;
+
+            color: #777;
+            cursor: pointer;
+        }
+
+        .forgot-password {
+            text-align: right;
+            margin-top: -8px;
+            margin-bottom: 20px;
+        }
+
+        .forgot-password a {
+            font-size: 13px;
+            color: #8a681c;
+            text-decoration: none;
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 14px;
+
+            border: none;
+            border-radius: 9px;
+
+            background: #7c1717;
+            color: #ffffff;
+
+            font-size: 15px;
+            font-weight: 600;
+
+            cursor: pointer;
+            transition: 0.25s ease;
+        }
+
+        .login-btn:hover {
+            background: #641010;
+        }
+
+        .login-btn:disabled {
+            opacity: 0.65;
+            cursor: not-allowed;
+        }
+
+        .message {
+            display: none;
+            margin-bottom: 18px;
+            padding: 11px 13px;
+
+            border-radius: 8px;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
+        .message.error {
+            display: block;
+            background: #fff0f0;
+            color: #9b2020;
+            border: 1px solid #f0caca;
+        }
+
+        .message.success {
+            display: block;
+            background: #eef9f0;
+            color: #26733a;
+            border: 1px solid #c8e6ce;
+        }
+
+        .signup-link {
+            text-align: center;
+            margin-top: 24px;
+
+            font-size: 14px;
+            color: #777;
+        }
+
+        .signup-link a {
+            color: #7c1717;
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        .back-home {
+            display: block;
+            text-align: center;
+            margin-top: 22px;
+
+            color: #777;
+            font-size: 13px;
+            text-decoration: none;
+        }
+
+        .back-home:hover,
+        .signup-link a:hover,
+        .forgot-password a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 480px) {
+
+            body {
+                padding: 16px;
+            }
+
+            .auth-card {
+                padding: 30px 22px;
+            }
+
+            .brand h1 {
+                font-size: 26px;
+            }
+
+            .auth-title h2 {
+                font-size: 23px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="auth-container">
+
+    <div class="auth-card">
+
+        <div class="brand">
+            <h1>ShriVatsaDarbar</h1>
+            <p>Where Every Shringar is an Offering</p>
+        </div>
+
+        <div class="auth-title">
+            <h2>Welcome Back</h2>
+            <p>Sign in to continue to your account</p>
+        </div>
+
+        <div id="message" class="message"></div>
+
+        <form id="loginForm">
+
+            <div class="form-group">
+
+                <label for="email">
+                    Email Address
+                </label>
+
+                <div class="input-wrapper">
+
+                    <i class="fa-regular fa-envelope"></i>
+
+                    <input
+                        type="email"
+                        id="email"
+                        placeholder="Enter your email"
+                        autocomplete="email"
+                        required
+                    >
+
+                </div>
+
+            </div>
+
+            <div class="form-group">
+
+                <label for="password">
+                    Password
+                </label>
+
+                <div class="input-wrapper">
+
+                    <i class="fa-solid fa-lock"></i>
+
+                    <input
+                        type="password"
+                        id="password"
+                        placeholder="Enter your password"
+                        autocomplete="current-password"
+                        required
+                    >
+
+                    <button
+                        type="button"
+                        class="password-toggle"
+                        id="togglePassword"
+                        aria-label="Show password"
+                    >
+                        <i class="fa-regular fa-eye"></i>
+                    </button>
+
+                </div>
+
+            </div>
+
+            <div class="forgot-password">
+                <a href="#" id="forgotPassword">
+                    Forgot Password?
+                </a>
+            </div>
+
+            <button
+                type="submit"
+                class="login-btn"
+                id="loginButton"
+            >
+                Sign In
+            </button>
+
+        </form>
+
+        <div class="signup-link">
+            Don't have an account?
+            <a href="signup.html">Create Account</a>
+        </div>
+
+    </div>
+
+    <a href="../index.html" class="back-home">
+        ← Back to ShriVatsaDarbar
+    </a>
+
+</div>
+
+<!-- Supabase -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script src="supabase-auth.js"></script>
+
+<script>
+
+    const loginForm = document.getElementById("loginForm");
+    const loginButton = document.getElementById("loginButton");
+    const message = document.getElementById("message");
+
+    const passwordInput = document.getElementById("password");
+    const togglePassword = document.getElementById("togglePassword");
+
+    function showMessage(text, type) {
+
+        message.textContent = text;
+        message.className = "message " + type;
+
+    }
+
+    togglePassword.addEventListener("click", function () {
+
+        const isPassword =
+            passwordInput.type === "password";
+
+        passwordInput.type =
+            isPassword ? "text" : "password";
+
+        this.innerHTML = isPassword
+            ? '<i class="fa-regular fa-eye-slash"></i>'
+            : '<i class="fa-regular fa-eye"></i>';
+
+    });
+
+    loginForm.addEventListener("submit", async function (event) {
+
+        event.preventDefault();
+
+        const email =
+            document.getElementById("email").value.trim();
+
+        const password =
+            passwordInput.value;
+
+        if (!email || !password) {
+
+            showMessage(
+                "Please enter your email and password.",
+                "error"
+            );
+
+            return;
+        }
+
+        loginButton.disabled = true;
+        loginButton.textContent = "Signing In...";
+
+        try {
+
+            const { data, error } =
+                await supabase.auth.signInWithPassword({
+                    email: email,
+                    password: password
+                });
+
+            if (error) {
+                throw error;
+            }
+
+            showMessage(
+                "Login successful. Redirecting...",
+                "success"
+            );
+
+            setTimeout(function () {
+
+                window.location.href =
+                    "account.html";
+
+            }, 800);
+
+        } catch (error) {
+
+            console.error(error);
+
+            showMessage(
+                error.message ||
+                "Unable to sign in. Please try again.",
+                "error"
+            );
+
+            loginButton.disabled = false;
+            loginButton.textContent = "Sign In";
+        }
+
+    });
+
+    document
+        .getElementById("forgotPassword")
+        .addEventListener("click", function (event) {
+
+            event.preventDefault();
+
+            alert(
+                "Password reset will be connected in the next step."
+            );
+
+        });
+
+</script>
+
+</body>
+</html>
