@@ -1,1 +1,2091 @@
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>My Account | ShriVatsaDarbar</title>
+
+    <meta
+        name="description"
+        content="Manage your ShriVatsaDarbar account, profile, orders and security."
+    >
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+
+        body {
+
+            min-height: 100vh;
+
+            font-family: Arial, sans-serif;
+
+            background: #faf7f0;
+
+            color: #4b1717;
+        }
+
+
+        /* ==================================================
+           PAGE LOADER
+        ================================================== */
+
+        .page-loader {
+
+            position: fixed;
+
+            inset: 0;
+
+            z-index: 9999;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            background: #faf7f0;
+
+            transition: opacity 0.3s ease;
+        }
+
+
+        .page-loader.hidden {
+
+            opacity: 0;
+
+            pointer-events: none;
+        }
+
+
+        .loader-content {
+
+            text-align: center;
+        }
+
+
+        .loader-content h2 {
+
+            font-family: Georgia, serif;
+
+            color: #7c1717;
+
+            font-size: 25px;
+
+            margin-bottom: 10px;
+        }
+
+
+        .loader-content p {
+
+            color: #777;
+
+            font-size: 13px;
+        }
+
+
+        .loader-spinner {
+
+            width: 34px;
+
+            height: 34px;
+
+            margin: 20px auto 0;
+
+            border: 3px solid #eadfc5;
+
+            border-top-color: #7c1717;
+
+            border-radius: 50%;
+
+            animation: spin 0.8s linear infinite;
+        }
+
+
+        @keyframes spin {
+
+            to {
+                transform: rotate(360deg);
+            }
+
+        }
+
+
+        /* ==================================================
+           HEADER
+        ================================================== */
+
+        .account-header {
+
+            position: sticky;
+
+            top: 0;
+
+            z-index: 100;
+
+            background: rgba(255, 255, 255, 0.96);
+
+            backdrop-filter: blur(10px);
+
+            border-bottom: 1px solid rgba(190, 160, 90, 0.20);
+
+            box-shadow:
+                0 4px 20px rgba(80, 40, 20, 0.05);
+        }
+
+
+        .header-inner {
+
+            max-width: 1180px;
+
+            margin: auto;
+
+            padding: 17px 24px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 20px;
+        }
+
+
+        .brand {
+
+            text-decoration: none;
+
+            color: #7c1717;
+        }
+
+
+        .brand h1 {
+
+            font-family: Georgia, serif;
+
+            font-size: 24px;
+
+            letter-spacing: 0.5px;
+        }
+
+
+        .brand span {
+
+            display: block;
+
+            margin-top: 3px;
+
+            font-size: 10px;
+
+            color: #9a8a70;
+
+            letter-spacing: 0.8px;
+        }
+
+
+        .header-actions {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+        }
+
+
+        .home-btn {
+
+            text-decoration: none;
+
+            color: #6f5550;
+
+            font-size: 13px;
+
+            padding: 9px 14px;
+
+            border: 1px solid #dfd3b7;
+
+            border-radius: 8px;
+
+            transition: 0.2s ease;
+        }
+
+
+        .home-btn:hover {
+
+            border-color: #b79643;
+
+            color: #7c1717;
+        }
+
+
+        /* ==================================================
+           MAIN
+        ================================================== */
+
+        .account-wrapper {
+
+            max-width: 1180px;
+
+            margin: 0 auto;
+
+            padding: 40px 24px 70px;
+        }
+
+
+        /* ==================================================
+           WELCOME
+        ================================================== */
+
+        .welcome-section {
+
+            margin-bottom: 30px;
+
+            padding: 32px;
+
+            border-radius: 18px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #ffffff,
+                    #fffaf0
+                );
+
+            border: 1px solid rgba(190, 160, 90, 0.22);
+
+            box-shadow:
+                0 12px 35px rgba(80, 40, 20, 0.06);
+        }
+
+
+        .welcome-label {
+
+            color: #b79643;
+
+            font-size: 12px;
+
+            font-weight: 700;
+
+            text-transform: uppercase;
+
+            letter-spacing: 1.5px;
+
+            margin-bottom: 8px;
+        }
+
+
+        .welcome-section h2 {
+
+            font-family: Georgia, serif;
+
+            color: #641616;
+
+            font-size: 32px;
+
+            margin-bottom: 9px;
+        }
+
+
+        .welcome-section p {
+
+            color: #777;
+
+            font-size: 14px;
+
+            line-height: 1.6;
+        }
+
+
+        #userEmail {
+
+            color: #7c1717;
+
+            font-weight: 600;
+        }
+
+
+        /* ==================================================
+           ACCOUNT LAYOUT
+        ================================================== */
+
+        .account-layout {
+
+            display: grid;
+
+            grid-template-columns: 245px 1fr;
+
+            gap: 28px;
+
+            align-items: start;
+        }
+
+
+        /* ==================================================
+           SIDEBAR
+        ================================================== */
+
+        .account-sidebar {
+
+            background: #ffffff;
+
+            border: 1px solid rgba(190, 160, 90, 0.22);
+
+            border-radius: 16px;
+
+            padding: 14px;
+
+            box-shadow:
+                0 10px 30px rgba(80, 40, 20, 0.05);
+
+            position: sticky;
+
+            top: 95px;
+        }
+
+
+        .sidebar-title {
+
+            padding: 12px 13px 14px;
+
+            color: #9a8a70;
+
+            font-size: 11px;
+
+            font-weight: 700;
+
+            letter-spacing: 1.2px;
+
+            text-transform: uppercase;
+        }
+
+
+        .account-nav {
+
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 5px;
+        }
+
+
+        .nav-btn {
+
+            width: 100%;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+            padding: 12px 13px;
+
+            border: none;
+
+            border-radius: 9px;
+
+            background: transparent;
+
+            color: #67534e;
+
+            font-size: 14px;
+
+            text-align: left;
+
+            cursor: pointer;
+
+            transition: 0.2s ease;
+        }
+
+
+        .nav-btn i {
+
+            width: 19px;
+
+            text-align: center;
+
+            color: #b79643;
+        }
+
+
+        .nav-btn:hover {
+
+            background: #faf7f0;
+
+            color: #7c1717;
+        }
+
+
+        .nav-btn.active {
+
+            background: #7c1717;
+
+            color: #ffffff;
+        }
+
+
+        .nav-btn.active i {
+
+            color: #e5c979;
+        }
+
+
+        .logout-btn {
+
+            margin-top: 10px;
+
+            border-top: 1px solid #eee6d5;
+
+            border-radius: 0 0 9px 9px;
+
+            padding-top: 17px;
+
+            color: #9b2020;
+        }
+
+
+        .logout-btn i {
+
+            color: #9b2020;
+        }
+
+
+        /* ==================================================
+           CONTENT
+        ================================================== */
+
+        .account-content {
+
+            min-width: 0;
+        }
+
+
+        .account-section {
+
+            display: none;
+
+            animation: fadeIn 0.25s ease;
+        }
+
+
+        .account-section.active {
+
+            display: block;
+        }
+
+
+        @keyframes fadeIn {
+
+            from {
+
+                opacity: 0;
+
+                transform: translateY(5px);
+
+            }
+
+            to {
+
+                opacity: 1;
+
+                transform: translateY(0);
+
+            }
+
+        }
+
+
+        .section-header {
+
+            margin-bottom: 22px;
+        }
+
+
+        .section-header h2 {
+
+            font-family: Georgia, serif;
+
+            color: #641616;
+
+            font-size: 27px;
+
+            margin-bottom: 7px;
+        }
+
+
+        .section-header p {
+
+            color: #777;
+
+            font-size: 14px;
+
+            line-height: 1.5;
+        }
+
+
+        /* ==================================================
+           DASHBOARD CARDS
+        ================================================== */
+
+        .dashboard-grid {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 16px;
+
+            margin-bottom: 24px;
+        }
+
+
+        .dashboard-card {
+
+            background: #ffffff;
+
+            border: 1px solid rgba(190, 160, 90, 0.22);
+
+            border-radius: 14px;
+
+            padding: 22px;
+
+            box-shadow:
+                0 8px 25px rgba(80, 40, 20, 0.04);
+        }
+
+
+        .dashboard-card-icon {
+
+            width: 42px;
+
+            height: 42px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            border-radius: 10px;
+
+            background: #faf7f0;
+
+            color: #b79643;
+
+            margin-bottom: 15px;
+        }
+
+
+        .dashboard-card h3 {
+
+            font-family: Georgia, serif;
+
+            color: #641616;
+
+            font-size: 18px;
+
+            margin-bottom: 7px;
+        }
+
+
+        .dashboard-card p {
+
+            color: #777;
+
+            font-size: 13px;
+
+            line-height: 1.5;
+        }
+
+
+        /* ==================================================
+           GENERIC CARD
+        ================================================== */
+
+        .content-card {
+
+            background: #ffffff;
+
+            border: 1px solid rgba(190, 160, 90, 0.22);
+
+            border-radius: 15px;
+
+            padding: 25px;
+
+            box-shadow:
+                0 8px 25px rgba(80, 40, 20, 0.04);
+
+            margin-bottom: 20px;
+        }
+
+
+        .content-card h3 {
+
+            font-family: Georgia, serif;
+
+            color: #641616;
+
+            font-size: 19px;
+
+            margin-bottom: 18px;
+        }
+
+
+        /* ==================================================
+           PROFILE
+        ================================================== */
+
+        .profile-row {
+
+            display: grid;
+
+            grid-template-columns: 1fr 1fr;
+
+            gap: 18px;
+
+            margin-bottom: 18px;
+        }
+
+
+        .profile-field label {
+
+            display: block;
+
+            margin-bottom: 7px;
+
+            font-size: 12px;
+
+            font-weight: 600;
+
+            color: #67534e;
+        }
+
+
+        .profile-value {
+
+            min-height: 44px;
+
+            display: flex;
+
+            align-items: center;
+
+            padding: 12px 13px;
+
+            border: 1px solid #e0d6bd;
+
+            border-radius: 8px;
+
+            background: #faf9f5;
+
+            color: #666;
+
+            font-size: 13px;
+        }
+
+
+        .profile-note {
+
+            margin-top: 5px;
+
+            font-size: 12px;
+
+            color: #999;
+        }
+
+
+        /* ==================================================
+           ORDERS
+        ================================================== */
+
+        .empty-state {
+
+            padding: 55px 25px;
+
+            text-align: center;
+
+            border: 1px dashed #d9cba9;
+
+            border-radius: 13px;
+
+            background: #fffdf8;
+        }
+
+
+        .empty-state-icon {
+
+            width: 62px;
+
+            height: 62px;
+
+            margin: 0 auto 18px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            border-radius: 50%;
+
+            background: #faf7f0;
+
+            color: #b79643;
+
+            font-size: 24px;
+        }
+
+
+        .empty-state h3 {
+
+            font-family: Georgia, serif;
+
+            color: #641616;
+
+            font-size: 21px;
+
+            margin-bottom: 8px;
+        }
+
+
+        .empty-state p {
+
+            max-width: 430px;
+
+            margin: auto;
+
+            color: #888;
+
+            font-size: 13px;
+
+            line-height: 1.6;
+        }
+
+
+        /* ==================================================
+           SECURITY
+        ================================================== */
+
+        .security-item {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 20px;
+
+            padding: 18px 0;
+
+            border-bottom: 1px solid #eee7d9;
+        }
+
+
+        .security-item:last-child {
+
+            border-bottom: none;
+
+            padding-bottom: 0;
+        }
+
+
+        .security-info {
+
+            display: flex;
+
+            gap: 14px;
+
+            align-items: center;
+        }
+
+
+        .security-icon {
+
+            width: 42px;
+
+            height: 42px;
+
+            flex-shrink: 0;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            border-radius: 9px;
+
+            background: #faf7f0;
+
+            color: #b79643;
+        }
+
+
+        .security-info h4 {
+
+            color: #641616;
+
+            font-size: 14px;
+
+            margin-bottom: 4px;
+        }
+
+
+        .security-info p {
+
+            color: #888;
+
+            font-size: 12px;
+        }
+
+
+        .status-badge {
+
+            padding: 6px 10px;
+
+            border-radius: 20px;
+
+            background: #eef9f0;
+
+            color: #26733a;
+
+            font-size: 11px;
+
+            font-weight: 600;
+        }
+
+
+        /* ==================================================
+           FOOTER
+        ================================================== */
+
+        .account-footer {
+
+            text-align: center;
+
+            padding: 0 20px 35px;
+
+            color: #999;
+
+            font-size: 12px;
+        }
+
+
+        .account-footer a {
+
+            color: #7c1717;
+
+            text-decoration: none;
+        }
+
+
+        /* ==================================================
+           RESPONSIVE
+        ================================================== */
+
+        @media (max-width: 850px) {
+
+            .account-layout {
+
+                grid-template-columns: 1fr;
+
+            }
+
+
+            .account-sidebar {
+
+                position: static;
+
+            }
+
+
+            .account-nav {
+
+                display: grid;
+
+                grid-template-columns:
+                    repeat(4, 1fr);
+
+            }
+
+
+            .nav-btn {
+
+                justify-content: center;
+
+                flex-direction: column;
+
+                gap: 5px;
+
+                text-align: center;
+
+                font-size: 11px;
+
+                padding: 10px 5px;
+            }
+
+
+            .logout-btn {
+
+                border-top: none;
+
+                margin-top: 0;
+
+                padding-top: 10px;
+            }
+
+        }
+
+
+        @media (max-width: 600px) {
+
+            .header-inner {
+
+                padding: 14px 16px;
+            }
+
+
+            .brand h1 {
+
+                font-size: 20px;
+            }
+
+
+            .brand span {
+
+                font-size: 8px;
+            }
+
+
+            .home-btn {
+
+                font-size: 11px;
+
+                padding: 8px 10px;
+            }
+
+
+            .account-wrapper {
+
+                padding: 25px 16px 50px;
+            }
+
+
+            .welcome-section {
+
+                padding: 24px 20px;
+            }
+
+
+            .welcome-section h2 {
+
+                font-size: 25px;
+            }
+
+
+            .dashboard-grid {
+
+                grid-template-columns: 1fr;
+
+            }
+
+
+            .profile-row {
+
+                grid-template-columns: 1fr;
+            }
+
+
+            .content-card {
+
+                padding: 20px;
+            }
+
+
+            .security-item {
+
+                align-items: flex-start;
+
+                flex-direction: column;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- ======================================================
+     PAGE LOADER
+====================================================== -->
+
+<div
+    class="page-loader"
+    id="pageLoader"
+>
+
+    <div class="loader-content">
+
+        <h2>ShriVatsaDarbar</h2>
+
+        <p>Preparing your account...</p>
+
+        <div class="loader-spinner"></div>
+
+    </div>
+
+</div>
+
+
+<!-- ======================================================
+     HEADER
+====================================================== -->
+
+<header class="account-header">
+
+    <div class="header-inner">
+
+        <a
+            href="../index.html"
+            class="brand"
+        >
+
+            <h1>ShriVatsaDarbar</h1>
+
+            <span>
+                WHERE EVERY SHRINGAR IS AN OFFERING
+            </span>
+
+        </a>
+
+
+        <div class="header-actions">
+
+            <a
+                href="../index.html"
+                class="home-btn"
+            >
+
+                <i class="fa-solid fa-house"></i>
+
+                Back to Store
+
+            </a>
+
+        </div>
+
+    </div>
+
+</header>
+
+
+<!-- ======================================================
+     MAIN
+====================================================== -->
+
+<main class="account-wrapper">
+
+
+    <!-- ==================================================
+         WELCOME
+    ================================================== -->
+
+    <section class="welcome-section">
+
+        <div class="welcome-label">
+            My Account
+        </div>
+
+        <h2>
+            Welcome,
+            <span id="userName">
+                Devotee
+            </span>
+        </h2>
+
+        <p>
+
+            Your devotional journey with
+            ShriVatsaDarbar begins here.
+
+            <br>
+
+            Signed in as:
+            <span id="userEmail">
+                Loading...
+            </span>
+
+        </p>
+
+    </section>
+
+
+    <!-- ==================================================
+         ACCOUNT LAYOUT
+    ================================================== -->
+
+    <div class="account-layout">
+
+
+        <!-- ==================================================
+             SIDEBAR
+        ================================================== -->
+
+        <aside class="account-sidebar">
+
+            <div class="sidebar-title">
+                Account
+            </div>
+
+
+            <nav class="account-nav">
+
+
+                <button
+                    type="button"
+                    class="nav-btn active"
+                    data-section="dashboard"
+                >
+
+                    <i class="fa-solid fa-house"></i>
+
+                    <span>Dashboard</span>
+
+                </button>
+
+
+                <button
+                    type="button"
+                    class="nav-btn"
+                    data-section="profile"
+                >
+
+                    <i class="fa-solid fa-user"></i>
+
+                    <span>Profile</span>
+
+                </button>
+
+
+                <button
+                    type="button"
+                    class="nav-btn"
+                    data-section="orders"
+                >
+
+                    <i class="fa-solid fa-bag-shopping"></i>
+
+                    <span>Orders</span>
+
+                </button>
+
+
+                <button
+                    type="button"
+                    class="nav-btn"
+                    data-section="security"
+                >
+
+                    <i class="fa-solid fa-shield-halved"></i>
+
+                    <span>Security</span>
+
+                </button>
+
+
+                <button
+                    type="button"
+                    class="nav-btn logout-btn"
+                    id="logoutButton"
+                >
+
+                    <i class="fa-solid fa-right-from-bracket"></i>
+
+                    <span>Logout</span>
+
+                </button>
+
+
+            </nav>
+
+        </aside>
+
+
+        <!-- ==================================================
+             CONTENT
+        ================================================== -->
+
+        <section class="account-content">
+
+
+            <!-- ==================================================
+                 DASHBOARD
+            ================================================== -->
+
+            <div
+                class="account-section active"
+                id="dashboard"
+            >
+
+                <div class="section-header">
+
+                    <h2>
+                        Account Dashboard
+                    </h2>
+
+                    <p>
+                        Manage your ShriVatsaDarbar account
+                        from one place.
+                    </p>
+
+                </div>
+
+
+                <div class="dashboard-grid">
+
+
+                    <div class="dashboard-card">
+
+                        <div class="dashboard-card-icon">
+
+                            <i class="fa-solid fa-user"></i>
+
+                        </div>
+
+                        <h3>
+                            My Profile
+                        </h3>
+
+                        <p>
+                            Manage your personal information
+                            and account details.
+                        </p>
+
+                    </div>
+
+
+                    <div class="dashboard-card">
+
+                        <div class="dashboard-card-icon">
+
+                            <i class="fa-solid fa-bag-shopping"></i>
+
+                        </div>
+
+                        <h3>
+                            My Orders
+                        </h3>
+
+                        <p>
+                            View your ShriVatsaDarbar purchases
+                            and order history.
+                        </p>
+
+                    </div>
+
+
+                    <div class="dashboard-card">
+
+                        <div class="dashboard-card-icon">
+
+                            <i class="fa-solid fa-shield-halved"></i>
+
+                        </div>
+
+                        <h3>
+                            Account Security
+                        </h3>
+
+                        <p>
+                            Manage your account security
+                            and authentication.
+                        </p>
+
+                    </div>
+
+
+                </div>
+
+
+                <div class="content-card">
+
+                    <h3>
+                        Your ShriVatsaDarbar Journey
+                    </h3>
+
+                    <p
+                        style="
+                            color:#777;
+                            font-size:14px;
+                            line-height:1.7;
+                        "
+                    >
+
+                        Welcome to your personal
+                        ShriVatsaDarbar account.
+
+                        Your profile, orders, saved information
+                        and account security will be managed
+                        here as the store grows.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- ==================================================
+                 PROFILE
+            ================================================== -->
+
+            <div
+                class="account-section"
+                id="profile"
+            >
+
+                <div class="section-header">
+
+                    <h2>
+                        My Profile
+                    </h2>
+
+                    <p>
+                        Your account information.
+                    </p>
+
+                </div>
+
+
+                <div class="content-card">
+
+                    <h3>
+                        Account Information
+                    </h3>
+
+
+                    <div class="profile-row">
+
+
+                        <div class="profile-field">
+
+                            <label>
+                                Email Address
+                            </label>
+
+                            <div
+                                class="profile-value"
+                                id="profileEmail"
+                            >
+                                Loading...
+                            </div>
+
+                            <div class="profile-note">
+                                Your email is managed through
+                                Supabase Authentication.
+                            </div>
+
+                        </div>
+
+
+                        <div class="profile-field">
+
+                            <label>
+                                Account Status
+                            </label>
+
+                            <div class="profile-value">
+
+                                <span class="status-badge">
+                                    Verified Account
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+
+                    <div class="profile-row">
+
+
+                        <div class="profile-field">
+
+                            <label>
+                                Full Name
+                            </label>
+
+                            <div class="profile-value">
+
+                                <span
+                                    style="color:#aaa;"
+                                >
+                                    To be configured
+
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="profile-field">
+
+                            <label>
+                                Mobile Number
+                            </label>
+
+                            <div class="profile-value">
+
+                                <span
+                                    style="color:#aaa;"
+                                >
+                                    To be configured
+
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+
+                    <p
+                        style="
+                            margin-top:8px;
+                            color:#999;
+                            font-size:12px;
+                            line-height:1.6;
+                        "
+                    >
+
+                        Profile details will be connected
+                        to your customer profile database
+                        in the next phase.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- ==================================================
+                 ORDERS
+            ================================================== -->
+
+            <div
+                class="account-section"
+                id="orders"
+            >
+
+                <div class="section-header">
+
+                    <h2>
+                        My Orders
+                    </h2>
+
+                    <p>
+                        View and manage your
+                        ShriVatsaDarbar purchases.
+                    </p>
+
+                </div>
+
+
+                <div class="content-card">
+
+
+                    <div class="empty-state">
+
+                        <div class="empty-state-icon">
+
+                            <i class="fa-solid fa-bag-shopping"></i>
+
+                        </div>
+
+
+                        <h3>
+                            No Orders Yet
+                        </h3>
+
+
+                        <p>
+
+                            Your orders will appear here
+                            once you make your first purchase
+                            from ShriVatsaDarbar.
+
+                        </p>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+
+            <!-- ==================================================
+                 SECURITY
+            ================================================== -->
+
+            <div
+                class="account-section"
+                id="security"
+            >
+
+                <div class="section-header">
+
+                    <h2>
+                        Security
+                    </h2>
+
+                    <p>
+                        Manage your account authentication
+                        and security.
+                    </p>
+
+                </div>
+
+
+                <div class="content-card">
+
+
+                    <h3>
+                        Account Security
+                    </h3>
+
+
+                    <div class="security-item">
+
+
+                        <div class="security-info">
+
+                            <div class="security-icon">
+
+                                <i class="fa-solid fa-envelope-circle-check"></i>
+
+                            </div>
+
+
+                            <div>
+
+                                <h4>
+                                    Email Verification
+                                </h4>
+
+                                <p>
+                                    Your email address has
+                                    been verified.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <span class="status-badge">
+                            Verified
+                        </span>
+
+                    </div>
+
+
+                    <div class="security-item">
+
+
+                        <div class="security-info">
+
+                            <div class="security-icon">
+
+                                <i class="fa-solid fa-lock"></i>
+
+                            </div>
+
+
+                            <div>
+
+                                <h4>
+                                    Password
+                                </h4>
+
+                                <p>
+                                    Your account is protected
+                                    by a password.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <span class="status-badge">
+                            Protected
+                        </span>
+
+                    </div>
+
+
+                    <div class="security-item">
+
+
+                        <div class="security-info">
+
+                            <div class="security-icon">
+
+                                <i class="fa-solid fa-right-from-bracket"></i>
+
+                            </div>
+
+
+                            <div>
+
+                                <h4>
+                                    Sign Out
+                                </h4>
+
+                                <p>
+                                    Securely sign out of
+                                    your ShriVatsaDarbar account.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <button
+                            type="button"
+                            class="home-btn"
+                            id="securityLogout"
+                        >
+                            Logout
+                        </button>
+
+                    </div>
+
+
+                    <p
+                        style="
+                            margin-top:22px;
+                            color:#999;
+                            font-size:12px;
+                            line-height:1.6;
+                        "
+                    >
+
+                        Advanced security features such as
+                        password change and account recovery
+                        will be connected in the security phase.
+
+                    </p>
+
+
+                </div>
+
+            </div>
+
+
+        </section>
+
+    </div>
+
+</main>
+
+
+<!-- ======================================================
+     FOOTER
+====================================================== -->
+
+<footer class="account-footer">
+
+    <p>
+
+        © <span id="currentYear"></span>
+        ShriVatsaDarbar.
+
+        All rights reserved.
+
+        &nbsp;|&nbsp;
+
+        <a href="../index.html">
+            Return to Store
+        </a>
+
+    </p>
+
+</footer>
+
+
+<!-- ======================================================
+     SUPABASE
+====================================================== -->
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script src="supabase-auth.js"></script>
+
+
+<script>
+
+    /* ==================================================
+       ELEMENTS
+    ================================================== */
+
+    const pageLoader =
+        document.getElementById("pageLoader");
+
+    const userName =
+        document.getElementById("userName");
+
+    const userEmail =
+        document.getElementById("userEmail");
+
+    const profileEmail =
+        document.getElementById("profileEmail");
+
+    const logoutButton =
+        document.getElementById("logoutButton");
+
+    const securityLogout =
+        document.getElementById("securityLogout");
+
+    const navButtons =
+        document.querySelectorAll(".nav-btn[data-section]");
+
+    const sections =
+        document.querySelectorAll(".account-section");
+
+
+    /* ==================================================
+       CURRENT YEAR
+    ================================================== */
+
+    document.getElementById("currentYear").textContent =
+        new Date().getFullYear();
+
+
+    /* ==================================================
+       SHOW SECTION
+    ================================================== */
+
+    function showSection(sectionId) {
+
+        sections.forEach(function (section) {
+
+            section.classList.remove("active");
+
+        });
+
+
+        navButtons.forEach(function (button) {
+
+            button.classList.remove("active");
+
+        });
+
+
+        const targetSection =
+            document.getElementById(sectionId);
+
+        const targetButton =
+            document.querySelector(
+                '[data-section="' + sectionId + '"]'
+            );
+
+
+        if (targetSection) {
+
+            targetSection.classList.add("active");
+
+        }
+
+
+        if (targetButton) {
+
+            targetButton.classList.add("active");
+
+        }
+
+
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+
+    }
+
+
+    /* ==================================================
+       NAVIGATION
+    ================================================== */
+
+    navButtons.forEach(function (button) {
+
+        button.addEventListener(
+            "click",
+            function () {
+
+                const sectionId =
+                    this.dataset.section;
+
+                showSection(sectionId);
+
+            }
+        );
+
+    });
+
+
+    /* ==================================================
+       LOGOUT
+    ================================================== */
+
+    async function logoutUser() {
+
+        try {
+
+            const {
+                error
+            } = await supabaseClient.auth.signOut();
+
+
+            if (error) {
+
+                console.error(error);
+
+                return;
+
+            }
+
+
+            window.location.href =
+                "login.html";
+
+        } catch (error) {
+
+            console.error(error);
+
+            window.location.href =
+                "login.html";
+
+        }
+
+    }
+
+
+    logoutButton.addEventListener(
+        "click",
+        logoutUser
+    );
+
+
+    securityLogout.addEventListener(
+        "click",
+        logoutUser
+    );
+
+
+    /* ==================================================
+       GET CURRENT USER
+    ================================================== */
+
+    async function loadAccount() {
+
+        try {
+
+            const {
+                data,
+                error
+            } = await supabaseClient.auth.getUser();
+
+
+            if (error) {
+
+                console.error(error);
+
+                window.location.href =
+                    "login.html";
+
+                return;
+
+            }
+
+
+            const user =
+                data.user;
+
+
+            if (!user) {
+
+                window.location.href =
+                    "login.html";
+
+                return;
+
+            }
+
+
+            /* ------------------------------------------
+               EMAIL
+            ------------------------------------------ */
+
+            const email =
+                user.email || "";
+
+
+            userEmail.textContent =
+                email;
+
+
+            profileEmail.textContent =
+                email;
+
+
+            /* ------------------------------------------
+               DISPLAY NAME
+            ------------------------------------------ */
+
+            let displayName =
+                "Devotee";
+
+
+            if (user.user_metadata) {
+
+                const metadata =
+                    user.user_metadata;
+
+
+                if (metadata.full_name) {
+
+                    displayName =
+                        metadata.full_name;
+
+                }
+
+                else if (metadata.name) {
+
+                    displayName =
+                        metadata.name;
+
+                }
+
+            }
+
+
+            /*
+             * If no profile name exists yet,
+             * use the email prefix temporarily.
+             */
+
+            if (
+                displayName === "Devotee" &&
+                email
+            ) {
+
+                const emailPrefix =
+                    email.split("@")[0];
+
+
+                if (emailPrefix) {
+
+                    displayName =
+                        emailPrefix;
+
+                }
+
+            }
+
+
+            userName.textContent =
+                displayName;
+
+
+            /* ------------------------------------------
+               VERIFIED STATUS
+            ------------------------------------------ */
+
+            /*
+             * Supabase already authenticated this user
+             * after the email confirmation flow.
+             */
+
+            pageLoader.classList.add("hidden");
+
+        }
+
+        catch (error) {
+
+            console.error(error);
+
+            window.location.href =
+                "login.html";
+
+        }
+
+    }
+
+
+    /* ==================================================
+       AUTH STATE LISTENER
+    ================================================== */
+
+    supabaseClient.auth.onAuthStateChange(
+        function (event, session) {
+
+            if (
+                event === "SIGNED_OUT" ||
+                !session
+            ) {
+
+                window.location.href =
+                    "login.html";
+
+            }
+
+        }
+    );
+
+
+    /* ==================================================
+       INITIALIZE
+    ================================================== */
+
+    loadAccount();
+
+</script>
+
+
+</body>
+
+</html>
