@@ -3,1036 +3,1643 @@
 
 <head>
 
-    <meta charset="UTF-8">
+<meta charset="UTF-8">
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
 
-    <title>My Account | ShriVatsaDarbar</title>
+<title>My Account | ShriVatsaDarbar</title>
 
-    <meta
-        name="description"
-        content="Manage your ShriVatsaDarbar account, profile, orders and security."
-    >
+<meta
+    name="description"
+    content="Manage your ShriVatsaDarbar account, profile, orders and security."
+>
 
-    <link
-        rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
-    >
+<link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+>
 
-    <style>
+<style>
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+/* =========================================================
+   RESET
+========================================================= */
 
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
 
-        body {
+html {
+    scroll-behavior: smooth;
+}
 
-            min-height: 100vh;
+body {
 
-            font-family: Arial, sans-serif;
+    min-height: 100vh;
 
-            background: #faf7f0;
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
 
-            color: #4b1717;
-        }
+    background:
+        radial-gradient(
+            circle at top right,
+            rgba(183,150,67,0.07),
+            transparent 35%
+        ),
+        #faf7f0;
 
+    color: #4b1717;
+}
 
-        /* ==================================================
-           PAGE LOADER
-        ================================================== */
 
-        .page-loader {
+/* =========================================================
+   VARIABLES
+========================================================= */
 
-            position: fixed;
+:root {
 
-            inset: 0;
+    --maroon: #7c1717;
 
-            z-index: 9999;
+    --maroon-dark: #5f1010;
 
-            display: flex;
+    --gold: #b79643;
 
-            align-items: center;
+    --gold-light: #e5d29a;
 
-            justify-content: center;
+    --cream: #faf7f0;
 
-            background: #faf7f0;
+    --cream-dark: #f4eee1;
 
-            transition: opacity 0.3s ease;
-        }
+    --text: #4b1717;
 
+    --muted: #7d716c;
 
-        .page-loader.hidden {
+    --border: rgba(190,160,90,0.24);
 
-            opacity: 0;
+    --white: #ffffff;
 
-            pointer-events: none;
-        }
+}
 
 
-        .loader-content {
+/* =========================================================
+   LOADER
+========================================================= */
 
-            text-align: center;
-        }
+.page-loader {
 
+    position: fixed;
 
-        .loader-content h2 {
+    inset: 0;
 
-            font-family: Georgia, serif;
+    z-index: 9999;
 
-            color: #7c1717;
+    display: flex;
 
-            font-size: 25px;
+    align-items: center;
 
-            margin-bottom: 10px;
-        }
+    justify-content: center;
 
+    background: var(--cream);
 
-        .loader-content p {
+    transition:
+        opacity .35s ease,
+        visibility .35s ease;
+}
 
-            color: #777;
+.page-loader.hidden {
 
-            font-size: 13px;
-        }
+    opacity: 0;
 
+    visibility: hidden;
 
-        .loader-spinner {
+    pointer-events: none;
+}
 
-            width: 34px;
+.loader-content {
 
-            height: 34px;
+    text-align: center;
+}
 
-            margin: 20px auto 0;
+.loader-symbol {
 
-            border: 3px solid #eadfc5;
+    width: 55px;
 
-            border-top-color: #7c1717;
+    height: 55px;
 
-            border-radius: 50%;
+    margin: 0 auto 18px;
 
-            animation: spin 0.8s linear infinite;
-        }
+    display: flex;
 
+    align-items: center;
 
-        @keyframes spin {
+    justify-content: center;
 
-            to {
-                transform: rotate(360deg);
-            }
+    border-radius: 50%;
 
-        }
+    background:
+        linear-gradient(
+            135deg,
+            #fff,
+            #f7efd9
+        );
 
+    border: 1px solid var(--gold-light);
 
-        /* ==================================================
-           HEADER
-        ================================================== */
+    color: var(--gold);
 
-        .account-header {
+    font-size: 22px;
 
-            position: sticky;
+    box-shadow:
+        0 10px 30px rgba(80,40,20,.08);
+}
 
-            top: 0;
+.loader-content h2 {
 
-            z-index: 100;
+    font-family: Georgia, serif;
 
-            background: rgba(255, 255, 255, 0.96);
+    color: var(--maroon);
 
-            backdrop-filter: blur(10px);
+    font-size: 24px;
 
-            border-bottom: 1px solid rgba(190, 160, 90, 0.20);
+    margin-bottom: 7px;
+}
 
-            box-shadow:
-                0 4px 20px rgba(80, 40, 20, 0.05);
-        }
+.loader-content p {
 
+    color: var(--muted);
 
-        .header-inner {
+    font-size: 12px;
+}
 
-            max-width: 1180px;
 
-            margin: auto;
+/* =========================================================
+   HEADER
+========================================================= */
 
-            padding: 17px 24px;
+.account-header {
 
-            display: flex;
+    position: sticky;
 
-            align-items: center;
+    top: 0;
 
-            justify-content: space-between;
+    z-index: 100;
 
-            gap: 20px;
-        }
+    background:
+        rgba(255,255,255,.94);
 
+    backdrop-filter: blur(14px);
 
-        .brand {
+    border-bottom:
+        1px solid var(--border);
 
-            text-decoration: none;
+    box-shadow:
+        0 5px 25px rgba(80,40,20,.045);
+}
 
-            color: #7c1717;
-        }
+.header-inner {
 
+    max-width: 1240px;
 
-        .brand h1 {
+    margin: auto;
 
-            font-family: Georgia, serif;
+    padding: 15px 28px;
 
-            font-size: 24px;
+    display: flex;
 
-            letter-spacing: 0.5px;
-        }
+    align-items: center;
 
+    justify-content: space-between;
 
-        .brand span {
+    gap: 20px;
+}
 
-            display: block;
 
-            margin-top: 3px;
+/* =========================================================
+   BRAND
+========================================================= */
 
-            font-size: 10px;
+.brand {
 
-            color: #9a8a70;
+    display: flex;
 
-            letter-spacing: 0.8px;
-        }
+    align-items: center;
 
+    gap: 12px;
 
-        .header-actions {
+    text-decoration: none;
 
-            display: flex;
+    color: var(--maroon);
+}
 
-            align-items: center;
+.brand-mark {
 
-            gap: 12px;
-        }
+    width: 44px;
 
+    height: 44px;
 
-        .home-btn {
+    flex-shrink: 0;
 
-            text-decoration: none;
+    display: flex;
 
-            color: #6f5550;
+    align-items: center;
 
-            font-size: 13px;
+    justify-content: center;
 
-            padding: 9px 14px;
+    border-radius: 12px;
 
-            border: 1px solid #dfd3b7;
+    background:
+        linear-gradient(
+            145deg,
+            #fffaf0,
+            #f4ead0
+        );
 
-            border-radius: 8px;
+    border:
+        1px solid var(--gold-light);
 
-            transition: 0.2s ease;
-        }
+    color: var(--gold);
 
+    box-shadow:
+        0 5px 16px rgba(80,40,20,.06);
 
-        .home-btn:hover {
+    font-size: 17px;
+}
 
-            border-color: #b79643;
+.brand-text h1 {
 
-            color: #7c1717;
-        }
+    font-family: Georgia, serif;
 
+    font-size: 22px;
 
-        /* ==================================================
-           MAIN
-        ================================================== */
+    letter-spacing: .4px;
 
-        .account-wrapper {
+    color: var(--maroon);
+}
 
-            max-width: 1180px;
+.brand-text span {
 
-            margin: 0 auto;
+    display: block;
 
-            padding: 40px 24px 70px;
-        }
+    margin-top: 3px;
 
+    font-size: 8px;
 
-        /* ==================================================
-           WELCOME
-        ================================================== */
+    letter-spacing: 1.4px;
 
-        .welcome-section {
+    color: #9a8a70;
+}
 
-            margin-bottom: 30px;
 
-            padding: 32px;
+/* =========================================================
+   HEADER ACTIONS
+========================================================= */
 
-            border-radius: 18px;
+.header-actions {
 
-            background:
-                linear-gradient(
-                    135deg,
-                    #ffffff,
-                    #fffaf0
-                );
+    display: flex;
 
-            border: 1px solid rgba(190, 160, 90, 0.22);
+    align-items: center;
 
-            box-shadow:
-                0 12px 35px rgba(80, 40, 20, 0.06);
-        }
+    gap: 10px;
+}
 
+.store-btn {
 
-        .welcome-label {
+    display: inline-flex;
 
-            color: #b79643;
+    align-items: center;
 
-            font-size: 12px;
+    gap: 8px;
 
-            font-weight: 700;
+    padding: 10px 15px;
 
-            text-transform: uppercase;
+    border:
+        1px solid #ded3bb;
 
-            letter-spacing: 1.5px;
+    border-radius: 9px;
 
-            margin-bottom: 8px;
-        }
+    background: #fff;
 
+    color: #67534e;
 
-        .welcome-section h2 {
+    text-decoration: none;
 
-            font-family: Georgia, serif;
+    font-size: 12px;
 
-            color: #641616;
+    transition: .2s ease;
+}
 
-            font-size: 32px;
+.store-btn:hover {
 
-            margin-bottom: 9px;
-        }
+    border-color: var(--gold);
 
+    color: var(--maroon);
 
-        .welcome-section p {
+    transform: translateY(-1px);
+}
 
-            color: #777;
 
-            font-size: 14px;
+/* =========================================================
+   MAIN
+========================================================= */
 
-            line-height: 1.6;
-        }
+.account-wrapper {
 
+    max-width: 1240px;
 
-        #userEmail {
+    margin: auto;
 
-            color: #7c1717;
+    padding:
+        34px 28px
+        70px;
+}
 
-            font-weight: 600;
-        }
 
+/* =========================================================
+   WELCOME HERO
+========================================================= */
 
-        /* ==================================================
-           ACCOUNT LAYOUT
-        ================================================== */
+.welcome-section {
 
-        .account-layout {
+    position: relative;
 
-            display: grid;
+    overflow: hidden;
 
-            grid-template-columns: 245px 1fr;
+    margin-bottom: 28px;
 
-            gap: 28px;
+    padding: 32px 36px;
 
-            align-items: start;
-        }
+    border:
+        1px solid var(--border);
 
+    border-radius: 20px;
 
-        /* ==================================================
-           SIDEBAR
-        ================================================== */
+    background:
+        linear-gradient(
+            125deg,
+            #ffffff 0%,
+            #fffaf0 65%,
+            #f8efd9 100%
+        );
 
-        .account-sidebar {
+    box-shadow:
+        0 18px 45px rgba(80,40,20,.065);
+}
 
-            background: #ffffff;
+.welcome-section::after {
 
-            border: 1px solid rgba(190, 160, 90, 0.22);
+    content: "";
 
-            border-radius: 16px;
+    position: absolute;
 
-            padding: 14px;
+    width: 230px;
 
-            box-shadow:
-                0 10px 30px rgba(80, 40, 20, 0.05);
+    height: 230px;
 
-            position: sticky;
+    right: -80px;
 
-            top: 95px;
-        }
+    top: -100px;
 
+    border-radius: 50%;
 
-        .sidebar-title {
+    border:
+        1px solid rgba(183,150,67,.14);
+}
 
-            padding: 12px 13px 14px;
+.welcome-label {
 
-            color: #9a8a70;
+    position: relative;
 
-            font-size: 11px;
+    z-index: 1;
 
-            font-weight: 700;
+    color: var(--gold);
 
-            letter-spacing: 1.2px;
+    font-size: 10px;
 
-            text-transform: uppercase;
-        }
+    font-weight: 700;
 
+    letter-spacing: 2px;
 
-        .account-nav {
+    text-transform: uppercase;
 
-            display: flex;
+    margin-bottom: 8px;
+}
 
-            flex-direction: column;
+.welcome-section h2 {
 
-            gap: 5px;
-        }
+    position: relative;
 
+    z-index: 1;
 
-        .nav-btn {
+    font-family: Georgia, serif;
 
-            width: 100%;
+    color: var(--maroon);
 
-            display: flex;
+    font-size: 31px;
 
-            align-items: center;
+    margin-bottom: 8px;
+}
 
-            gap: 12px;
+.welcome-section p {
 
-            padding: 12px 13px;
+    position: relative;
 
-            border: none;
+    z-index: 1;
 
-            border-radius: 9px;
+    color: var(--muted);
 
-            background: transparent;
+    font-size: 13px;
 
-            color: #67534e;
+    line-height: 1.7;
+}
 
-            font-size: 14px;
+#userEmail {
 
-            text-align: left;
+    color: var(--maroon);
 
-            cursor: pointer;
+    font-weight: 600;
+}
 
-            transition: 0.2s ease;
-        }
 
+/* =========================================================
+   LAYOUT
+========================================================= */
 
-        .nav-btn i {
+.account-layout {
 
-            width: 19px;
+    display: grid;
 
-            text-align: center;
+    grid-template-columns:
+        235px
+        minmax(0,1fr);
 
-            color: #b79643;
-        }
+    gap: 25px;
 
+    align-items: start;
+}
 
-        .nav-btn:hover {
 
-            background: #faf7f0;
+/* =========================================================
+   SIDEBAR
+========================================================= */
 
-            color: #7c1717;
-        }
+.account-sidebar {
 
+    position: sticky;
 
-        .nav-btn.active {
+    top: 90px;
 
-            background: #7c1717;
+    background: rgba(255,255,255,.96);
 
-            color: #ffffff;
-        }
+    border:
+        1px solid var(--border);
 
+    border-radius: 17px;
 
-        .nav-btn.active i {
+    padding: 12px;
 
-            color: #e5c979;
-        }
+    box-shadow:
+        0 12px 35px rgba(80,40,20,.055);
+}
 
+.sidebar-heading {
 
-        .logout-btn {
+    padding:
+        12px
+        12px
+        10px;
 
-            margin-top: 10px;
+    color: #a18f73;
 
-            border-top: 1px solid #eee6d5;
+    font-size: 9px;
 
-            border-radius: 0 0 9px 9px;
+    font-weight: 700;
 
-            padding-top: 17px;
+    letter-spacing: 1.7px;
 
-            color: #9b2020;
-        }
+    text-transform: uppercase;
+}
 
+.account-nav {
 
-        .logout-btn i {
+    display: flex;
 
-            color: #9b2020;
-        }
+    flex-direction: column;
 
+    gap: 4px;
+}
 
-        /* ==================================================
-           CONTENT
-        ================================================== */
+.nav-btn {
 
-        .account-content {
+    width: 100%;
 
-            min-width: 0;
-        }
+    display: flex;
 
+    align-items: center;
 
-        .account-section {
+    gap: 11px;
 
-            display: none;
+    padding: 12px;
 
-            animation: fadeIn 0.25s ease;
-        }
+    border: none;
 
+    border-radius: 9px;
 
-        .account-section.active {
+    background: transparent;
 
-            display: block;
-        }
+    color: #67534e;
 
+    font-size: 13px;
 
-        @keyframes fadeIn {
+    text-align: left;
 
-            from {
+    cursor: pointer;
 
-                opacity: 0;
+    transition: .2s ease;
+}
 
-                transform: translateY(5px);
+.nav-btn i {
 
-            }
+    width: 18px;
 
-            to {
+    text-align: center;
 
-                opacity: 1;
+    color: var(--gold);
+}
 
-                transform: translateY(0);
+.nav-btn:hover {
 
-            }
+    background: var(--cream);
 
-        }
+    color: var(--maroon);
+}
 
+.nav-btn.active {
 
-        .section-header {
+    background:
+        linear-gradient(
+            135deg,
+            var(--maroon),
+            #8d1d1d
+        );
 
-            margin-bottom: 22px;
-        }
+    color: #fff;
 
+    box-shadow:
+        0 7px 18px rgba(124,23,23,.16);
+}
 
-        .section-header h2 {
+.nav-btn.active i {
 
-            font-family: Georgia, serif;
+    color: #efd57e;
+}
 
-            color: #641616;
+.logout-btn {
 
-            font-size: 27px;
+    margin-top: 8px;
 
-            margin-bottom: 7px;
-        }
+    padding-top: 15px;
 
+    border-top:
+        1px solid #eee6d5;
 
-        .section-header p {
+    color: #9b2020;
+}
 
-            color: #777;
+.logout-btn i {
 
-            font-size: 14px;
+    color: #9b2020;
+}
 
-            line-height: 1.5;
-        }
 
+/* =========================================================
+   CONTENT
+========================================================= */
 
-        /* ==================================================
-           DASHBOARD CARDS
-        ================================================== */
+.account-content {
 
-        .dashboard-grid {
+    min-width: 0;
+}
 
-            display: grid;
+.account-section {
 
-            grid-template-columns:
-                repeat(3, 1fr);
+    display: none;
 
-            gap: 16px;
+    animation:
+        sectionIn .25s ease;
+}
 
-            margin-bottom: 24px;
-        }
+.account-section.active {
 
+    display: block;
+}
 
-        .dashboard-card {
+@keyframes sectionIn {
 
-            background: #ffffff;
+    from {
 
-            border: 1px solid rgba(190, 160, 90, 0.22);
+        opacity: 0;
 
-            border-radius: 14px;
+        transform: translateY(6px);
 
-            padding: 22px;
+    }
 
-            box-shadow:
-                0 8px 25px rgba(80, 40, 20, 0.04);
-        }
+    to {
 
+        opacity: 1;
 
-        .dashboard-card-icon {
+        transform: translateY(0);
 
-            width: 42px;
+    }
+}
 
-            height: 42px;
+.section-header {
 
-            display: flex;
+    margin-bottom: 19px;
+}
 
-            align-items: center;
+.section-header h2 {
 
-            justify-content: center;
+    font-family: Georgia, serif;
 
-            border-radius: 10px;
+    color: var(--maroon);
 
-            background: #faf7f0;
+    font-size: 27px;
 
-            color: #b79643;
+    margin-bottom: 5px;
+}
 
-            margin-bottom: 15px;
-        }
+.section-header p {
 
+    color: var(--muted);
 
-        .dashboard-card h3 {
+    font-size: 13px;
+}
 
-            font-family: Georgia, serif;
 
-            color: #641616;
+/* =========================================================
+   DASHBOARD
+========================================================= */
 
-            font-size: 18px;
+.dashboard-stats {
 
-            margin-bottom: 7px;
-        }
+    display: grid;
 
+    grid-template-columns:
+        repeat(3,1fr);
 
-        .dashboard-card p {
+    gap: 14px;
 
-            color: #777;
+    margin-bottom: 18px;
+}
 
-            font-size: 13px;
+.stat-card {
 
-            line-height: 1.5;
-        }
+    padding: 19px;
 
+    border:
+        1px solid var(--border);
 
-        /* ==================================================
-           GENERIC CARD
-        ================================================== */
+    border-radius: 14px;
 
-        .content-card {
+    background: #fff;
 
-            background: #ffffff;
+    box-shadow:
+        0 8px 24px rgba(80,40,20,.035);
+}
 
-            border: 1px solid rgba(190, 160, 90, 0.22);
+.stat-top {
 
-            border-radius: 15px;
+    display: flex;
 
-            padding: 25px;
+    align-items: center;
 
-            box-shadow:
-                0 8px 25px rgba(80, 40, 20, 0.04);
+    justify-content: space-between;
 
-            margin-bottom: 20px;
-        }
+    margin-bottom: 12px;
+}
 
+.stat-icon {
 
-        .content-card h3 {
+    width: 38px;
 
-            font-family: Georgia, serif;
+    height: 38px;
 
-            color: #641616;
+    display: flex;
 
-            font-size: 19px;
+    align-items: center;
 
-            margin-bottom: 18px;
-        }
+    justify-content: center;
 
+    border-radius: 10px;
 
-        /* ==================================================
-           PROFILE
-        ================================================== */
+    background: var(--cream);
 
-        .profile-row {
+    color: var(--gold);
+}
 
-            display: grid;
+.stat-card small {
 
-            grid-template-columns: 1fr 1fr;
+    color: #a18f73;
 
-            gap: 18px;
+    font-size: 10px;
 
-            margin-bottom: 18px;
-        }
+    text-transform: uppercase;
 
+    letter-spacing: 1px;
+}
 
-        .profile-field label {
+.stat-card strong {
 
-            display: block;
+    display: block;
 
-            margin-bottom: 7px;
+    color: var(--maroon);
 
-            font-size: 12px;
+    font-family: Georgia, serif;
 
-            font-weight: 600;
+    font-size: 22px;
+}
 
-            color: #67534e;
-        }
 
+/* =========================================================
+   DASHBOARD QUICK ACTIONS
+========================================================= */
 
-        .profile-value {
+.quick-grid {
 
-            min-height: 44px;
+    display: grid;
 
-            display: flex;
+    grid-template-columns:
+        repeat(3,1fr);
 
-            align-items: center;
+    gap: 14px;
 
-            padding: 12px 13px;
+    margin-bottom: 18px;
+}
 
-            border: 1px solid #e0d6bd;
+.quick-card {
 
-            border-radius: 8px;
+    display: block;
 
-            background: #faf9f5;
+    padding: 21px;
 
-            color: #666;
+    border:
+        1px solid var(--border);
 
-            font-size: 13px;
-        }
+    border-radius: 14px;
 
+    background: #fff;
 
-        .profile-note {
+    text-decoration: none;
 
-            margin-top: 5px;
+    color: inherit;
 
-            font-size: 12px;
+    cursor: pointer;
 
-            color: #999;
-        }
+    transition: .22s ease;
+}
 
+.quick-card:hover {
 
-        /* ==================================================
-           ORDERS
-        ================================================== */
+    transform: translateY(-3px);
 
-        .empty-state {
+    box-shadow:
+        0 12px 28px rgba(80,40,20,.07);
 
-            padding: 55px 25px;
+    border-color:
+        rgba(183,150,67,.45);
+}
 
-            text-align: center;
+.quick-icon {
 
-            border: 1px dashed #d9cba9;
+    width: 42px;
 
-            border-radius: 13px;
+    height: 42px;
 
-            background: #fffdf8;
-        }
+    display: flex;
 
+    align-items: center;
 
-        .empty-state-icon {
+    justify-content: center;
 
-            width: 62px;
+    margin-bottom: 14px;
 
-            height: 62px;
+    border-radius: 11px;
 
-            margin: 0 auto 18px;
+    background: var(--cream);
 
-            display: flex;
+    color: var(--gold);
+}
 
-            align-items: center;
+.quick-card h3 {
 
-            justify-content: center;
+    font-family: Georgia, serif;
 
-            border-radius: 50%;
+    color: var(--maroon);
 
-            background: #faf7f0;
+    font-size: 17px;
 
-            color: #b79643;
+    margin-bottom: 6px;
+}
 
-            font-size: 24px;
-        }
+.quick-card p {
 
+    color: var(--muted);
 
-        .empty-state h3 {
+    font-size: 12px;
 
-            font-family: Georgia, serif;
+    line-height: 1.5;
+}
 
-            color: #641616;
 
-            font-size: 21px;
+/* =========================================================
+   GENERIC CARD
+========================================================= */
 
-            margin-bottom: 8px;
-        }
+.content-card {
 
+    background: #fff;
 
-        .empty-state p {
+    border:
+        1px solid var(--border);
 
-            max-width: 430px;
+    border-radius: 16px;
 
-            margin: auto;
+    padding: 24px;
 
-            color: #888;
+    box-shadow:
+        0 8px 25px rgba(80,40,20,.035);
 
-            font-size: 13px;
+    margin-bottom: 18px;
+}
 
-            line-height: 1.6;
-        }
+.content-card h3 {
 
+    font-family: Georgia, serif;
 
-        /* ==================================================
-           SECURITY
-        ================================================== */
+    color: var(--maroon);
 
-        .security-item {
+    font-size: 18px;
 
-            display: flex;
+    margin-bottom: 16px;
+}
 
-            align-items: center;
 
-            justify-content: space-between;
+/* =========================================================
+   PROFILE
+========================================================= */
 
-            gap: 20px;
+.profile-top {
 
-            padding: 18px 0;
+    display: flex;
 
-            border-bottom: 1px solid #eee7d9;
-        }
+    align-items: center;
 
+    gap: 17px;
 
-        .security-item:last-child {
+    margin-bottom: 25px;
 
-            border-bottom: none;
+    padding-bottom: 20px;
 
-            padding-bottom: 0;
-        }
+    border-bottom:
+        1px solid #eee7d9;
+}
 
+.profile-avatar {
 
-        .security-info {
+    width: 64px;
 
-            display: flex;
+    height: 64px;
 
-            gap: 14px;
+    flex-shrink: 0;
 
-            align-items: center;
-        }
+    display: flex;
 
+    align-items: center;
 
-        .security-icon {
+    justify-content: center;
 
-            width: 42px;
+    border-radius: 50%;
 
-            height: 42px;
+    background:
+        linear-gradient(
+            145deg,
+            #fffaf0,
+            #f3e7c8
+        );
 
-            flex-shrink: 0;
+    border:
+        1px solid var(--gold-light);
 
-            display: flex;
+    color: var(--maroon);
 
-            align-items: center;
+    font-family: Georgia, serif;
 
-            justify-content: center;
+    font-size: 24px;
 
-            border-radius: 9px;
+    font-weight: bold;
+}
 
-            background: #faf7f0;
+.profile-top h3 {
 
-            color: #b79643;
-        }
+    margin-bottom: 4px;
+}
 
+.profile-top p {
 
-        .security-info h4 {
+    color: var(--muted);
 
-            color: #641616;
+    font-size: 12px;
+}
 
-            font-size: 14px;
+.form-grid {
 
-            margin-bottom: 4px;
-        }
+    display: grid;
 
+    grid-template-columns:
+        1fr 1fr;
 
-        .security-info p {
+    gap: 17px;
+}
 
-            color: #888;
+.form-group {
 
-            font-size: 12px;
-        }
+    margin-bottom: 4px;
+}
 
+.form-group.full {
 
-        .status-badge {
+    grid-column:
+        1 / -1;
+}
 
-            padding: 6px 10px;
+.form-group label {
 
-            border-radius: 20px;
+    display: block;
 
-            background: #eef9f0;
+    margin-bottom: 7px;
 
-            color: #26733a;
+    color: #67534e;
 
-            font-size: 11px;
+    font-size: 11px;
 
-            font-weight: 600;
-        }
+    font-weight: 700;
+}
 
+.form-input {
 
-        /* ==================================================
-           FOOTER
-        ================================================== */
+    width: 100%;
 
-        .account-footer {
+    height: 44px;
 
-            text-align: center;
+    padding: 0 13px;
 
-            padding: 0 20px 35px;
+    border:
+        1px solid #dfd4bb;
 
-            color: #999;
+    border-radius: 8px;
 
-            font-size: 12px;
-        }
+    outline: none;
 
+    background: #fffdf9;
 
-        .account-footer a {
+    color: #4b1717;
 
-            color: #7c1717;
+    font-size: 13px;
 
-            text-decoration: none;
-        }
+    transition: .2s ease;
+}
 
+.form-input:focus {
 
-        /* ==================================================
-           RESPONSIVE
-        ================================================== */
+    border-color: var(--gold);
 
-        @media (max-width: 850px) {
+    box-shadow:
+        0 0 0 3px rgba(183,150,67,.10);
+}
 
-            .account-layout {
+.form-input:disabled {
 
-                grid-template-columns: 1fr;
+    background: #f6f3ed;
 
-            }
+    color: #888;
 
+    cursor: not-allowed;
+}
 
-            .account-sidebar {
+.field-note {
 
-                position: static;
+    margin-top: 5px;
 
-            }
+    color: #999;
 
+    font-size: 10px;
 
-            .account-nav {
+    line-height: 1.4;
+}
 
-                display: grid;
+.profile-actions {
 
-                grid-template-columns:
-                    repeat(4, 1fr);
+    display: flex;
 
-            }
+    align-items: center;
 
+    justify-content: space-between;
 
-            .nav-btn {
+    gap: 15px;
 
-                justify-content: center;
+    margin-top: 22px;
 
-                flex-direction: column;
+    padding-top: 18px;
 
-                gap: 5px;
+    border-top:
+        1px solid #eee7d9;
+}
 
-                text-align: center;
+.save-status {
 
-                font-size: 11px;
+    font-size: 12px;
 
-                padding: 10px 5px;
-            }
+    color: #26733a;
+}
 
+.save-btn {
 
-            .logout-btn {
+    display: inline-flex;
 
-                border-top: none;
+    align-items: center;
 
-                margin-top: 0;
+    gap: 8px;
 
-                padding-top: 10px;
-            }
+    border: none;
 
-        }
+    border-radius: 8px;
 
+    padding: 11px 18px;
 
-        @media (max-width: 600px) {
+    background: var(--maroon);
 
-            .header-inner {
+    color: #fff;
 
-                padding: 14px 16px;
-            }
+    font-size: 12px;
 
+    font-weight: 600;
 
-            .brand h1 {
+    cursor: pointer;
 
-                font-size: 20px;
-            }
+    transition: .2s ease;
+}
 
+.save-btn:hover {
 
-            .brand span {
+    background: var(--maroon-dark);
 
-                font-size: 8px;
-            }
+    transform: translateY(-1px);
+}
 
+.save-btn:disabled {
 
-            .home-btn {
+    opacity: .65;
 
-                font-size: 11px;
+    cursor: not-allowed;
 
-                padding: 8px 10px;
-            }
+}
 
 
-            .account-wrapper {
+/* =========================================================
+   EMAIL / STATUS
+========================================================= */
 
-                padding: 25px 16px 50px;
-            }
+.status-badge {
 
+    display: inline-flex;
 
-            .welcome-section {
+    align-items: center;
 
-                padding: 24px 20px;
-            }
+    gap: 6px;
 
+    padding: 6px 10px;
 
-            .welcome-section h2 {
+    border-radius: 20px;
 
-                font-size: 25px;
-            }
+    background: #eef9f0;
 
+    color: #26733a;
 
-            .dashboard-grid {
+    font-size: 10px;
 
-                grid-template-columns: 1fr;
+    font-weight: 700;
+}
 
-            }
+.status-badge i {
 
+    font-size: 9px;
+}
 
-            .profile-row {
 
-                grid-template-columns: 1fr;
-            }
+/* =========================================================
+   ORDERS
+========================================================= */
 
+.order-empty {
 
-            .content-card {
+    text-align: center;
 
-                padding: 20px;
-            }
+    padding: 54px 25px;
 
+    border:
+        1px dashed #d8cba9;
 
-            .security-item {
+    border-radius: 13px;
 
-                align-items: flex-start;
+    background: #fffdf8;
+}
 
-                flex-direction: column;
-            }
+.order-icon {
 
-        }
+    width: 66px;
 
-    </style>
+    height: 66px;
+
+    margin:
+        0 auto 18px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: var(--cream);
+
+    color: var(--gold);
+
+    font-size: 23px;
+}
+
+.order-empty h3 {
+
+    font-family: Georgia, serif;
+
+    color: var(--maroon);
+
+    font-size: 21px;
+
+    margin-bottom: 7px;
+}
+
+.order-empty p {
+
+    max-width: 420px;
+
+    margin: auto;
+
+    color: #888;
+
+    font-size: 12px;
+
+    line-height: 1.6;
+}
+
+.shop-now {
+
+    display: inline-flex;
+
+    margin-top: 20px;
+
+    padding: 10px 17px;
+
+    border-radius: 8px;
+
+    background: var(--maroon);
+
+    color: #fff;
+
+    text-decoration: none;
+
+    font-size: 12px;
+
+    font-weight: 600;
+}
+
+
+/* =========================================================
+   SECURITY
+========================================================= */
+
+.security-item {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 20px;
+
+    padding: 17px 0;
+
+    border-bottom:
+        1px solid #eee7d9;
+}
+
+.security-item:last-child {
+
+    border-bottom: none;
+}
+
+.security-info {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 13px;
+}
+
+.security-icon {
+
+    width: 42px;
+
+    height: 42px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 10px;
+
+    background: var(--cream);
+
+    color: var(--gold);
+
+    flex-shrink: 0;
+}
+
+.security-info h4 {
+
+    color: var(--maroon);
+
+    font-size: 13px;
+
+    margin-bottom: 3px;
+}
+
+.security-info p {
+
+    color: #888;
+
+    font-size: 11px;
+}
+
+.security-action {
+
+    border:
+        1px solid #ded3bb;
+
+    background: #fff;
+
+    color: #67534e;
+
+    padding: 8px 12px;
+
+    border-radius: 7px;
+
+    font-size: 11px;
+
+    cursor: pointer;
+}
+
+
+/* =========================================================
+   FUTURE FEATURES
+========================================================= */
+
+.future-box {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3,1fr);
+
+    gap: 12px;
+
+    margin-top: 18px;
+}
+
+.future-item {
+
+    padding: 15px;
+
+    border:
+        1px solid #eee7d9;
+
+    border-radius: 10px;
+
+    background: #fffdf9;
+}
+
+.future-item i {
+
+    color: var(--gold);
+
+    margin-bottom: 8px;
+}
+
+.future-item h4 {
+
+    color: var(--maroon);
+
+    font-family: Georgia, serif;
+
+    font-size: 14px;
+
+    margin-bottom: 4px;
+}
+
+.future-item p {
+
+    color: #999;
+
+    font-size: 10px;
+
+    line-height: 1.5;
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.account-footer {
+
+    text-align: center;
+
+    padding:
+        0 20px
+        35px;
+
+    color: #999;
+
+    font-size: 10px;
+}
+
+.account-footer a {
+
+    color: var(--maroon);
+
+    text-decoration: none;
+}
+
+
+/* =========================================================
+   TOAST
+========================================================= */
+
+.toast {
+
+    position: fixed;
+
+    right: 22px;
+
+    bottom: 22px;
+
+    z-index: 500;
+
+    max-width: 320px;
+
+    padding: 13px 17px;
+
+    border-radius: 9px;
+
+    background: #fff;
+
+    border:
+        1px solid var(--border);
+
+    box-shadow:
+        0 12px 35px rgba(0,0,0,.12);
+
+    color: #4b1717;
+
+    font-size: 12px;
+
+    opacity: 0;
+
+    transform:
+        translateY(10px);
+
+    pointer-events: none;
+
+    transition: .25s ease;
+}
+
+.toast.show {
+
+    opacity: 1;
+
+    transform:
+        translateY(0);
+}
+
+.toast.success {
+
+    border-left:
+        3px solid #26733a;
+}
+
+.toast.error {
+
+    border-left:
+        3px solid #9b2020;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 900px) {
+
+    .account-layout {
+
+        grid-template-columns: 1fr;
+    }
+
+    .account-sidebar {
+
+        position: static;
+    }
+
+    .account-nav {
+
+        display: grid;
+
+        grid-template-columns:
+            repeat(4,1fr);
+    }
+
+    .nav-btn {
+
+        justify-content: center;
+
+        flex-direction: column;
+
+        gap: 5px;
+
+        text-align: center;
+
+        font-size: 10px;
+
+        padding: 10px 5px;
+    }
+
+    .logout-btn {
+
+        margin-top: 0;
+
+        padding-top: 10px;
+
+        border-top: none;
+    }
+
+}
+
+
+@media (max-width: 680px) {
+
+    .header-inner {
+
+        padding:
+            13px 16px;
+    }
+
+    .brand-text h1 {
+
+        font-size: 19px;
+    }
+
+    .brand-text span {
+
+        display: none;
+    }
+
+    .brand-mark {
+
+        width: 38px;
+
+        height: 38px;
+    }
+
+    .store-btn {
+
+        padding:
+            8px 10px;
+
+        font-size: 10px;
+    }
+
+    .account-wrapper {
+
+        padding:
+            22px 16px
+            50px;
+    }
+
+    .welcome-section {
+
+        padding:
+            25px 22px;
+    }
+
+    .welcome-section h2 {
+
+        font-size: 25px;
+    }
+
+    .dashboard-stats {
+
+        grid-template-columns:
+            1fr;
+    }
+
+    .quick-grid {
+
+        grid-template-columns:
+            1fr;
+    }
+
+    .form-grid {
+
+        grid-template-columns:
+            1fr;
+    }
+
+    .form-group.full {
+
+        grid-column:
+            auto;
+    }
+
+    .profile-actions {
+
+        align-items: flex-start;
+
+        flex-direction: column;
+    }
+
+    .future-box {
+
+        grid-template-columns:
+            1fr;
+    }
+
+    .security-item {
+
+        align-items: flex-start;
+
+        flex-direction: column;
+    }
+
+}
+
+
+/* =========================================================
+   VERY SMALL MOBILE
+========================================================= */
+
+@media (max-width: 430px) {
+
+    .account-nav {
+
+        grid-template-columns:
+            repeat(2,1fr);
+    }
+
+    .account-sidebar {
+
+        padding: 10px;
+    }
+
+    .welcome-section h2 {
+
+        font-size: 23px;
+    }
+
+}
+
+</style>
 
 </head>
 
@@ -1040,9 +1647,9 @@
 <body>
 
 
-<!-- ======================================================
-     PAGE LOADER
-====================================================== -->
+<!-- =======================================================
+     LOADER
+======================================================= -->
 
 <div
     class="page-loader"
@@ -1051,20 +1658,24 @@
 
     <div class="loader-content">
 
+        <div class="loader-symbol">
+
+            <i class="fa-solid fa-crown"></i>
+
+        </div>
+
         <h2>ShriVatsaDarbar</h2>
 
         <p>Preparing your account...</p>
-
-        <div class="loader-spinner"></div>
 
     </div>
 
 </div>
 
 
-<!-- ======================================================
+<!-- =======================================================
      HEADER
-====================================================== -->
+======================================================= -->
 
 <header class="account-header">
 
@@ -1075,11 +1686,23 @@
             class="brand"
         >
 
-            <h1>ShriVatsaDarbar</h1>
+            <div class="brand-mark">
 
-            <span>
-                WHERE EVERY SHRINGAR IS AN OFFERING
-            </span>
+                <i class="fa-solid fa-crown"></i>
+
+            </div>
+
+            <div class="brand-text">
+
+                <h1>
+                    ShriVatsaDarbar
+                </h1>
+
+                <span>
+                    WHERE EVERY SHRINGAR IS AN OFFERING
+                </span>
+
+            </div>
 
         </a>
 
@@ -1088,7 +1711,7 @@
 
             <a
                 href="../index.html"
-                class="home-btn"
+                class="store-btn"
             >
 
                 <i class="fa-solid fa-house"></i>
@@ -1104,255 +1727,808 @@
 </header>
 
 
-<!-- ======================================================
+<!-- =======================================================
      MAIN
-====================================================== -->
+======================================================= -->
 
 <main class="account-wrapper">
 
 
-    <!-- ==================================================
-         WELCOME
-    ================================================== -->
+<!-- =======================================================
+     WELCOME
+======================================================= -->
 
-    <section class="welcome-section">
+<section class="welcome-section">
 
-        <div class="welcome-label">
-            My Account
-        </div>
+    <div class="welcome-label">
+        My Account
+    </div>
+
+    <h2>
+
+        Welcome,
+        <span id="userName">
+            Devotee
+        </span>
+
+    </h2>
+
+    <p>
+
+        Your personal ShriVatsaDarbar space.
+
+        <br>
+
+        Signed in as:
+        <span id="userEmail">
+            Loading...
+        </span>
+
+    </p>
+
+</section>
+
+
+<!-- =======================================================
+     ACCOUNT LAYOUT
+======================================================= -->
+
+<div class="account-layout">
+
+
+<!-- =======================================================
+     SIDEBAR
+======================================================= -->
+
+<aside class="account-sidebar">
+
+    <div class="sidebar-heading">
+        Account
+    </div>
+
+
+    <nav class="account-nav">
+
+
+        <button
+            type="button"
+            class="nav-btn active"
+            data-section="dashboard"
+        >
+
+            <i class="fa-solid fa-grid-2"></i>
+
+            <span>
+                Dashboard
+            </span>
+
+        </button>
+
+
+        <button
+            type="button"
+            class="nav-btn"
+            data-section="profile"
+        >
+
+            <i class="fa-solid fa-user"></i>
+
+            <span>
+                My Profile
+            </span>
+
+        </button>
+
+
+        <button
+            type="button"
+            class="nav-btn"
+            data-section="orders"
+        >
+
+            <i class="fa-solid fa-bag-shopping"></i>
+
+            <span>
+                My Orders
+            </span>
+
+        </button>
+
+
+        <button
+            type="button"
+            class="nav-btn"
+            data-section="security"
+        >
+
+            <i class="fa-solid fa-shield-halved"></i>
+
+            <span>
+                Security
+            </span>
+
+        </button>
+
+
+        <button
+            type="button"
+            class="nav-btn logout-btn"
+            id="logoutButton"
+        >
+
+            <i class="fa-solid fa-right-from-bracket"></i>
+
+            <span>
+                Logout
+            </span>
+
+        </button>
+
+
+    </nav>
+
+</aside>
+
+
+<!-- =======================================================
+     CONTENT
+======================================================= -->
+
+<section class="account-content">
+
+
+<!-- =======================================================
+     DASHBOARD
+======================================================= -->
+
+<div
+    class="account-section active"
+    id="dashboard"
+>
+
+    <div class="section-header">
 
         <h2>
-            Welcome,
-            <span id="userName">
-                Devotee
-            </span>
+            Account Dashboard
         </h2>
 
         <p>
+            Everything you need to manage your
+            ShriVatsaDarbar account.
+        </p>
 
-            Your devotional journey with
-            ShriVatsaDarbar begins here.
+    </div>
 
-            <br>
 
-            Signed in as:
-            <span id="userEmail">
-                Loading...
-            </span>
+    <div class="dashboard-stats">
+
+
+        <div class="stat-card">
+
+            <div class="stat-top">
+
+                <div class="stat-icon">
+                    <i class="fa-solid fa-bag-shopping"></i>
+                </div>
+
+                <small>
+                    Orders
+                </small>
+
+            </div>
+
+            <strong>
+                0
+            </strong>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <div class="stat-top">
+
+                <div class="stat-icon">
+                    <i class="fa-regular fa-heart"></i>
+                </div>
+
+                <small>
+                    Wishlist
+                </small>
+
+            </div>
+
+            <strong>
+                0
+            </strong>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <div class="stat-top">
+
+                <div class="stat-icon">
+                    <i class="fa-solid fa-circle-check"></i>
+                </div>
+
+                <small>
+                    Account
+                </small>
+
+            </div>
+
+            <strong>
+                Active
+            </strong>
+
+        </div>
+
+
+    </div>
+
+
+    <div class="quick-grid">
+
+
+        <button
+            type="button"
+            class="quick-card"
+            data-open-section="profile"
+        >
+
+            <div class="quick-icon">
+
+                <i class="fa-solid fa-user-pen"></i>
+
+            </div>
+
+            <h3>
+                My Profile
+            </h3>
+
+            <p>
+                Update your name and contact
+                information.
+            </p>
+
+        </button>
+
+
+        <button
+            type="button"
+            class="quick-card"
+            data-open-section="orders"
+        >
+
+            <div class="quick-icon">
+
+                <i class="fa-solid fa-bag-shopping"></i>
+
+            </div>
+
+            <h3>
+                My Orders
+            </h3>
+
+            <p>
+                View your purchases and
+                order history.
+            </p>
+
+        </button>
+
+
+        <button
+            type="button"
+            class="quick-card"
+            data-open-section="security"
+        >
+
+            <div class="quick-icon">
+
+                <i class="fa-solid fa-shield-halved"></i>
+
+            </div>
+
+            <h3>
+                Account Security
+            </h3>
+
+            <p>
+                Review your authentication
+                and account security.
+            </p>
+
+        </button>
+
+
+    </div>
+
+
+    <div class="content-card">
+
+        <h3>
+            Your ShriVatsaDarbar Journey
+        </h3>
+
+        <p
+            style="
+                color:#777;
+                font-size:13px;
+                line-height:1.75;
+            "
+        >
+
+            This is your personal space at
+            ShriVatsaDarbar.
+
+            As your journey grows, this account
+            will become the place to manage your
+            purchases, profile, saved information,
+            preferences and more.
 
         </p>
 
-    </section>
+
+        <div class="future-box">
 
 
-    <!-- ==================================================
-         ACCOUNT LAYOUT
-    ================================================== -->
+            <div class="future-item">
 
-    <div class="account-layout">
+                <i class="fa-solid fa-location-dot"></i>
 
+                <h4>
+                    Saved Addresses
+                </h4>
 
-        <!-- ==================================================
-             SIDEBAR
-        ================================================== -->
+                <p>
+                    Delivery addresses will be
+                    connected in the commerce phase.
+                </p>
 
-        <aside class="account-sidebar">
-
-            <div class="sidebar-title">
-                Account
             </div>
 
 
-            <nav class="account-nav">
+            <div class="future-item">
+
+                <i class="fa-regular fa-heart"></i>
+
+                <h4>
+                    Wishlist
+                </h4>
+
+                <p>
+                    Save your favourite devotional
+                    products for later.
+                </p>
+
+            </div>
 
 
-                <button
-                    type="button"
-                    class="nav-btn active"
-                    data-section="dashboard"
+            <div class="future-item">
+
+                <i class="fa-solid fa-gift"></i>
+
+                <h4>
+                    Rewards
+                </h4>
+
+                <p>
+                    Future loyalty and customer
+                    benefits can live here.
+                </p>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =======================================================
+     PROFILE
+======================================================= -->
+
+<div
+    class="account-section"
+    id="profile"
+>
+
+    <div class="section-header">
+
+        <h2>
+            My Profile
+        </h2>
+
+        <p>
+            Manage your personal information.
+        </p>
+
+    </div>
+
+
+    <div class="content-card">
+
+
+        <div class="profile-top">
+
+            <div
+                class="profile-avatar"
+                id="profileAvatar"
+            >
+                D
+            </div>
+
+            <div>
+
+                <h3>
+                    Personal Information
+                </h3>
+
+                <p>
+                    Keep your account information
+                    up to date.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="form-grid">
+
+
+            <div class="form-group">
+
+                <label>
+                    Full Name
+                </label>
+
+                <input
+                    type="text"
+                    id="fullName"
+                    class="form-input"
+                    placeholder="Enter your full name"
+                    autocomplete="name"
                 >
 
-                    <i class="fa-solid fa-house"></i>
-
-                    <span>Dashboard</span>
-
-                </button>
+            </div>
 
 
-                <button
-                    type="button"
-                    class="nav-btn"
-                    data-section="profile"
+            <div class="form-group">
+
+                <label>
+                    Mobile Number
+                </label>
+
+                <input
+                    type="tel"
+                    id="mobileNumber"
+                    class="form-input"
+                    placeholder="Enter your mobile number"
+                    autocomplete="tel"
                 >
 
-                    <i class="fa-solid fa-user"></i>
-
-                    <span>Profile</span>
-
-                </button>
+            </div>
 
 
-                <button
-                    type="button"
-                    class="nav-btn"
-                    data-section="orders"
+            <div class="form-group full">
+
+                <label>
+                    Email Address
+                </label>
+
+                <input
+                    type="email"
+                    id="profileEmail"
+                    class="form-input"
+                    disabled
                 >
 
-                    <i class="fa-solid fa-bag-shopping"></i>
+                <div class="field-note">
 
-                    <span>Orders</span>
+                    Your email address is managed through
+                    Supabase Authentication.
 
-                </button>
+                </div>
+
+            </div>
 
 
-                <button
-                    type="button"
-                    class="nav-btn"
-                    data-section="security"
+        </div>
+
+
+        <div class="profile-actions">
+
+            <span
+                class="save-status"
+                id="saveStatus"
+            ></span>
+
+
+            <button
+                type="button"
+                class="save-btn"
+                id="saveProfile"
+            >
+
+                <i class="fa-solid fa-check"></i>
+
+                Save Changes
+
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <div class="content-card">
+
+        <h3>
+            Account Status
+        </h3>
+
+        <div
+            style="
+                display:flex;
+                align-items:center;
+                justify-content:space-between;
+                gap:15px;
+            "
+        >
+
+            <div>
+
+                <div
+                    style="
+                        color:#641616;
+                        font-size:13px;
+                        font-weight:600;
+                        margin-bottom:4px;
+                    "
                 >
+                    Email Verification
+                </div>
 
-                    <i class="fa-solid fa-shield-halved"></i>
-
-                    <span>Security</span>
-
-                </button>
-
-
-                <button
-                    type="button"
-                    class="nav-btn logout-btn"
-                    id="logoutButton"
+                <div
+                    style="
+                        color:#888;
+                        font-size:11px;
+                    "
                 >
+                    Your email has been successfully
+                    verified.
+
+                </div>
+
+            </div>
+
+
+            <span class="status-badge">
+
+                <i class="fa-solid fa-check"></i>
+
+                Verified
+
+            </span>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =======================================================
+     ORDERS
+======================================================= -->
+
+<div
+    class="account-section"
+    id="orders"
+>
+
+    <div class="section-header">
+
+        <h2>
+            My Orders
+        </h2>
+
+        <p>
+            Your ShriVatsaDarbar purchase history.
+        </p>
+
+    </div>
+
+
+    <div class="content-card">
+
+        <div class="order-empty">
+
+            <div class="order-icon">
+
+                <i class="fa-solid fa-bag-shopping"></i>
+
+            </div>
+
+            <h3>
+                No Orders Yet
+            </h3>
+
+            <p>
+
+                Your orders will appear here after
+                your first purchase from
+                ShriVatsaDarbar.
+
+            </p>
+
+            <a
+                href="../index.html"
+                class="shop-now"
+            >
+
+                Explore ShriVatsaDarbar
+
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <div class="content-card">
+
+        <h3>
+            How Orders Will Look
+        </h3>
+
+        <p
+            style="
+                color:#777;
+                font-size:12px;
+                line-height:1.7;
+            "
+        >
+
+            Once the store's order database is
+            connected, this area will show your
+            order number, date, products, amount,
+            payment status and delivery status.
+
+        </p>
+
+    </div>
+
+</div>
+
+
+<!-- =======================================================
+     SECURITY
+======================================================= -->
+
+<div
+    class="account-section"
+    id="security"
+>
+
+    <div class="section-header">
+
+        <h2>
+            Security
+        </h2>
+
+        <p>
+            Keep your ShriVatsaDarbar account secure.
+        </p>
+
+    </div>
+
+
+    <div class="content-card">
+
+        <h3>
+            Account Security
+        </h3>
+
+
+        <div class="security-item">
+
+            <div class="security-info">
+
+                <div class="security-icon">
+
+                    <i class="fa-solid fa-envelope-circle-check"></i>
+
+                </div>
+
+                <div>
+
+                    <h4>
+                        Email Verification
+                    </h4>
+
+                    <p>
+                        Your email address has been
+                        verified.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <span class="status-badge">
+
+                <i class="fa-solid fa-check"></i>
+
+                Verified
+
+            </span>
+
+        </div>
+
+
+        <div class="security-item">
+
+            <div class="security-info">
+
+                <div class="security-icon">
+
+                    <i class="fa-solid fa-lock"></i>
+
+                </div>
+
+                <div>
+
+                    <h4>
+                        Password
+                    </h4>
+
+                    <p>
+                        Your account is protected
+                        by a password.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <span class="status-badge">
+
+                Protected
+
+            </span>
+
+        </div>
+
+
+        <div class="security-item">
+
+            <div class="security-info">
+
+                <div class="security-icon">
 
                     <i class="fa-solid fa-right-from-bracket"></i>
 
-                    <span>Logout</span>
+                </div>
 
-                </button>
+                <div>
 
-
-            </nav>
-
-        </aside>
-
-
-        <!-- ==================================================
-             CONTENT
-        ================================================== -->
-
-        <section class="account-content">
-
-
-            <!-- ==================================================
-                 DASHBOARD
-            ================================================== -->
-
-            <div
-                class="account-section active"
-                id="dashboard"
-            >
-
-                <div class="section-header">
-
-                    <h2>
-                        Account Dashboard
-                    </h2>
+                    <h4>
+                        Sign Out
+                    </h4>
 
                     <p>
-                        Manage your ShriVatsaDarbar account
-                        from one place.
-                    </p>
-
-                </div>
-
-
-                <div class="dashboard-grid">
-
-
-                    <div class="dashboard-card">
-
-                        <div class="dashboard-card-icon">
-
-                            <i class="fa-solid fa-user"></i>
-
-                        </div>
-
-                        <h3>
-                            My Profile
-                        </h3>
-
-                        <p>
-                            Manage your personal information
-                            and account details.
-                        </p>
-
-                    </div>
-
-
-                    <div class="dashboard-card">
-
-                        <div class="dashboard-card-icon">
-
-                            <i class="fa-solid fa-bag-shopping"></i>
-
-                        </div>
-
-                        <h3>
-                            My Orders
-                        </h3>
-
-                        <p>
-                            View your ShriVatsaDarbar purchases
-                            and order history.
-                        </p>
-
-                    </div>
-
-
-                    <div class="dashboard-card">
-
-                        <div class="dashboard-card-icon">
-
-                            <i class="fa-solid fa-shield-halved"></i>
-
-                        </div>
-
-                        <h3>
-                            Account Security
-                        </h3>
-
-                        <p>
-                            Manage your account security
-                            and authentication.
-                        </p>
-
-                    </div>
-
-
-                </div>
-
-
-                <div class="content-card">
-
-                    <h3>
-                        Your ShriVatsaDarbar Journey
-                    </h3>
-
-                    <p
-                        style="
-                            color:#777;
-                            font-size:14px;
-                            line-height:1.7;
-                        "
-                    >
-
-                        Welcome to your personal
-                        ShriVatsaDarbar account.
-
-                        Your profile, orders, saved information
-                        and account security will be managed
-                        here as the store grows.
-
+                        Securely sign out of your
+                        account.
                     </p>
 
                 </div>
@@ -1360,383 +2536,70 @@
             </div>
 
 
-            <!-- ==================================================
-                 PROFILE
-            ================================================== -->
-
-            <div
-                class="account-section"
-                id="profile"
+            <button
+                type="button"
+                class="security-action"
+                id="securityLogout"
             >
 
-                <div class="section-header">
+                Logout
 
-                    <h2>
-                        My Profile
-                    </h2>
+            </button>
 
-                    <p>
-                        Your account information.
-                    </p>
+        </div>
 
-                </div>
-
-
-                <div class="content-card">
-
-                    <h3>
-                        Account Information
-                    </h3>
-
-
-                    <div class="profile-row">
-
-
-                        <div class="profile-field">
-
-                            <label>
-                                Email Address
-                            </label>
-
-                            <div
-                                class="profile-value"
-                                id="profileEmail"
-                            >
-                                Loading...
-                            </div>
-
-                            <div class="profile-note">
-                                Your email is managed through
-                                Supabase Authentication.
-                            </div>
-
-                        </div>
-
-
-                        <div class="profile-field">
-
-                            <label>
-                                Account Status
-                            </label>
-
-                            <div class="profile-value">
-
-                                <span class="status-badge">
-                                    Verified Account
-                                </span>
-
-                            </div>
-
-                        </div>
-
-
-                    </div>
-
-
-                    <div class="profile-row">
-
-
-                        <div class="profile-field">
-
-                            <label>
-                                Full Name
-                            </label>
-
-                            <div class="profile-value">
-
-                                <span
-                                    style="color:#aaa;"
-                                >
-                                    To be configured
-
-                                </span>
-
-                            </div>
-
-                        </div>
-
-
-                        <div class="profile-field">
-
-                            <label>
-                                Mobile Number
-                            </label>
-
-                            <div class="profile-value">
-
-                                <span
-                                    style="color:#aaa;"
-                                >
-                                    To be configured
-
-                                </span>
-
-                            </div>
-
-                        </div>
-
-
-                    </div>
-
-
-                    <p
-                        style="
-                            margin-top:8px;
-                            color:#999;
-                            font-size:12px;
-                            line-height:1.6;
-                        "
-                    >
-
-                        Profile details will be connected
-                        to your customer profile database
-                        in the next phase.
-
-                    </p>
-
-                </div>
-
-            </div>
-
-
-            <!-- ==================================================
-                 ORDERS
-            ================================================== -->
-
-            <div
-                class="account-section"
-                id="orders"
-            >
-
-                <div class="section-header">
-
-                    <h2>
-                        My Orders
-                    </h2>
-
-                    <p>
-                        View and manage your
-                        ShriVatsaDarbar purchases.
-                    </p>
-
-                </div>
-
-
-                <div class="content-card">
-
-
-                    <div class="empty-state">
-
-                        <div class="empty-state-icon">
-
-                            <i class="fa-solid fa-bag-shopping"></i>
-
-                        </div>
-
-
-                        <h3>
-                            No Orders Yet
-                        </h3>
-
-
-                        <p>
-
-                            Your orders will appear here
-                            once you make your first purchase
-                            from ShriVatsaDarbar.
-
-                        </p>
-
-                    </div>
-
-
-                </div>
-
-            </div>
-
-
-            <!-- ==================================================
-                 SECURITY
-            ================================================== -->
-
-            <div
-                class="account-section"
-                id="security"
-            >
-
-                <div class="section-header">
-
-                    <h2>
-                        Security
-                    </h2>
-
-                    <p>
-                        Manage your account authentication
-                        and security.
-                    </p>
-
-                </div>
-
-
-                <div class="content-card">
-
-
-                    <h3>
-                        Account Security
-                    </h3>
-
-
-                    <div class="security-item">
-
-
-                        <div class="security-info">
-
-                            <div class="security-icon">
-
-                                <i class="fa-solid fa-envelope-circle-check"></i>
-
-                            </div>
-
-
-                            <div>
-
-                                <h4>
-                                    Email Verification
-                                </h4>
-
-                                <p>
-                                    Your email address has
-                                    been verified.
-                                </p>
-
-                            </div>
-
-                        </div>
-
-
-                        <span class="status-badge">
-                            Verified
-                        </span>
-
-                    </div>
-
-
-                    <div class="security-item">
-
-
-                        <div class="security-info">
-
-                            <div class="security-icon">
-
-                                <i class="fa-solid fa-lock"></i>
-
-                            </div>
-
-
-                            <div>
-
-                                <h4>
-                                    Password
-                                </h4>
-
-                                <p>
-                                    Your account is protected
-                                    by a password.
-                                </p>
-
-                            </div>
-
-                        </div>
-
-
-                        <span class="status-badge">
-                            Protected
-                        </span>
-
-                    </div>
-
-
-                    <div class="security-item">
-
-
-                        <div class="security-info">
-
-                            <div class="security-icon">
-
-                                <i class="fa-solid fa-right-from-bracket"></i>
-
-                            </div>
-
-
-                            <div>
-
-                                <h4>
-                                    Sign Out
-                                </h4>
-
-                                <p>
-                                    Securely sign out of
-                                    your ShriVatsaDarbar account.
-                                </p>
-
-                            </div>
-
-                        </div>
-
-
-                        <button
-                            type="button"
-                            class="home-btn"
-                            id="securityLogout"
-                        >
-                            Logout
-                        </button>
-
-                    </div>
-
-
-                    <p
-                        style="
-                            margin-top:22px;
-                            color:#999;
-                            font-size:12px;
-                            line-height:1.6;
-                        "
-                    >
-
-                        Advanced security features such as
-                        password change and account recovery
-                        will be connected in the security phase.
-
-                    </p>
-
-
-                </div>
-
-            </div>
-
-
-        </section>
 
     </div>
+
+
+    <div class="content-card">
+
+        <h3>
+            More Security Options
+        </h3>
+
+        <p
+            style="
+                color:#888;
+                font-size:12px;
+                line-height:1.7;
+            "
+        >
+
+            Password change, password recovery,
+            email change and advanced account
+            security will be added in the dedicated
+            security phase.
+
+        </p>
+
+    </div>
+
+</div>
+
+
+</section>
+
+</div>
 
 </main>
 
 
-<!-- ======================================================
+<!-- =======================================================
      FOOTER
-====================================================== -->
+======================================================= -->
 
 <footer class="account-footer">
 
     <p>
 
-        © <span id="currentYear"></span>
+        ©
+        <span id="currentYear"></span>
         ShriVatsaDarbar.
 
         All rights reserved.
 
-        &nbsp;|&nbsp;
+        &nbsp; | &nbsp;
 
         <a href="../index.html">
             Return to Store
@@ -1747,9 +2610,19 @@
 </footer>
 
 
-<!-- ======================================================
+<!-- =======================================================
+     TOAST
+======================================================= -->
+
+<div
+    class="toast"
+    id="toast"
+></div>
+
+
+<!-- =======================================================
      SUPABASE
-====================================================== -->
+======================================================= -->
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
@@ -1758,289 +2631,475 @@
 
 <script>
 
-    /* ==================================================
-       ELEMENTS
-    ================================================== */
+/* =========================================================
+   ELEMENTS
+========================================================= */
 
-    const pageLoader =
-        document.getElementById("pageLoader");
+const pageLoader =
+    document.getElementById("pageLoader");
 
-    const userName =
-        document.getElementById("userName");
+const userName =
+    document.getElementById("userName");
 
-    const userEmail =
-        document.getElementById("userEmail");
+const userEmail =
+    document.getElementById("userEmail");
 
-    const profileEmail =
-        document.getElementById("profileEmail");
+const profileEmail =
+    document.getElementById("profileEmail");
 
-    const logoutButton =
-        document.getElementById("logoutButton");
+const fullName =
+    document.getElementById("fullName");
 
-    const securityLogout =
-        document.getElementById("securityLogout");
+const mobileNumber =
+    document.getElementById("mobileNumber");
 
-    const navButtons =
-        document.querySelectorAll(".nav-btn[data-section]");
+const profileAvatar =
+    document.getElementById("profileAvatar");
 
-    const sections =
-        document.querySelectorAll(".account-section");
+const saveProfile =
+    document.getElementById("saveProfile");
 
+const saveStatus =
+    document.getElementById("saveStatus");
 
-    /* ==================================================
-       CURRENT YEAR
-    ================================================== */
+const logoutButton =
+    document.getElementById("logoutButton");
 
-    document.getElementById("currentYear").textContent =
-        new Date().getFullYear();
+const securityLogout =
+    document.getElementById("securityLogout");
 
+const toast =
+    document.getElementById("toast");
 
-    /* ==================================================
-       SHOW SECTION
-    ================================================== */
+const navButtons =
+    document.querySelectorAll(
+        ".nav-btn[data-section]"
+    );
 
-    function showSection(sectionId) {
+const sections =
+    document.querySelectorAll(
+        ".account-section"
+    );
 
-        sections.forEach(function (section) {
-
-            section.classList.remove("active");
-
-        });
-
-
-        navButtons.forEach(function (button) {
-
-            button.classList.remove("active");
-
-        });
-
-
-        const targetSection =
-            document.getElementById(sectionId);
-
-        const targetButton =
-            document.querySelector(
-                '[data-section="' + sectionId + '"]'
-            );
+const quickCards =
+    document.querySelectorAll(
+        "[data-open-section]"
+    );
 
 
-        if (targetSection) {
+/* =========================================================
+   YEAR
+========================================================= */
 
-            targetSection.classList.add("active");
-
-        }
-
-
-        if (targetButton) {
-
-            targetButton.classList.add("active");
-
-        }
+document.getElementById(
+    "currentYear"
+).textContent =
+    new Date().getFullYear();
 
 
-        window.scrollTo({
-            top: 0,
-            behavior: "smooth"
-        });
+/* =========================================================
+   TOAST
+========================================================= */
 
-    }
+let toastTimer;
+
+function showToast(text, type = "success") {
+
+    clearTimeout(toastTimer);
+
+    toast.textContent = text;
+
+    toast.className =
+        "toast " + type + " show";
+
+    toastTimer =
+        setTimeout(function () {
+
+            toast.classList.remove("show");
+
+        }, 3500);
+
+}
 
 
-    /* ==================================================
-       NAVIGATION
-    ================================================== */
+/* =========================================================
+   NAVIGATION
+========================================================= */
 
-    navButtons.forEach(function (button) {
+function showSection(sectionId) {
 
-        button.addEventListener(
-            "click",
-            function () {
+    sections.forEach(function(section) {
 
-                const sectionId =
-                    this.dataset.section;
-
-                showSection(sectionId);
-
-            }
-        );
+        section.classList.remove("active");
 
     });
 
 
-    /* ==================================================
-       LOGOUT
-    ================================================== */
+    navButtons.forEach(function(button) {
 
-    async function logoutUser() {
+        button.classList.remove("active");
 
-        try {
-
-            const {
-                error
-            } = await supabaseClient.auth.signOut();
+    });
 
 
-            if (error) {
-
-                console.error(error);
-
-                return;
-
-            }
+    const targetSection =
+        document.getElementById(sectionId);
 
 
-            window.location.href =
-                "login.html";
+    const targetButton =
+        document.querySelector(
+            '[data-section="' +
+            sectionId +
+            '"]'
+        );
 
-        } catch (error) {
+
+    if (targetSection) {
+
+        targetSection.classList.add("active");
+
+    }
+
+
+    if (targetButton) {
+
+        targetButton.classList.add("active");
+
+    }
+
+
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+
+}
+
+
+navButtons.forEach(function(button) {
+
+    button.addEventListener(
+        "click",
+        function() {
+
+            showSection(
+                this.dataset.section
+            );
+
+        }
+    );
+
+});
+
+
+quickCards.forEach(function(card) {
+
+    card.addEventListener(
+        "click",
+        function() {
+
+            showSection(
+                this.dataset.openSection
+            );
+
+        }
+    );
+
+});
+
+
+/* =========================================================
+   LOGOUT
+========================================================= */
+
+async function logoutUser() {
+
+    try {
+
+        const {
+            error
+        } =
+        await supabaseClient.auth.signOut();
+
+
+        if (error) {
+
+            console.error(error);
+
+        }
+
+
+        window.location.href =
+            "login.html";
+
+    }
+
+    catch (error) {
+
+        console.error(error);
+
+        window.location.href =
+            "login.html";
+
+    }
+
+}
+
+
+logoutButton.addEventListener(
+    "click",
+    logoutUser
+);
+
+
+securityLogout.addEventListener(
+    "click",
+    logoutUser
+);
+
+
+/* =========================================================
+   DISPLAY NAME
+========================================================= */
+
+function getInitials(name) {
+
+    if (!name) {
+        return "D";
+    }
+
+    const parts =
+        name.trim().split(/\s+/);
+
+    if (parts.length === 1) {
+
+        return parts[0]
+            .charAt(0)
+            .toUpperCase();
+
+    }
+
+    return (
+        parts[0].charAt(0) +
+        parts[parts.length - 1].charAt(0)
+    ).toUpperCase();
+
+}
+
+
+/* =========================================================
+   LOAD ACCOUNT
+========================================================= */
+
+async function loadAccount() {
+
+    try {
+
+        const {
+            data,
+            error
+        } =
+        await supabaseClient.auth.getUser();
+
+
+        if (error) {
 
             console.error(error);
 
             window.location.href =
                 "login.html";
 
+            return;
+
         }
+
+
+        const user =
+            data.user;
+
+
+        if (!user) {
+
+            window.location.href =
+                "login.html";
+
+            return;
+
+        }
+
+
+        /* -------------------------------------------------
+           EMAIL
+        ------------------------------------------------- */
+
+        const email =
+            user.email || "";
+
+
+        userEmail.textContent =
+            email;
+
+        profileEmail.value =
+            email;
+
+
+        /* -------------------------------------------------
+           METADATA
+        ------------------------------------------------- */
+
+        const metadata =
+            user.user_metadata || {};
+
+
+        let name =
+            metadata.full_name ||
+            metadata.name ||
+            "";
+
+
+        const phone =
+            metadata.phone ||
+            "";
+
+
+        if (!name && email) {
+
+            name =
+                email.split("@")[0];
+
+        }
+
+
+        if (!name) {
+
+            name =
+                "Devotee";
+
+        }
+
+
+        userName.textContent =
+            name;
+
+
+        fullName.value =
+            name === "Devotee"
+                ? ""
+                : name;
+
+
+        mobileNumber.value =
+            phone;
+
+
+        profileAvatar.textContent =
+            getInitials(name);
+
+
+        /* -------------------------------------------------
+           LOADER
+        ------------------------------------------------- */
+
+        pageLoader.classList.add(
+            "hidden"
+        );
 
     }
 
+    catch (error) {
 
-    logoutButton.addEventListener(
-        "click",
-        logoutUser
-    );
+        console.error(error);
+
+        window.location.href =
+            "login.html";
+
+    }
+
+}
 
 
-    securityLogout.addEventListener(
-        "click",
-        logoutUser
-    );
+/* =========================================================
+   SAVE PROFILE
+========================================================= */
+
+saveProfile.addEventListener(
+    "click",
+    async function() {
+
+        const name =
+            fullName.value.trim();
+
+        const phone =
+            mobileNumber.value.trim();
 
 
-    /* ==================================================
-       GET CURRENT USER
-    ================================================== */
+        if (!name) {
 
-    async function loadAccount() {
+            showToast(
+                "Please enter your full name.",
+                "error"
+            );
+
+            fullName.focus();
+
+            return;
+
+        }
+
+
+        saveProfile.disabled =
+            true;
+
+        saveProfile.innerHTML =
+            '<i class="fa-solid fa-spinner fa-spin"></i> Saving...';
+
+
+        saveStatus.textContent =
+            "";
+
 
         try {
 
             const {
                 data,
                 error
-            } = await supabaseClient.auth.getUser();
+            } =
+            await supabaseClient.auth.updateUser({
+
+                data: {
+
+                    full_name: name,
+
+                    phone: phone
+
+                }
+
+            });
 
 
             if (error) {
 
-                console.error(error);
-
-                window.location.href =
-                    "login.html";
-
-                return;
-
-            }
-
-
-            const user =
-                data.user;
-
-
-            if (!user) {
-
-                window.location.href =
-                    "login.html";
-
-                return;
-
-            }
-
-
-            /* ------------------------------------------
-               EMAIL
-            ------------------------------------------ */
-
-            const email =
-                user.email || "";
-
-
-            userEmail.textContent =
-                email;
-
-
-            profileEmail.textContent =
-                email;
-
-
-            /* ------------------------------------------
-               DISPLAY NAME
-            ------------------------------------------ */
-
-            let displayName =
-                "Devotee";
-
-
-            if (user.user_metadata) {
-
-                const metadata =
-                    user.user_metadata;
-
-
-                if (metadata.full_name) {
-
-                    displayName =
-                        metadata.full_name;
-
-                }
-
-                else if (metadata.name) {
-
-                    displayName =
-                        metadata.name;
-
-                }
-
-            }
-
-
-            /*
-             * If no profile name exists yet,
-             * use the email prefix temporarily.
-             */
-
-            if (
-                displayName === "Devotee" &&
-                email
-            ) {
-
-                const emailPrefix =
-                    email.split("@")[0];
-
-
-                if (emailPrefix) {
-
-                    displayName =
-                        emailPrefix;
-
-                }
+                throw error;
 
             }
 
 
             userName.textContent =
-                displayName;
+                name;
 
 
-            /* ------------------------------------------
-               VERIFIED STATUS
-            ------------------------------------------ */
+            profileAvatar.textContent =
+                getInitials(name);
 
-            /*
-             * Supabase already authenticated this user
-             * after the email confirmation flow.
-             */
 
-            pageLoader.classList.add("hidden");
+            saveStatus.textContent =
+                "Changes saved successfully.";
+
+            showToast(
+                "Your profile has been updated.",
+                "success"
+            );
+
 
         }
 
@@ -2048,43 +3107,58 @@
 
             console.error(error);
 
+            saveStatus.textContent =
+                "";
+
+            showToast(
+                error.message ||
+                "Unable to save your profile.",
+                "error"
+            );
+
+        }
+
+        finally {
+
+            saveProfile.disabled =
+                false;
+
+            saveProfile.innerHTML =
+                '<i class="fa-solid fa-check"></i> Save Changes';
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   AUTH STATE
+========================================================= */
+
+supabaseClient.auth.onAuthStateChange(
+    function(event, session) {
+
+        if (
+            event === "SIGNED_OUT"
+        ) {
+
             window.location.href =
                 "login.html";
 
         }
 
     }
+);
 
 
-    /* ==================================================
-       AUTH STATE LISTENER
-    ================================================== */
+/* =========================================================
+   INITIALIZE
+========================================================= */
 
-    supabaseClient.auth.onAuthStateChange(
-        function (event, session) {
-
-            if (
-                event === "SIGNED_OUT" ||
-                !session
-            ) {
-
-                window.location.href =
-                    "login.html";
-
-            }
-
-        }
-    );
-
-
-    /* ==================================================
-       INITIALIZE
-    ================================================== */
-
-    loadAccount();
+loadAccount();
 
 </script>
-
 
 </body>
 
