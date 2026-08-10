@@ -1,1 +1,3135 @@
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<title>Admin Dashboard | ShriVatsaDarbar</title>
+
+<meta
+    name="description"
+    content="ShriVatsaDarbar Admin Dashboard"
+>
+
+<link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+>
+
+<style>
+
+/* =========================================================
+   RESET
+========================================================= */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+
+    min-height: 100vh;
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    background:
+        radial-gradient(
+            circle at top right,
+            rgba(183,150,67,.08),
+            transparent 32%
+        ),
+        #faf7f0;
+
+    color: #4b1717;
+}
+
+
+/* =========================================================
+   VARIABLES
+========================================================= */
+
+:root {
+
+    --maroon: #7c1717;
+
+    --maroon-dark: #5f1010;
+
+    --gold: #b79643;
+
+    --gold-light: #e5d29a;
+
+    --cream: #faf7f0;
+
+    --cream-dark: #f4eee1;
+
+    --text: #4b1717;
+
+    --muted: #7d716c;
+
+    --border:
+        rgba(190,160,90,.24);
+
+    --white: #ffffff;
+
+}
+
+
+/* =========================================================
+   LOADER
+========================================================= */
+
+.page-loader {
+
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 9999;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background: var(--cream);
+
+    transition:
+        opacity .35s ease,
+        visibility .35s ease;
+}
+
+.page-loader.hidden {
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    pointer-events: none;
+}
+
+.loader-content {
+
+    text-align: center;
+}
+
+.loader-symbol {
+
+    width: 58px;
+
+    height: 58px;
+
+    margin:
+        0 auto 18px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background:
+        linear-gradient(
+            145deg,
+            #fffaf0,
+            #f3e7c8
+        );
+
+    border:
+        1px solid var(--gold-light);
+
+    color: var(--gold);
+
+    font-size: 22px;
+}
+
+.loader-content h2 {
+
+    font-family: Georgia, serif;
+
+    color: var(--maroon);
+
+    font-size: 24px;
+
+    margin-bottom: 6px;
+}
+
+.loader-content p {
+
+    color: var(--muted);
+
+    font-size: 12px;
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.admin-header {
+
+    position: sticky;
+
+    top: 0;
+
+    z-index: 100;
+
+    background:
+        rgba(255,255,255,.95);
+
+    backdrop-filter:
+        blur(14px);
+
+    border-bottom:
+        1px solid var(--border);
+
+    box-shadow:
+        0 5px 25px
+        rgba(80,40,20,.045);
+}
+
+.header-inner {
+
+    max-width: 1280px;
+
+    margin: auto;
+
+    padding:
+        14px 28px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 20px;
+}
+
+
+/* =========================================================
+   BRAND
+========================================================= */
+
+.brand {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    text-decoration: none;
+
+    color: var(--maroon);
+}
+
+.brand-mark {
+
+    width: 43px;
+
+    height: 43px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 11px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #fffaf0,
+            #f3e7c8
+        );
+
+    border:
+        1px solid var(--gold-light);
+
+    color: var(--gold);
+
+    box-shadow:
+        0 5px 16px
+        rgba(80,40,20,.06);
+}
+
+.brand-text h1 {
+
+    font-family: Georgia, serif;
+
+    font-size: 21px;
+
+    letter-spacing: .3px;
+}
+
+.brand-text span {
+
+    display: block;
+
+    margin-top: 3px;
+
+    color: #9a8a70;
+
+    font-size: 8px;
+
+    letter-spacing: 1.3px;
+}
+
+
+/* =========================================================
+   HEADER RIGHT
+========================================================= */
+
+.header-right {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 14px;
+}
+
+.admin-label {
+
+    text-align: right;
+}
+
+.admin-label small {
+
+    display: block;
+
+    color: #a18f73;
+
+    font-size: 9px;
+
+    text-transform: uppercase;
+
+    letter-spacing: 1px;
+
+    margin-bottom: 3px;
+}
+
+.admin-label span {
+
+    color: var(--maroon);
+
+    font-size: 12px;
+
+    font-weight: 600;
+}
+
+.logout-btn {
+
+    border:
+        1px solid #ded3bb;
+
+    background: #fff;
+
+    color: #67534e;
+
+    padding:
+        9px 13px;
+
+    border-radius: 8px;
+
+    cursor: pointer;
+
+    font-size: 11px;
+
+    transition: .2s ease;
+}
+
+.logout-btn:hover {
+
+    border-color:
+        var(--gold);
+
+    color:
+        var(--maroon);
+}
+
+
+/* =========================================================
+   MAIN
+========================================================= */
+
+.admin-wrapper {
+
+    max-width: 1280px;
+
+    margin: auto;
+
+    padding:
+        32px 28px
+        70px;
+}
+
+
+/* =========================================================
+   PAGE TITLE
+========================================================= */
+
+.page-title {
+
+    margin-bottom: 25px;
+}
+
+.page-title h2 {
+
+    font-family: Georgia, serif;
+
+    color: var(--maroon);
+
+    font-size: 29px;
+
+    margin-bottom: 6px;
+}
+
+.page-title p {
+
+    color: var(--muted);
+
+    font-size: 13px;
+}
+
+
+/* =========================================================
+   STAT CARDS
+========================================================= */
+
+.stats-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(4,1fr);
+
+    gap: 15px;
+
+    margin-bottom: 25px;
+}
+
+.stat-card {
+
+    background: #fff;
+
+    border:
+        1px solid var(--border);
+
+    border-radius: 15px;
+
+    padding: 20px;
+
+    box-shadow:
+        0 8px 25px
+        rgba(80,40,20,.035);
+}
+
+.stat-top {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    margin-bottom: 13px;
+}
+
+.stat-icon {
+
+    width: 40px;
+
+    height: 40px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 10px;
+
+    background: var(--cream);
+
+    color: var(--gold);
+}
+
+.stat-card small {
+
+    color: #a18f73;
+
+    font-size: 9px;
+
+    text-transform: uppercase;
+
+    letter-spacing: 1px;
+}
+
+.stat-card strong {
+
+    display: block;
+
+    color: var(--maroon);
+
+    font-family: Georgia, serif;
+
+    font-size: 24px;
+}
+
+
+/* =========================================================
+   CONTENT CARD
+========================================================= */
+
+.content-card {
+
+    background: #fff;
+
+    border:
+        1px solid var(--border);
+
+    border-radius: 16px;
+
+    box-shadow:
+        0 8px 25px
+        rgba(80,40,20,.035);
+
+    margin-bottom: 20px;
+
+    overflow: hidden;
+}
+
+
+/* =========================================================
+   CARD HEADER
+========================================================= */
+
+.card-header {
+
+    padding:
+        20px 22px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 15px;
+
+    border-bottom:
+        1px solid #eee7d9;
+}
+
+.card-header h3 {
+
+    font-family: Georgia, serif;
+
+    color: var(--maroon);
+
+    font-size: 19px;
+}
+
+.card-header p {
+
+    margin-top: 4px;
+
+    color: #999;
+
+    font-size: 11px;
+}
+
+.new-order-btn {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+    padding:
+        10px 14px;
+
+    border: none;
+
+    border-radius: 8px;
+
+    background: var(--maroon);
+
+    color: #fff;
+
+    font-size: 11px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: .2s ease;
+}
+
+.new-order-btn:hover {
+
+    background:
+        var(--maroon-dark);
+
+    transform:
+        translateY(-1px);
+}
+
+
+/* =========================================================
+   ORDER FILTER BAR
+========================================================= */
+
+.order-toolbar {
+
+    padding:
+        15px 22px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 12px;
+
+    background: #fffdf9;
+
+    border-bottom:
+        1px solid #eee7d9;
+}
+
+.search-box {
+
+    position: relative;
+
+    flex: 1;
+
+    max-width: 350px;
+}
+
+.search-box i {
+
+    position: absolute;
+
+    left: 12px;
+
+    top: 50%;
+
+    transform:
+        translateY(-50%);
+
+    color: #aaa;
+
+    font-size: 12px;
+}
+
+.search-box input {
+
+    width: 100%;
+
+    height: 38px;
+
+    padding:
+        0 12px 0 34px;
+
+    border:
+        1px solid #dfd4bb;
+
+    border-radius: 8px;
+
+    outline: none;
+
+    background: #fff;
+
+    color: var(--text);
+
+    font-size: 11px;
+}
+
+.search-box input:focus {
+
+    border-color:
+        var(--gold);
+}
+
+.status-filter {
+
+    height: 38px;
+
+    padding:
+        0 12px;
+
+    border:
+        1px solid #dfd4bb;
+
+    border-radius: 8px;
+
+    background: #fff;
+
+    color: #67534e;
+
+    font-size: 11px;
+
+    outline: none;
+}
+
+
+/* =========================================================
+   TABLE
+========================================================= */
+
+.table-wrapper {
+
+    overflow-x: auto;
+}
+
+.orders-table {
+
+    width: 100%;
+
+    border-collapse:
+        collapse;
+
+    min-width: 850px;
+}
+
+.orders-table th {
+
+    padding:
+        13px 18px;
+
+    background:
+        #fffdf9;
+
+    color: #a18f73;
+
+    font-size: 9px;
+
+    text-transform:
+        uppercase;
+
+    letter-spacing:
+        1px;
+
+    text-align: left;
+
+    border-bottom:
+        1px solid #eee7d9;
+}
+
+.orders-table td {
+
+    padding:
+        15px 18px;
+
+    color: #67534e;
+
+    font-size: 11px;
+
+    border-bottom:
+        1px solid #f0ebe1;
+
+    vertical-align: middle;
+}
+
+.orders-table tr:last-child td {
+
+    border-bottom: none;
+}
+
+.orders-table tbody tr {
+
+    transition: .15s ease;
+}
+
+.orders-table tbody tr:hover {
+
+    background:
+        #fffdf9;
+}
+
+.order-number {
+
+    color: var(--maroon);
+
+    font-weight: 700;
+}
+
+.customer-name {
+
+    color: #4b1717;
+
+    font-weight: 600;
+}
+
+.amount {
+
+    color: var(--maroon);
+
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   STATUS BADGES
+========================================================= */
+
+.status {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    padding:
+        5px 9px;
+
+    border-radius:
+        20px;
+
+    font-size: 9px;
+
+    font-weight: 700;
+}
+
+.status-new {
+
+    background: #fff4dc;
+
+    color: #9a6900;
+}
+
+.status-confirmed {
+
+    background: #eaf4ff;
+
+    color: #286090;
+}
+
+.status-processing {
+
+    background: #f2ebff;
+
+    color: #6b43a2;
+}
+
+.status-shipped {
+
+    background: #e8f6f0;
+
+    color: #237154;
+}
+
+.status-delivered {
+
+    background: #eaf8ed;
+
+    color: #26733a;
+}
+
+.status-cancelled {
+
+    background: #fdeeee;
+
+    color: #a02b2b;
+}
+
+.payment-paid {
+
+    color: #26733a;
+
+    font-weight: 600;
+}
+
+.payment-pending {
+
+    color: #9a6900;
+
+    font-weight: 600;
+}
+
+
+/* =========================================================
+   ORDER ACTION
+========================================================= */
+
+.view-order-btn {
+
+    border:
+        1px solid #ded3bb;
+
+    background: #fff;
+
+    color: #67534e;
+
+    padding:
+        7px 10px;
+
+    border-radius: 7px;
+
+    cursor: pointer;
+
+    font-size: 10px;
+}
+
+.view-order-btn:hover {
+
+    border-color:
+        var(--gold);
+
+    color:
+        var(--maroon);
+}
+
+
+/* =========================================================
+   EMPTY STATE
+========================================================= */
+
+.empty-orders {
+
+    padding:
+        65px 25px;
+
+    text-align: center;
+}
+
+.empty-orders-icon {
+
+    width: 64px;
+
+    height: 64px;
+
+    margin:
+        0 auto 17px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background:
+        var(--cream);
+
+    color:
+        var(--gold);
+
+    font-size: 23px;
+}
+
+.empty-orders h3 {
+
+    font-family: Georgia, serif;
+
+    color:
+        var(--maroon);
+
+    font-size: 20px;
+
+    margin-bottom: 7px;
+}
+
+.empty-orders p {
+
+    max-width: 420px;
+
+    margin: auto;
+
+    color: #999;
+
+    font-size: 12px;
+
+    line-height: 1.6;
+}
+
+
+/* =========================================================
+   ERROR
+========================================================= */
+
+.error-box {
+
+    display: none;
+
+    margin:
+        15px 22px;
+
+    padding:
+        12px 15px;
+
+    border-radius: 8px;
+
+    background:
+        #fff2f2;
+
+    border:
+        1px solid #f0cccc;
+
+    color:
+        #9b2020;
+
+    font-size: 11px;
+}
+
+
+/* =========================================================
+   MODAL
+========================================================= */
+
+.modal {
+
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 1000;
+
+    display: none;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 20px;
+
+    background:
+        rgba(35,18,10,.45);
+
+    backdrop-filter:
+        blur(4px);
+}
+
+.modal.show {
+
+    display: flex;
+}
+
+.modal-box {
+
+    width: 100%;
+
+    max-width: 650px;
+
+    max-height: 90vh;
+
+    overflow-y: auto;
+
+    background: #fff;
+
+    border-radius: 17px;
+
+    box-shadow:
+        0 25px 70px
+        rgba(0,0,0,.20);
+}
+
+.modal-header {
+
+    padding:
+        20px 22px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    border-bottom:
+        1px solid #eee7d9;
+}
+
+.modal-header h3 {
+
+    font-family: Georgia, serif;
+
+    color:
+        var(--maroon);
+
+    font-size: 20px;
+}
+
+.close-modal {
+
+    width: 32px;
+
+    height: 32px;
+
+    border: none;
+
+    border-radius: 50%;
+
+    background:
+        var(--cream);
+
+    color:
+        var(--maroon);
+
+    cursor: pointer;
+}
+
+.modal-body {
+
+    padding: 22px;
+}
+
+.form-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap: 16px;
+}
+
+.form-group {
+
+    margin-bottom: 3px;
+}
+
+.form-group.full {
+
+    grid-column:
+        1 / -1;
+}
+
+.form-group label {
+
+    display: block;
+
+    margin-bottom: 7px;
+
+    color:
+        #67534e;
+
+    font-size: 10px;
+
+    font-weight: 700;
+}
+
+.form-input,
+.form-select,
+.form-textarea {
+
+    width: 100%;
+
+    border:
+        1px solid #dfd4bb;
+
+    border-radius: 8px;
+
+    outline: none;
+
+    background:
+        #fffdf9;
+
+    color:
+        var(--text);
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    font-size: 12px;
+}
+
+.form-input,
+.form-select {
+
+    height: 42px;
+
+    padding:
+        0 12px;
+}
+
+.form-textarea {
+
+    min-height: 85px;
+
+    padding:
+        12px;
+
+    resize:
+        vertical;
+}
+
+.form-input:focus,
+.form-select:focus,
+.form-textarea:focus {
+
+    border-color:
+        var(--gold);
+
+    box-shadow:
+        0 0 0 3px
+        rgba(183,150,67,.09);
+}
+
+.modal-footer {
+
+    padding:
+        16px 22px;
+
+    display: flex;
+
+    justify-content: flex-end;
+
+    gap: 10px;
+
+    border-top:
+        1px solid #eee7d9;
+}
+
+.cancel-btn {
+
+    padding:
+        10px 15px;
+
+    border:
+        1px solid #ded3bb;
+
+    border-radius: 8px;
+
+    background: #fff;
+
+    color: #67534e;
+
+    cursor: pointer;
+
+    font-size: 11px;
+}
+
+.create-btn {
+
+    padding:
+        10px 17px;
+
+    border: none;
+
+    border-radius: 8px;
+
+    background:
+        var(--maroon);
+
+    color: #fff;
+
+    cursor: pointer;
+
+    font-size: 11px;
+
+    font-weight: 600;
+}
+
+
+/* =========================================================
+   TOAST
+========================================================= */
+
+.toast {
+
+    position: fixed;
+
+    right: 20px;
+
+    bottom: 20px;
+
+    z-index: 2000;
+
+    max-width: 330px;
+
+    padding:
+        13px 17px;
+
+    border-radius: 9px;
+
+    background: #fff;
+
+    border:
+        1px solid var(--border);
+
+    box-shadow:
+        0 15px 40px
+        rgba(0,0,0,.13);
+
+    color:
+        var(--text);
+
+    font-size: 11px;
+
+    opacity: 0;
+
+    transform:
+        translateY(10px);
+
+    pointer-events: none;
+
+    transition: .25s ease;
+}
+
+.toast.show {
+
+    opacity: 1;
+
+    transform:
+        translateY(0);
+}
+
+.toast.success {
+
+    border-left:
+        3px solid #26733a;
+}
+
+.toast.error {
+
+    border-left:
+        3px solid #9b2020;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 950px) {
+
+    .stats-grid {
+
+        grid-template-columns:
+            repeat(2,1fr);
+    }
+
+}
+
+
+@media (max-width: 700px) {
+
+    .header-inner {
+
+        padding:
+            13px 16px;
+    }
+
+    .admin-label {
+
+        display: none;
+    }
+
+    .admin-wrapper {
+
+        padding:
+            25px 16px
+            50px;
+    }
+
+    .page-title h2 {
+
+        font-size: 25px;
+    }
+
+    .stats-grid {
+
+        grid-template-columns:
+            1fr 1fr;
+    }
+
+    .order-toolbar {
+
+        align-items:
+            stretch;
+
+        flex-direction:
+            column;
+    }
+
+    .search-box {
+
+        max-width:
+            none;
+    }
+
+    .card-header {
+
+        align-items:
+            flex-start;
+
+        flex-direction:
+            column;
+    }
+
+    .form-grid {
+
+        grid-template-columns:
+            1fr;
+    }
+
+    .form-group.full {
+
+        grid-column:
+            auto;
+    }
+
+}
+
+
+@media (max-width: 430px) {
+
+    .stats-grid {
+
+        grid-template-columns:
+            1fr;
+    }
+
+    .brand-text span {
+
+        display: none;
+    }
+
+    .brand-text h1 {
+
+        font-size: 18px;
+    }
+
+    .brand-mark {
+
+        width: 38px;
+
+        height: 38px;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =======================================================
+     LOADER
+======================================================= -->
+
+<div
+    class="page-loader"
+    id="pageLoader"
+>
+
+    <div class="loader-content">
+
+        <div class="loader-symbol">
+
+            <i class="fa-solid fa-crown"></i>
+
+        </div>
+
+        <h2>
+            ShriVatsaDarbar
+        </h2>
+
+        <p>
+            Preparing admin dashboard...
+        </p>
+
+    </div>
+
+</div>
+
+
+<!-- =======================================================
+     HEADER
+======================================================= -->
+
+<header class="admin-header">
+
+    <div class="header-inner">
+
+
+        <a
+            href="../index.html"
+            class="brand"
+        >
+
+            <div class="brand-mark">
+
+                <i class="fa-solid fa-crown"></i>
+
+            </div>
+
+            <div class="brand-text">
+
+                <h1>
+                    ShriVatsaDarbar
+                </h1>
+
+                <span>
+                    ADMINISTRATION
+                </span>
+
+            </div>
+
+        </a>
+
+
+        <div class="header-right">
+
+            <div class="admin-label">
+
+                <small>
+                    Signed in as
+                </small>
+
+                <span id="adminEmail">
+                    Loading...
+                </span>
+
+            </div>
+
+
+            <button
+                type="button"
+                class="logout-btn"
+                id="logoutButton"
+            >
+
+                <i class="fa-solid fa-right-from-bracket"></i>
+
+                Logout
+
+            </button>
+
+        </div>
+
+    </div>
+
+</header>
+
+
+<!-- =======================================================
+     MAIN
+======================================================= -->
+
+<main class="admin-wrapper">
+
+
+    <div class="page-title">
+
+        <h2>
+            Admin Dashboard
+        </h2>
+
+        <p>
+            Manage ShriVatsaDarbar orders and
+            customer purchases from one place.
+        </p>
+
+    </div>
+
+
+    <!-- ===================================================
+         STATS
+    =================================================== -->
+
+    <section class="stats-grid">
+
+
+        <div class="stat-card">
+
+            <div class="stat-top">
+
+                <div class="stat-icon">
+
+                    <i class="fa-solid fa-bag-shopping"></i>
+
+                </div>
+
+                <small>
+                    Total Orders
+                </small>
+
+            </div>
+
+            <strong id="totalOrders">
+                0
+            </strong>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <div class="stat-top">
+
+                <div class="stat-icon">
+
+                    <i class="fa-solid fa-clock"></i>
+
+                </div>
+
+                <small>
+                    New
+                </small>
+
+            </div>
+
+            <strong id="newOrders">
+                0
+            </strong>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <div class="stat-top">
+
+                <div class="stat-icon">
+
+                    <i class="fa-solid fa-box"></i>
+
+                </div>
+
+                <small>
+                    Processing
+                </small>
+
+            </div>
+
+            <strong id="processingOrders">
+                0
+            </strong>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <div class="stat-top">
+
+                <div class="stat-icon">
+
+                    <i class="fa-solid fa-truck"></i>
+
+                </div>
+
+                <small>
+                    Delivered
+                </small>
+
+            </div>
+
+            <strong id="deliveredOrders">
+                0
+            </strong>
+
+        </div>
+
+
+    </section>
+
+
+    <!-- ===================================================
+         ORDERS
+    =================================================== -->
+
+    <section class="content-card">
+
+
+        <div class="card-header">
+
+            <div>
+
+                <h3>
+                    Orders
+                </h3>
+
+                <p>
+                    Manage customer orders and
+                    update their status.
+                </p>
+
+            </div>
+
+
+            <button
+                type="button"
+                class="new-order-btn"
+                id="newOrderButton"
+            >
+
+                <i class="fa-solid fa-plus"></i>
+
+                New Order
+
+            </button>
+
+        </div>
+
+
+        <div class="order-toolbar">
+
+
+            <div class="search-box">
+
+                <i class="fa-solid fa-search"></i>
+
+                <input
+                    type="search"
+                    id="orderSearch"
+                    placeholder="Search order or customer..."
+                >
+
+            </div>
+
+
+            <select
+                class="status-filter"
+                id="statusFilter"
+            >
+
+                <option value="all">
+                    All Status
+                </option>
+
+                <option value="new">
+                    New
+                </option>
+
+                <option value="confirmed">
+                    Confirmed
+                </option>
+
+                <option value="processing">
+                    Processing
+                </option>
+
+                <option value="shipped">
+                    Shipped
+                </option>
+
+                <option value="delivered">
+                    Delivered
+                </option>
+
+                <option value="cancelled">
+                    Cancelled
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <div
+            class="error-box"
+            id="errorBox"
+        ></div>
+
+
+        <div class="table-wrapper">
+
+            <table class="orders-table">
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            Order
+                        </th>
+
+                        <th>
+                            Customer
+                        </th>
+
+                        <th>
+                            Date
+                        </th>
+
+                        <th>
+                            Amount
+                        </th>
+
+                        <th>
+                            Payment
+                        </th>
+
+                        <th>
+                            Status
+                        </th>
+
+                        <th>
+                            Action
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody id="ordersBody">
+
+                </tbody>
+
+            </table>
+
+
+            <div
+                class="empty-orders"
+                id="emptyOrders"
+            >
+
+                <div class="empty-orders-icon">
+
+                    <i class="fa-solid fa-bag-shopping"></i>
+
+                </div>
+
+                <h3>
+                    No Orders Yet
+                </h3>
+
+                <p>
+                    Once an order is created,
+                    it will appear here.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+</main>
+
+
+<!-- =======================================================
+     NEW ORDER MODAL
+======================================================= -->
+
+<div
+    class="modal"
+    id="orderModal"
+>
+
+    <div class="modal-box">
+
+
+        <div class="modal-header">
+
+            <h3>
+                Create New Order
+            </h3>
+
+
+            <button
+                type="button"
+                class="close-modal"
+                id="closeModal"
+            >
+
+                <i class="fa-solid fa-xmark"></i>
+
+            </button>
+
+        </div>
+
+
+        <div class="modal-body">
+
+
+            <div class="form-grid">
+
+
+                <div class="form-group">
+
+                    <label>
+                        Customer Name
+                    </label>
+
+                    <input
+                        type="text"
+                        id="customerName"
+                        class="form-input"
+                        placeholder="Customer name"
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Customer Phone
+                    </label>
+
+                    <input
+                        type="tel"
+                        id="customerPhone"
+                        class="form-input"
+                        placeholder="Mobile number"
+                    >
+
+                </div>
+
+
+                <div class="form-group full">
+
+                    <label>
+                        Customer Email
+                    </label>
+
+                    <input
+                        type="email"
+                        id="customerEmail"
+                        class="form-input"
+                        placeholder="Customer email"
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Order Amount
+                    </label>
+
+                    <input
+                        type="number"
+                        id="orderAmount"
+                        class="form-input"
+                        placeholder="0"
+                        min="0"
+                        step="0.01"
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Payment Status
+                    </label>
+
+                    <select
+                        id="paymentStatus"
+                        class="form-select"
+                    >
+
+                        <option value="pending">
+                            Pending
+                        </option>
+
+                        <option value="paid">
+                            Paid
+                        </option>
+
+                        <option value="failed">
+                            Failed
+                        </option>
+
+                        <option value="refunded">
+                            Refunded
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Order Status
+                    </label>
+
+                    <select
+                        id="orderStatus"
+                        class="form-select"
+                    >
+
+                        <option value="new">
+                            New
+                        </option>
+
+                        <option value="confirmed">
+                            Confirmed
+                        </option>
+
+                        <option value="processing">
+                            Processing
+                        </option>
+
+                        <option value="shipped">
+                            Shipped
+                        </option>
+
+                        <option value="delivered">
+                            Delivered
+                        </option>
+
+                        <option value="cancelled">
+                            Cancelled
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Product
+                    </label>
+
+                    <input
+                        type="text"
+                        id="productName"
+                        class="form-input"
+                        placeholder="Product name"
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Size
+                    </label>
+
+                    <input
+                        type="text"
+                        id="productSize"
+                        class="form-input"
+                        placeholder="e.g. Size 4"
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Quantity
+                    </label>
+
+                    <input
+                        type="number"
+                        id="productQuantity"
+                        class="form-input"
+                        value="1"
+                        min="1"
+                    >
+
+                </div>
+
+
+                <div class="form-group full">
+
+                    <label>
+                        Order Notes
+                    </label>
+
+                    <textarea
+                        id="orderNotes"
+                        class="form-textarea"
+                        placeholder="Add any customer or order notes..."
+                    ></textarea>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+
+        <div class="modal-footer">
+
+            <button
+                type="button"
+                class="cancel-btn"
+                id="cancelOrder"
+            >
+
+                Cancel
+
+            </button>
+
+
+            <button
+                type="button"
+                class="create-btn"
+                id="createOrder"
+            >
+
+                <i class="fa-solid fa-check"></i>
+
+                Create Order
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =======================================================
+     TOAST
+======================================================= -->
+
+<div
+    class="toast"
+    id="toast"
+></div>
+
+
+<!-- =======================================================
+     SUPABASE
+======================================================= -->
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<!--
+    IMPORTANT:
+    If your supabase-auth.js is inside /auth,
+    keep this path:
+
+        ../auth/supabase-auth.js
+
+    If it is somewhere else, we will change this
+    after checking your repository structure.
+-->
+
+<script src="../auth/supabase-auth.js"></script>
+
+
+<script>
+
+/* =========================================================
+   ELEMENTS
+========================================================= */
+
+const pageLoader =
+    document.getElementById("pageLoader");
+
+const adminEmail =
+    document.getElementById("adminEmail");
+
+const logoutButton =
+    document.getElementById("logoutButton");
+
+const totalOrders =
+    document.getElementById("totalOrders");
+
+const newOrders =
+    document.getElementById("newOrders");
+
+const processingOrders =
+    document.getElementById("processingOrders");
+
+const deliveredOrders =
+    document.getElementById("deliveredOrders");
+
+const ordersBody =
+    document.getElementById("ordersBody");
+
+const emptyOrders =
+    document.getElementById("emptyOrders");
+
+const errorBox =
+    document.getElementById("errorBox");
+
+const orderSearch =
+    document.getElementById("orderSearch");
+
+const statusFilter =
+    document.getElementById("statusFilter");
+
+const orderModal =
+    document.getElementById("orderModal");
+
+const newOrderButton =
+    document.getElementById("newOrderButton");
+
+const closeModal =
+    document.getElementById("closeModal");
+
+const cancelOrder =
+    document.getElementById("cancelOrder");
+
+const createOrder =
+    document.getElementById("createOrder");
+
+const toast =
+    document.getElementById("toast");
+
+
+let allOrders = [];
+
+
+/* =========================================================
+   TOAST
+========================================================= */
+
+let toastTimer;
+
+function showToast(
+    message,
+    type = "success"
+) {
+
+    clearTimeout(toastTimer);
+
+    toast.textContent =
+        message;
+
+    toast.className =
+        "toast " +
+        type +
+        " show";
+
+    toastTimer =
+        setTimeout(
+            function() {
+
+                toast.classList.remove(
+                    "show"
+                );
+
+            },
+            3500
+        );
+
+}
+
+
+/* =========================================================
+   FORMAT DATE
+========================================================= */
+
+function formatDate(value) {
+
+    if (!value) {
+        return "-";
+    }
+
+    const date =
+        new Date(value);
+
+    return date.toLocaleDateString(
+        "en-IN",
+        {
+            day: "2-digit",
+            month: "short",
+            year: "numeric"
+        }
+    );
+
+}
+
+
+/* =========================================================
+   FORMAT MONEY
+========================================================= */
+
+function formatMoney(value) {
+
+    const amount =
+        Number(value || 0);
+
+    return "₹" +
+        amount.toLocaleString(
+            "en-IN",
+            {
+                minimumFractionDigits: 0,
+                maximumFractionDigits: 2
+            }
+        );
+
+}
+
+
+/* =========================================================
+   STATUS HTML
+========================================================= */
+
+function statusBadge(status) {
+
+    const safeStatus =
+        String(status || "new")
+            .toLowerCase();
+
+    const label =
+        safeStatus.charAt(0).toUpperCase() +
+        safeStatus.slice(1);
+
+    return `
+        <span class="status status-${safeStatus}">
+            ${label}
+        </span>
+    `;
+
+}
+
+
+/* =========================================================
+   PAYMENT HTML
+========================================================= */
+
+function paymentBadge(status) {
+
+    const safeStatus =
+        String(status || "pending")
+            .toLowerCase();
+
+    const label =
+        safeStatus.charAt(0).toUpperCase() +
+        safeStatus.slice(1);
+
+    return `
+        <span class="payment-${safeStatus}">
+            ${label}
+        </span>
+    `;
+
+}
+
+
+/* =========================================================
+   RENDER ORDERS
+========================================================= */
+
+function renderOrders() {
+
+    const search =
+        orderSearch.value
+            .trim()
+            .toLowerCase();
+
+    const filter =
+        statusFilter.value;
+
+
+    const filtered =
+        allOrders.filter(
+            function(order) {
+
+                const matchesSearch =
+                    !search ||
+                    String(
+                        order.order_number || ""
+                    )
+                    .toLowerCase()
+                    .includes(search) ||
+
+                    String(
+                        order.customer_name || ""
+                    )
+                    .toLowerCase()
+                    .includes(search) ||
+
+                    String(
+                        order.customer_phone || ""
+                    )
+                    .toLowerCase()
+                    .includes(search);
+
+
+                const matchesStatus =
+                    filter === "all" ||
+                    order.status === filter;
+
+
+                return (
+                    matchesSearch &&
+                    matchesStatus
+                );
+
+            }
+        );
+
+
+    ordersBody.innerHTML = "";
+
+
+    if (!filtered.length) {
+
+        emptyOrders.style.display =
+            "block";
+
+        return;
+
+    }
+
+
+    emptyOrders.style.display =
+        "none";
+
+
+    filtered.forEach(
+        function(order) {
+
+            const row =
+                document.createElement("tr");
+
+
+            row.innerHTML = `
+
+                <td>
+
+                    <div class="order-number">
+
+                        ${order.order_number || "-"}
+
+                    </div>
+
+                </td>
+
+
+                <td>
+
+                    <div class="customer-name">
+
+                        ${order.customer_name || "-"}
+
+                    </div>
+
+                    <div
+                        style="
+                            color:#999;
+                            font-size:9px;
+                            margin-top:3px;
+                        "
+                    >
+
+                        ${order.customer_phone || ""}
+
+                    </div>
+
+                </td>
+
+
+                <td>
+
+                    ${formatDate(
+                        order.created_at
+                    )}
+
+                </td>
+
+
+                <td>
+
+                    <span class="amount">
+
+                        ${formatMoney(
+                            order.total_amount
+                        )}
+
+                    </span>
+
+                </td>
+
+
+                <td>
+
+                    ${paymentBadge(
+                        order.payment_status
+                    )}
+
+                </td>
+
+
+                <td>
+
+                    ${statusBadge(
+                        order.status
+                    )}
+
+                </td>
+
+
+                <td>
+
+                    <button
+                        type="button"
+                        class="view-order-btn"
+                        data-id="${order.id}"
+                    >
+
+                        View
+
+                    </button>
+
+                </td>
+
+            `;
+
+
+            ordersBody.appendChild(row);
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   UPDATE STATS
+========================================================= */
+
+function updateStats() {
+
+    totalOrders.textContent =
+        allOrders.length;
+
+
+    newOrders.textContent =
+        allOrders.filter(
+            function(order) {
+
+                return order.status === "new";
+
+            }
+        ).length;
+
+
+    processingOrders.textContent =
+        allOrders.filter(
+            function(order) {
+
+                return order.status === "processing";
+
+            }
+        ).length;
+
+
+    deliveredOrders.textContent =
+        allOrders.filter(
+            function(order) {
+
+                return order.status === "delivered";
+
+            }
+        ).length;
+
+}
+
+
+/* =========================================================
+   LOAD ORDERS
+========================================================= */
+
+async function loadOrders() {
+
+    errorBox.style.display =
+        "none";
+
+
+    try {
+
+        const {
+            data,
+            error
+        } =
+        await supabaseClient
+            .from("orders")
+            .select("*")
+            .order(
+                "created_at",
+                {
+                    ascending: false
+                }
+            );
+
+
+        if (error) {
+
+            throw error;
+
+        }
+
+
+        allOrders =
+            data || [];
+
+
+        updateStats();
+
+        renderOrders();
+
+
+    }
+
+    catch (error) {
+
+        console.error(error);
+
+
+        errorBox.textContent =
+            "Orders could not be loaded yet. " +
+            "The orders database table will be connected in the next step.";
+
+
+        errorBox.style.display =
+            "block";
+
+
+        allOrders = [];
+
+        updateStats();
+
+        renderOrders();
+
+    }
+
+}
+
+
+/* =========================================================
+   MODAL
+========================================================= */
+
+function openModal() {
+
+    orderModal.classList.add(
+        "show"
+    );
+
+}
+
+function closeOrderModal() {
+
+    orderModal.classList.remove(
+        "show"
+    );
+
+}
+
+
+newOrderButton.addEventListener(
+    "click",
+    openModal
+);
+
+
+closeModal.addEventListener(
+    "click",
+    closeOrderModal
+);
+
+
+cancelOrder.addEventListener(
+    "click",
+    closeOrderModal
+);
+
+
+orderModal.addEventListener(
+    "click",
+    function(event) {
+
+        if (
+            event.target ===
+            orderModal
+        ) {
+
+            closeOrderModal();
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   CREATE ORDER
+========================================================= */
+
+createOrder.addEventListener(
+    "click",
+    async function() {
+
+        const customerName =
+            document
+                .getElementById(
+                    "customerName"
+                )
+                .value
+                .trim();
+
+
+        const customerPhone =
+            document
+                .getElementById(
+                    "customerPhone"
+                )
+                .value
+                .trim();
+
+
+        const customerEmail =
+            document
+                .getElementById(
+                    "customerEmail"
+                )
+                .value
+                .trim();
+
+
+        const amount =
+            Number(
+                document
+                    .getElementById(
+                        "orderAmount"
+                    )
+                    .value
+            );
+
+
+        const paymentStatus =
+            document
+                .getElementById(
+                    "paymentStatus"
+                )
+                .value;
+
+
+        const orderStatus =
+            document
+                .getElementById(
+                    "orderStatus"
+                )
+                .value;
+
+
+        const productName =
+            document
+                .getElementById(
+                    "productName"
+                )
+                .value
+                .trim();
+
+
+        const productSize =
+            document
+                .getElementById(
+                    "productSize"
+                )
+                .value
+                .trim();
+
+
+        const productQuantity =
+            Number(
+                document
+                    .getElementById(
+                        "productQuantity"
+                    )
+                    .value
+            );
+
+
+        const notes =
+            document
+                .getElementById(
+                    "orderNotes"
+                )
+                .value
+                .trim();
+
+
+        if (!customerName) {
+
+            showToast(
+                "Please enter the customer name.",
+                "error"
+            );
+
+            return;
+
+        }
+
+
+        if (!amount || amount < 0) {
+
+            showToast(
+                "Please enter a valid order amount.",
+                "error"
+            );
+
+            return;
+
+        }
+
+
+        createOrder.disabled =
+            true;
+
+
+        createOrder.innerHTML =
+            '<i class="fa-solid fa-spinner fa-spin"></i> Creating...';
+
+
+        try {
+
+            /*
+             * STEP 2 will connect this
+             * to the final orders table.
+             */
+
+            const {
+                data,
+                error
+            } =
+            await supabaseClient
+                .from("orders")
+                .insert({
+
+                    customer_name:
+                        customerName,
+
+                    customer_phone:
+                        customerPhone,
+
+                    customer_email:
+                        customerEmail,
+
+                    total_amount:
+                        amount,
+
+                    payment_status:
+                        paymentStatus,
+
+                    status:
+                        orderStatus,
+
+                    notes:
+                        notes
+
+                })
+                .select()
+                .single();
+
+
+            if (error) {
+
+                throw error;
+
+            }
+
+
+            /*
+             * Product information will be
+             * moved into order_items when
+             * we create that table.
+             */
+
+            showToast(
+                "Order created successfully.",
+                "success"
+            );
+
+
+            closeOrderModal();
+
+
+            clearOrderForm();
+
+
+            await loadOrders();
+
+        }
+
+        catch (error) {
+
+            console.error(error);
+
+
+            showToast(
+                error.message ||
+                "Unable to create order.",
+                "error"
+            );
+
+        }
+
+        finally {
+
+            createOrder.disabled =
+                false;
+
+            createOrder.innerHTML =
+                '<i class="fa-solid fa-check"></i> Create Order';
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   CLEAR FORM
+========================================================= */
+
+function clearOrderForm() {
+
+    document
+        .getElementById(
+            "customerName"
+        )
+        .value = "";
+
+
+    document
+        .getElementById(
+            "customerPhone"
+        )
+        .value = "";
+
+
+    document
+        .getElementById(
+            "customerEmail"
+        )
+        .value = "";
+
+
+    document
+        .getElementById(
+            "orderAmount"
+        )
+        .value = "";
+
+
+    document
+        .getElementById(
+            "paymentStatus"
+        )
+        .value = "pending";
+
+
+    document
+        .getElementById(
+            "orderStatus"
+        )
+        .value = "new";
+
+
+    document
+        .getElementById(
+            "productName"
+        )
+        .value = "";
+
+
+    document
+        .getElementById(
+            "productSize"
+        )
+        .value = "";
+
+
+    document
+        .getElementById(
+            "productQuantity"
+        )
+        .value = "1";
+
+
+    document
+        .getElementById(
+            "orderNotes"
+        )
+        .value = "";
+
+}
+
+
+/* =========================================================
+   SEARCH
+========================================================= */
+
+orderSearch.addEventListener(
+    "input",
+    renderOrders
+);
+
+
+statusFilter.addEventListener(
+    "change",
+    renderOrders
+);
+
+
+/* =========================================================
+   LOGOUT
+========================================================= */
+
+async function logoutAdmin() {
+
+    try {
+
+        await supabaseClient
+            .auth
+            .signOut();
+
+    }
+
+    catch (error) {
+
+        console.error(error);
+
+    }
+
+
+    window.location.href =
+        "../auth/login.html";
+
+}
+
+
+logoutButton.addEventListener(
+    "click",
+    logoutAdmin
+);
+
+
+/* =========================================================
+   AUTHENTICATION
+========================================================= */
+
+async function initializeAdmin() {
+
+    try {
+
+        const {
+            data,
+            error
+        } =
+        await supabaseClient
+            .auth
+            .getUser();
+
+
+        if (
+            error ||
+            !data ||
+            !data.user
+        ) {
+
+            window.location.href =
+                "../auth/login.html";
+
+            return;
+
+        }
+
+
+        const user =
+            data.user;
+
+
+        adminEmail.textContent =
+            user.email || "";
+
+
+        /*
+         * IMPORTANT:
+         * Admin authorization will be
+         * hardened with Supabase RLS
+         * in the database phase.
+         */
+
+
+        await loadOrders();
+
+
+        pageLoader.classList.add(
+            "hidden"
+        );
+
+    }
+
+    catch (error) {
+
+        console.error(error);
+
+        window.location.href =
+            "../auth/login.html";
+
+    }
+
+}
+
+
+/* =========================================================
+   AUTH STATE
+========================================================= */
+
+supabaseClient.auth.onAuthStateChange(
+    function(
+        event,
+        session
+    ) {
+
+        if (
+            event ===
+            "SIGNED_OUT"
+        ) {
+
+            window.location.href =
+                "../auth/login.html";
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   INITIALIZE
+========================================================= */
+
+initializeAdmin();
+
+</script>
+
+</body>
+
+</html>
