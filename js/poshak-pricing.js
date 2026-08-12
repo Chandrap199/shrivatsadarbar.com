@@ -29,6 +29,18 @@ const POSHAK_PRICING = {
         8: { price: 320, mrp: 370 }
     }
 
+   "poshak-003": {
+    0: { price: 100, mrp: 150 },
+    1: { price: 120, mrp: 170 },
+    2: { price: 150, mrp: 200 },
+    3: { price: 180, mrp: 230 },
+    4: { price: 220, mrp: 270 },
+    5: { price: 250, mrp: 300 },
+    6: { price: 280, mrp: 330 },
+    7: { price: 300, mrp: 350 },
+    8: { price: 350, mrp: 400 }
+},
+
 };
 
 
