@@ -116,16 +116,21 @@ if (whatsappButton) {
         e.preventDefault();
 
         const productName = "Premium Handmade Poshak";
-        const price = "₹799";
 
-        let selectedSize = "Not Selected";
+let selectedSize = "Not Selected";
+let selectedPrice = "Not Selected";
 
-        const activeSize = document.querySelector(".size.active");
+const activeSize = document.querySelector(".size.active");
 
-        if (activeSize) {
-            selectedSize = activeSize.textContent.trim();
-        }
+if (activeSize) {
 
+    selectedSize = activeSize.textContent.trim();
+
+    selectedPrice = activeSize.dataset.price
+        ? `₹${activeSize.dataset.price}`
+        : "Not Available";
+
+}
         const message = `Jai Shri Krishna 🙏
 
 I would like to order:
@@ -153,20 +158,34 @@ Thank you.`;
 
 }
 /* ===========================================
-   PRODUCT SIZE SELECTION
+   PRODUCT SIZE & PRICE SELECTION
 =========================================== */
 
 const sizeButtons = document.querySelectorAll(".size");
+const productPrice = document.getElementById("productPrice");
 
 sizeButtons.forEach(button => {
 
     button.addEventListener("click", function () {
 
+        /* Remove active state */
         sizeButtons.forEach(btn => {
             btn.classList.remove("active");
         });
 
+        /* Activate selected size */
         this.classList.add("active");
+
+        /* Get selected price */
+        const selectedPrice = this.dataset.price;
+
+        /* Update product price */
+        if (productPrice && selectedPrice) {
+
+            productPrice.textContent =
+                `₹${selectedPrice}`;
+
+        }
 
     });
 
