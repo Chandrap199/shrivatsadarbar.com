@@ -640,3 +640,193 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
 });
+
+
+/* =========================================================
+   SHRI VATSADARBAR
+   PRODUCT IMAGE ZOOM
+   TEST VERSION — POSHAK 004
+========================================================= */
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const mainImage =
+        document.getElementById("mainProductImage");
+
+    const zoomIn =
+        document.getElementById("zoomIn");
+
+    const zoomOut =
+        document.getElementById("zoomOut");
+
+    const zoomReset =
+        document.getElementById("zoomReset");
+
+    if (
+        !mainImage ||
+        !zoomIn ||
+        !zoomOut ||
+        !zoomReset
+    ) {
+        return;
+    }
+
+
+    /* =====================================================
+       ZOOM SETTINGS
+    ===================================================== */
+
+    let currentZoom = 1;
+
+    const minZoom = 1;
+    const maxZoom = 3;
+    const zoomStep = 0.25;
+
+
+    /* =====================================================
+       APPLY ZOOM
+    ===================================================== */
+
+    function applyZoom() {
+
+        mainImage.style.transform =
+            `scale(${currentZoom})`;
+
+        if (currentZoom > 1) {
+
+            mainImage.style.cursor = "zoom-out";
+
+        } else {
+
+            mainImage.style.cursor = "zoom-in";
+
+        }
+
+    }
+
+
+    /* =====================================================
+       ZOOM IN
+    ===================================================== */
+
+    zoomIn.addEventListener("click", function () {
+
+        if (currentZoom < maxZoom) {
+
+            currentZoom += zoomStep;
+
+            applyZoom();
+
+        }
+
+    });
+
+
+    /* =====================================================
+       ZOOM OUT
+    ===================================================== */
+
+    zoomOut.addEventListener("click", function () {
+
+        if (currentZoom > minZoom) {
+
+            currentZoom -= zoomStep;
+
+            applyZoom();
+
+        }
+
+    });
+
+
+    /* =====================================================
+       RESET
+    ===================================================== */
+
+    zoomReset.addEventListener("click", function () {
+
+        currentZoom = 1;
+
+        applyZoom();
+
+    });
+
+
+    /* =====================================================
+       DOUBLE CLICK / DOUBLE TAP
+    ===================================================== */
+
+    mainImage.addEventListener("dblclick", function () {
+
+        if (currentZoom === 1) {
+
+            currentZoom = 2;
+
+        } else {
+
+            currentZoom = 1;
+
+        }
+
+        applyZoom();
+
+    });
+
+
+    /* =====================================================
+       MOUSE WHEEL ZOOM
+       DESKTOP
+    ===================================================== */
+
+    mainImage.addEventListener("wheel", function (event) {
+
+        event.preventDefault();
+
+        if (event.deltaY < 0) {
+
+            if (currentZoom < maxZoom) {
+
+                currentZoom += zoomStep;
+
+            }
+
+        } else {
+
+            if (currentZoom > minZoom) {
+
+                currentZoom -= zoomStep;
+
+            }
+
+        }
+
+        applyZoom();
+
+    }, { passive: false });
+
+
+    /* =====================================================
+       RESET ZOOM WHEN CHANGING THUMBNAIL
+    ===================================================== */
+
+    const thumbnails =
+        document.querySelectorAll(".product-gallery img");
+
+    thumbnails.forEach(function (thumb) {
+
+        thumb.addEventListener("click", function () {
+
+            currentZoom = 1;
+
+            applyZoom();
+
+        });
+
+    });
+
+
+    /* Initial state */
+
+    applyZoom();
+
+});
