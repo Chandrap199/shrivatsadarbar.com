@@ -158,38 +158,81 @@ Thank you.`;
 
 }
 /* ===========================================
-   PRODUCT SIZE & PRICE SELECTION
+   POSHAK SIZE & DYNAMIC PRICING
 =========================================== */
 
 const sizeButtons = document.querySelectorAll(".size");
 const productPrice = document.getElementById("productPrice");
+const productMRP = document.getElementById("productMRP");
+const productSave = document.getElementById("productSave");
 
-sizeButtons.forEach(button => {
+const productPricing = POSHAK_PRICING["poshak-001"];
 
-    button.addEventListener("click", function () {
+if (
+    sizeButtons.length &&
+    productPrice &&
+    productMRP &&
+    productSave &&
+    productPricing
+) {
 
-        /* Remove active state */
-        sizeButtons.forEach(btn => {
-            btn.classList.remove("active");
-        });
+    function updateProductPrice(size) {
 
-        /* Activate selected size */
-        this.classList.add("active");
+        const pricing = productPricing[size];
 
-        /* Get selected price */
-        const selectedPrice = this.dataset.price;
-
-        /* Update product price */
-        if (productPrice && selectedPrice) {
-
-            productPrice.textContent =
-                `₹${selectedPrice}`;
-
+        if (!pricing) {
+            console.error("Pricing not found for size:", size);
+            return;
         }
+
+        productPrice.textContent =
+            `₹${pricing.price}`;
+
+        productMRP.textContent =
+            `₹${pricing.mrp}`;
+
+        const saving =
+            pricing.mrp - pricing.price;
+
+        productSave.textContent =
+            `Save ₹${saving}`;
+    }
+
+
+    sizeButtons.forEach(button => {
+
+        button.addEventListener("click", function () {
+
+            sizeButtons.forEach(btn => {
+                btn.classList.remove("active");
+            });
+
+            this.classList.add("active");
+
+            const selectedSize =
+                this.dataset.size;
+
+            updateProductPrice(selectedSize);
+
+        });
 
     });
 
-});
+
+    /* Set initial price */
+
+    const activeButton =
+        document.querySelector(".size.active");
+
+    if (activeButton) {
+
+        updateProductPrice(
+            activeButton.dataset.size
+        );
+
+    }
+
+}
 /* ===========================================
    PRODUCT IMAGE GALLERY
 =========================================== */
