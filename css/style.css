@@ -7655,3 +7655,93 @@ body.search-open {
     }
 
 }
+
+
+/* =========================================================
+   PRODUCT IMAGE ZOOM CONTROLS
+   TEST VERSION — POSHAK 004
+========================================================= */
+
+.product-image-viewer {
+    position: relative;
+    overflow: hidden;
+}
+
+/* Main image */
+
+#mainProductImage {
+    transform: scale(1);
+    transform-origin: center center;
+    transition: transform 0.25s ease;
+    cursor: zoom-in;
+}
+
+/* Zoom controls */
+
+.product-zoom-controls {
+    position: absolute;
+    right: 18px;
+    bottom: 18px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+    z-index: 20;
+}
+
+/* Buttons */
+
+.product-zoom-controls button {
+    width: 42px;
+    height: 42px;
+
+    border: none;
+    border-radius: 50%;
+
+    background: rgba(255, 255, 255, 0.95);
+    color: #333;
+
+    font-size: 24px;
+    font-weight: 600;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    cursor: pointer;
+
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
+
+    transition:
+        transform 0.2s ease,
+        background 0.2s ease;
+}
+
+.product-zoom-controls button:hover {
+    transform: scale(1.08);
+    background: #ffffff;
+}
+
+/* Reset button */
+
+.product-zoom-controls #zoomReset {
+    font-size: 20px;
+}
+
+/* Mobile */
+
+@media (max-width: 768px) {
+
+    .product-zoom-controls {
+        right: 12px;
+        bottom: 12px;
+    }
+
+    .product-zoom-controls button {
+        width: 38px;
+        height: 38px;
+        font-size: 21px;
+    }
+
+}
