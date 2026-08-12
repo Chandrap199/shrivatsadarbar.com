@@ -15,6 +15,18 @@ const POSHAK_PRICING = {
         6: { price: 175, mrp: 225 },
         7: { price: 200, mrp: 250 },
         8: { price: 250, mrp: 300 }
+    },
+
+    "poshak-002": {
+        0: { price: 70,  mrp: 120 },
+        1: { price: 90,  mrp: 140 },
+        2: { price: 110, mrp: 160 },
+        3: { price: 130, mrp: 180 },
+        4: { price: 150, mrp: 200 },
+        5: { price: 170, mrp: 220 },
+        6: { price: 200, mrp: 250 },
+        7: { price: 250, mrp: 300 },
+        8: { price: 320, mrp: 370 }
     }
 
 };
@@ -26,10 +38,6 @@ const POSHAK_PRICING = {
 
 document.addEventListener("DOMContentLoaded", function () {
 
-    /* -----------------------------------------
-       Identify current Poshak from URL
-    ----------------------------------------- */
-
     const pageName = window.location.pathname
         .split("/")
         .pop()
@@ -38,7 +46,6 @@ document.addEventListener("DOMContentLoaded", function () {
     if (!POSHAK_PRICING[pageName]) {
         return;
     }
-
 
     const pricing = POSHAK_PRICING[pageName];
 
@@ -53,7 +60,6 @@ document.addEventListener("DOMContentLoaded", function () {
     const productSave =
         document.querySelector(".product-save");
 
-
     if (!sizeButtons.length || !productPrice) {
 
         console.error(
@@ -63,10 +69,6 @@ document.addEventListener("DOMContentLoaded", function () {
         return;
     }
 
-
-    /* =====================================================
-       UPDATE PRICE DISPLAY
-    ===================================================== */
 
     function updatePrice(size) {
 
@@ -81,7 +83,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
             return;
         }
-
 
         const sellingPrice = selectedPricing.price;
         const mrp = selectedPricing.mrp;
@@ -124,27 +125,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
         button.addEventListener("click", function () {
 
-            /* Remove active */
-
             sizeButtons.forEach(function (btn) {
-
                 btn.classList.remove("active");
-
             });
-
-
-            /* Activate selected size */
 
             this.classList.add("active");
 
-
-            /* Get size */
-
             const selectedSize =
                 this.textContent.trim();
-
-
-            /* Update pricing */
 
             updatePrice(selectedSize);
 
@@ -159,7 +147,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const activeSize =
         document.querySelector(".size.active");
-
 
     if (activeSize) {
 
