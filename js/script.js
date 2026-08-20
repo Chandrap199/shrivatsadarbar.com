@@ -166,7 +166,10 @@ const productPrice = document.getElementById("productPrice");
 const productMRP = document.getElementById("productMRP");
 const productSave = document.getElementById("productSave");
 
-const productPricing = POSHAK_PRICING["poshak-001"];
+const productPricing =
+    typeof POSHAK_PRICING !== "undefined"
+        ? POSHAK_PRICING["poshak-001"]
+        : null;
 
 if (
     sizeButtons.length &&
