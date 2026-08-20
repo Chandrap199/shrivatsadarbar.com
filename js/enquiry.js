@@ -1,137 +1,518 @@
 /*======================================================
         SHRIVATSADARBAR
-        PREMIUM ENQUIRY POPUP
+        PREMIUM ENQUIRY SYSTEM
+        MASTER VERSION
 ======================================================*/
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", function () {
 
-    const enquiryModal = document.getElementById("enquiryModal");
+    /* =====================================================
+       FIND EXISTING ENQUIRY MODAL
+    ===================================================== */
 
-    if (!enquiryModal) return;
+    let enquiryModal =
+        document.getElementById("enquiryModal");
 
-    const overlay = enquiryModal.querySelector(".enquiry-overlay");
-const closeBtn = document.getElementById("closeEnquiry");
 
-if (!overlay || !closeBtn) {
-    console.error("Enquiry popup HTML is incomplete.");
-    return;
-}
-    /* ======================================
-            OPEN POPUP
-    ====================================== */
+    /* =====================================================
+       CREATE MODAL IF PAGE DOES NOT HAVE ONE
+       This allows all collection pages to use the
+       same enquiry system without manually adding
+       modal HTML to every page.
+    ===================================================== */
 
-    function openEnquiry() {
+    if (!enquiryModal) {
 
-        enquiryModal.classList.add("active");
+        enquiryModal = document.createElement("div");
 
-        document.body.style.overflow = "hidden";
+        enquiryModal.id = "enquiryModal";
+
+        enquiryModal.innerHTML = `
+
+            <div class="enquiry-overlay"></div>
+
+            <div class="enquiry-modal">
+
+                <button
+                    type="button"
+                    class="enquiry-close"
+                    id="closeEnquiry"
+                    aria-label="Close enquiry">
+
+                    &times;
+
+                </button>
+
+                <div class="enquiry-header">
+
+                    <span class="section-tag">
+                        ✨ Product Enquiry
+                    </span>
+
+                    <h2>
+                        Enquire About This Product
+                    </h2>
+
+                    <p>
+                        Share your details and we'll help you
+                        with price, availability and delivery.
+                    </p>
+
+                </div>
+
+                <div class="enquiry-product">
+
+                    <img
+                        id="popupProductImage"
+                        src=""
+                        alt="Product">
+
+                    <div class="enquiry-product-info">
+
+                        <h3 id="popupProductName">
+                            Product
+                        </h3>
+
+                    </div>
+
+                </div>
+
+                <form id="whatsappEnquiryForm">
+
+                    <div class="enquiry-field">
+
+                        <label for="customerName">
+                            Name *
+                        </label>
+
+                        <input
+                            type="text"
+                            id="customerName"
+                            placeholder="Enter your name"
+                            required>
+
+                    </div>
+
+                    <div class="enquiry-field">
+
+                        <label for="customerPhone">
+                            Mobile Number *
+                        </label>
+
+                        <input
+                            type="tel"
+                            id="customerPhone"
+                            placeholder="Enter your mobile number"
+                            required>
+
+                    </div>
+
+                    <div class="enquiry-field">
+
+                        <label for="customerCity">
+                            City / State *
+                        </label>
+
+                        <input
+                            type="text"
+                            id="customerCity"
+                            placeholder="Enter your city / state"
+                            required>
+
+                    </div>
+
+                    <div class="enquiry-field">
+
+                        <label for="customerSize">
+                            Size
+                        </label>
+
+                        <select id="customerSize">
+
+                            <option value="">
+                                Select Size
+                            </option>
+
+                            <option value="0">
+                                Size 0
+                            </option>
+
+                            <option value="1">
+                                Size 1
+                            </option>
+
+                            <option value="2">
+                                Size 2
+                            </option>
+
+                            <option value="3">
+                                Size 3
+                            </option>
+
+                            <option value="4">
+                                Size 4
+                            </option>
+
+                            <option value="5">
+                                Size 5
+                            </option>
+
+                            <option value="6">
+                                Size 6
+                            </option>
+
+                            <option value="7">
+                                Size 7
+                            </option>
+
+                            <option value="8">
+                                Size 8
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                    <div class="enquiry-field">
+
+                        <label for="customerColour">
+                            Preferred Colour
+                        </label>
+
+                        <input
+                            type="text"
+                            id="customerColour"
+                            placeholder="Optional">
+
+                    </div>
+
+                    <div class="enquiry-field">
+
+                        <label for="customerMessage">
+                            Additional Notes
+                        </label>
+
+                        <textarea
+                            id="customerMessage"
+                            rows="4"
+                            placeholder="Anything else you'd like to tell us?"></textarea>
+
+                    </div>
+
+                    <button
+                        type="submit"
+                        class="enquiry-submit">
+
+                        💬 Continue on WhatsApp
+
+                    </button>
+
+                </form>
+
+            </div>
+        `;
+
+        document.body.appendChild(enquiryModal);
 
     }
 
-    /* ======================================
-            CLOSE POPUP
-    ====================================== */
+
+    /* =====================================================
+       ELEMENTS
+    ===================================================== */
+
+    const overlay =
+        enquiryModal.querySelector(".enquiry-overlay");
+
+    const closeBtn =
+        document.getElementById("closeEnquiry");
+
+    const form =
+        document.getElementById("whatsappEnquiryForm");
+
+    const popupProductName =
+        document.getElementById("popupProductName");
+
+    const popupProductImage =
+        document.getElementById("popupProductImage");
+
+
+    /* =====================================================
+       SAFETY CHECK
+    ===================================================== */
+
+    if (!overlay || !closeBtn || !form) {
+
+        console.error(
+            "ShriVatsaDarbar Enquiry System: Required elements missing."
+        );
+
+        return;
+
+    }
+
+
+    /* =====================================================
+       OPEN ENQUIRY
+    ===================================================== */
+
+    function openEnquiry(productName, productImage) {
+
+        if (popupProductName) {
+
+            popupProductName.textContent =
+                productName || "Product";
+
+        }
+
+        if (popupProductImage) {
+
+            if (productImage) {
+
+                popupProductImage.src =
+                    productImage;
+
+                popupProductImage.style.display =
+                    "block";
+
+            } else {
+
+                popupProductImage.style.display =
+                    "none";
+
+            }
+
+        }
+
+        enquiryModal.classList.add("active");
+
+        document.body.style.overflow =
+            "hidden";
+
+    }
+
+
+    /* =====================================================
+       CLOSE ENQUIRY
+    ===================================================== */
 
     function closeEnquiry() {
 
         enquiryModal.classList.remove("active");
 
-        document.body.style.overflow = "";
+        document.body.style.overflow =
+            "";
 
     }
 
-    /* ======================================
-            CLOSE EVENTS
-    ====================================== */
 
-    closeBtn.addEventListener("click", closeEnquiry);
+    /* =====================================================
+       CLOSE BUTTON
+    ===================================================== */
 
-    overlay.addEventListener("click", closeEnquiry);
+    closeBtn.addEventListener(
+        "click",
+        closeEnquiry
+    );
 
-    document.addEventListener("keydown", (event) => {
 
-        if (event.key === "Escape") {
+    /* =====================================================
+       CLOSE OVERLAY
+    ===================================================== */
 
-            closeEnquiry();
+    overlay.addEventListener(
+        "click",
+        closeEnquiry
+    );
+
+
+    /* =====================================================
+       ESCAPE KEY
+    ===================================================== */
+
+    document.addEventListener(
+        "keydown",
+        function (event) {
+
+            if (
+                event.key === "Escape" &&
+                enquiryModal.classList.contains("active")
+            ) {
+
+                closeEnquiry();
+
+            }
 
         }
+    );
 
-    });
 
-    /* ======================================
-            OPEN BUTTONS
-    ====================================== */
+    /* =====================================================
+       ENQUIRY BUTTONS
+       Works across ALL collection pages
+    ===================================================== */
 
-    const enquiryButtons = document.querySelectorAll(".enquiry-btn");
-console.log("Buttons found:", enquiryButtons.length);
-    enquiryButtons.forEach(button => {
+    const enquiryButtons =
+        document.querySelectorAll(".enquiry-btn");
 
-        button.addEventListener("click", (e) => {
 
-    e.preventDefault();
+    console.log(
+        "ShriVatsaDarbar enquiry buttons found:",
+        enquiryButtons.length
+    );
 
-    const productName = button.dataset.product;
-    const productImage = button.dataset.image;
 
-    document.getElementById("popupProductName").innerText = productName;
+    enquiryButtons.forEach(
+        function (button) {
 
-    document.getElementById("popupProductImage").src = productImage;
+            button.addEventListener(
+                "click",
+                function (event) {
 
-    openEnquiry();
+                    event.preventDefault();
 
-});
+                    const productName =
+                        button.dataset.product ||
+                        "Product Enquiry";
 
-    });
 
-});
-/*====================================================
-        WHATSAPP FORM SUBMISSION
-====================================================*/
+                    const productImage =
+                        button.dataset.image ||
+                        "";
 
-document.addEventListener("DOMContentLoaded", () => {
 
-    const form = document.getElementById("whatsappEnquiryForm");
+                    openEnquiry(
+                        productName,
+                        productImage
+                    );
 
-    if (!form) return;
+                }
+            );
 
-    form.addEventListener("submit", function(e){
+        }
+    );
 
-        e.preventDefault();
 
-        const name = document.getElementById("customerName").value.trim();
-        const phone = document.getElementById("customerPhone").value.trim();
-        const city = document.getElementById("customerCity").value.trim();
-        const sizeField = document.getElementById("customerSize");
-const size = sizeField ? sizeField.value : "";
-        const colour = document.getElementById("customerColour").value.trim();
-        const notes = document.getElementById("customerMessage").value.trim();
+    /* =====================================================
+       WHATSAPP FORM SUBMISSION
+    ===================================================== */
 
-        if (name === "" || phone === "" || city === "") {
+    form.addEventListener(
+        "submit",
+        function (event) {
 
-    alert("Please complete all required fields.");
+            event.preventDefault();
 
-    return;
 
-}
+            /* ---------------------------------------------
+               CUSTOMER DETAILS
+            --------------------------------------------- */
 
-if (sizeField && size === "") {
+            const name =
+                document
+                    .getElementById("customerName")
+                    .value
+                    .trim();
 
-    alert("Please select a size.");
 
-    return;
+            const phone =
+                document
+                    .getElementById("customerPhone")
+                    .value
+                    .trim();
 
-}
-        const productName =
-    document.getElementById("popupProductName").innerText;
 
- const sizeText = size
-    ? `📏 Size
+            const city =
+                document
+                    .getElementById("customerCity")
+                    .value
+                    .trim();
+
+
+            const sizeField =
+                document.getElementById(
+                    "customerSize"
+                );
+
+
+            const size =
+                sizeField
+                    ? sizeField.value.trim()
+                    : "";
+
+
+            const colourField =
+                document.getElementById(
+                    "customerColour"
+                );
+
+
+            const colour =
+                colourField
+                    ? colourField.value.trim()
+                    : "";
+
+
+            const notesField =
+                document.getElementById(
+                    "customerMessage"
+                );
+
+
+            const notes =
+                notesField
+                    ? notesField.value.trim()
+                    : "";
+
+
+            /* ---------------------------------------------
+               VALIDATION
+            --------------------------------------------- */
+
+            if (
+                name === "" ||
+                phone === "" ||
+                city === ""
+            ) {
+
+                alert(
+                    "Please complete all required fields."
+                );
+
+                return;
+
+            }
+
+
+            /* ---------------------------------------------
+               PRODUCT
+            --------------------------------------------- */
+
+            const productName =
+                popupProductName
+                    ? popupProductName.textContent.trim()
+                    : "Product Enquiry";
+
+
+            /* ---------------------------------------------
+               SIZE TEXT
+            --------------------------------------------- */
+
+            const sizeText =
+                size
+                    ? `📏 Size
 ${size}
 
 `
-    : "";
+                    : "";
 
-const message = `🙏 Jai Shri Krishna
+
+            /* ---------------------------------------------
+               WHATSAPP MESSAGE
+            --------------------------------------------- */
+
+            const message =
+`🙏 Jai Shri Krishna
 
 I would like to enquire about the following product.
 
@@ -177,15 +558,38 @@ Thank you 🙏
 ShriVatsaDarbar
 
 We look forward to serving you. 🌸`;
-            
-        const whatsappURL =
-        "https://wa.me/918826196544?text=" +
-        encodeURIComponent(message);
 
-        window.open(whatsappURL, "_blank");
-enquiryModal.classList.remove("active");
-document.body.style.overflow = "";
-form.reset();
-    });
+
+            /* ---------------------------------------------
+               WHATSAPP
+            --------------------------------------------- */
+
+            const phoneNumber =
+                "918826196544";
+
+
+            const whatsappURL =
+                "https://wa.me/" +
+                phoneNumber +
+                "?text=" +
+                encodeURIComponent(message);
+
+
+            window.open(
+                whatsappURL,
+                "_blank"
+            );
+
+
+            /* ---------------------------------------------
+               CLOSE + RESET
+            --------------------------------------------- */
+
+            closeEnquiry();
+
+            form.reset();
+
+        }
+    );
 
 });
