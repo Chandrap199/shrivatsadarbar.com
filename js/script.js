@@ -375,162 +375,16 @@ Thank you.
 });
 
 
-
 /* =========================================================
-   PREMIUM SEARCH OVERLAY
+   SHRI VATSADARBAR — GLOBAL PREMIUM SEARCH
+   Works automatically on ALL pages
 ========================================================= */
 
 document.addEventListener("DOMContentLoaded", function () {
 
-    const searchToggle = document.getElementById("searchToggle");
-    const searchOverlay = document.getElementById("searchOverlay");
-    const searchClose = document.getElementById("searchClose");
-    const searchInput = document.getElementById("siteSearchInput");
-    const searchResults = document.getElementById("searchResults");
-
-    if (!searchToggle || !searchOverlay || !searchClose) {
-        return;
-    }
-
-
-    /* Open Search */
-
-    searchToggle.addEventListener("click", function () {
-
-        searchOverlay.classList.add("active");
-
-        document.body.classList.add("search-open");
-
-        setTimeout(function () {
-
-            if (searchInput) {
-                searchInput.focus();
-            }
-
-        }, 300);
-
-    });
-
-
-    /* Close Search */
-
-    searchClose.addEventListener("click", function () {
-
-        searchOverlay.classList.remove("active");
-
-        document.body.classList.remove("search-open");
-
-    });
-
-
-    /* Close when clicking outside the panel */
-
-    searchOverlay.addEventListener("click", function (event) {
-
-        if (event.target === searchOverlay) {
-
-            searchOverlay.classList.remove("active");
-
-            document.body.classList.remove("search-open");
-
-        }
-
-    });
-
-
-    /* Close with Escape key */
-
-    document.addEventListener("keydown", function (event) {
-
-        if (
-            event.key === "Escape" &&
-            searchOverlay.classList.contains("active")
-        ) {
-
-            searchOverlay.classList.remove("active");
-
-            document.body.classList.remove("search-open");
-
-        }
-
-    });
-
-});
-
     /* =====================================================
-   SEARCH DATA
-===================================================== */
-
-const searchItems = [
-
-    {
-        name: "Premium Poshak",
-        keywords: "poshak dress clothes laddu gopal krishna bal gopal",
-        url: "collections/poshak.html"
-    },
-
-    {
-        name: "Royal Mukut",
-        keywords: "mukut crown kirti mukut laddu gopal krishna",
-        url: "collections/mukut.html"
-    },
-
-    {
-        name: "Necklace Collection",
-        keywords: "necklace jewellery jewelry haar laddu gopal krishna",
-        url: "collections/necklace.html"
-    },
-
-    {
-        name: "Earrings Collection",
-        keywords: "earrings jewellery jewelry kundan laddu gopal krishna",
-        url: "collections/earrings.html"
-    },
-
-    {
-        name: "Hair Accessories",
-        keywords: "hair accessories gajra laddu gopal krishna",
-        url: "collections/hair-accessories.html"
-    },
-
-    {
-        name: "Flute Collection",
-        keywords: "flute bansuri krishna laddu gopal",
-        url: "collections/flute.html"
-    },
-
-    {
-        name: "Jhula Collection",
-        keywords: "jhula swing palna hindola laddu gopal krishna",
-        url: "collections/jhula.html"
-    },
-
-    {
-        name: "Accessories",
-        keywords: "accessories shringar devotional laddu gopal krishna",
-        url: "collections/accessories.html"
-    },
-
-    {
-        name: "Rakhi Collection",
-        keywords: "rakhi raksha bandhan festival devotional krishna",
-        url: "collections/rakhi.html"
-    }
-
-];
-
-/* =====================================================
-   SHRI VATSADARBAR — SEARCH
-===================================================== */
-
-document.addEventListener("DOMContentLoaded", function () {
-
-    const searchInput = document.getElementById("siteSearchInput");
-    const searchResults = document.getElementById("searchResults");
-
-    if (!searchInput || !searchResults) {
-        return;
-    }
+       SEARCH DATA
+    ===================================================== */
 
     const searchItems = [
 
@@ -591,56 +445,324 @@ document.addEventListener("DOMContentLoaded", function () {
     ];
 
 
-    searchInput.addEventListener("input", function () {
+    /* =====================================================
+       FIND SEARCH BUTTON
+    ===================================================== */
 
-        const query = searchInput.value.trim().toLowerCase();
+    const searchToggle =
+        document.getElementById("searchToggle");
 
-        if (query === "") {
-
-            searchResults.innerHTML = `
-                <p class="search-empty">
-                    Start typing to discover our collections.
-                </p>
-            `;
-
-            return;
-        }
+    if (!searchToggle) {
+        return;
+    }
 
 
-        const matches = searchItems.filter(function (item) {
+    /* =====================================================
+       CREATE SEARCH OVERLAY IF IT DOES NOT EXIST
+    ===================================================== */
 
-            return (
-                item.name.toLowerCase().includes(query) ||
-                item.keywords.toLowerCase().includes(query)
-            );
-
-        });
+    let searchOverlay =
+        document.getElementById("searchOverlay");
 
 
-        if (matches.length === 0) {
+    if (!searchOverlay) {
 
-            searchResults.innerHTML = `
-                <p class="search-empty">
-                    No matching collection found.
-                </p>
-            `;
+        searchOverlay = document.createElement("div");
 
-            return;
-        }
+        searchOverlay.className = "search-overlay";
+
+        searchOverlay.id = "searchOverlay";
+
+        searchOverlay.innerHTML = `
+
+            <div class="search-panel">
+
+                <button
+                    class="search-close"
+                    id="searchClose"
+                    type="button"
+                    aria-label="Close Search">
+
+                    <i class="fa-solid fa-xmark"></i>
+
+                </button>
+
+                <div class="search-panel-content">
+
+                    <span class="search-label">
+                        Explore ShriVatsaDarbar
+                    </span>
+
+                    <h2>
+                        What are you looking for?
+                    </h2>
+
+                    <div class="search-input-wrapper">
+
+                        <i class="fa-solid fa-magnifying-glass"></i>
+
+                        <input
+                            type="search"
+                            id="siteSearchInput"
+                            placeholder="Search Poshak, Mukut, Necklace..."
+                            autocomplete="off">
+
+                    </div>
+
+                    <div
+                        class="search-results"
+                        id="searchResults">
+
+                        <p class="search-empty">
+                            Start typing to discover our collections.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        `;
+
+        document.body.appendChild(searchOverlay);
+
+    }
 
 
-        searchResults.innerHTML = matches.map(function (item) {
+    /* =====================================================
+       GET SEARCH ELEMENTS
+    ===================================================== */
 
-            return `
-                <a href="${item.url}" class="search-result-item">
-                    <i class="fa-solid fa-arrow-right"></i>
-                    <span>${item.name}</span>
-                </a>
-            `;
+    const searchClose =
+        document.getElementById("searchClose");
 
-        }).join("");
+    const searchInput =
+        document.getElementById("siteSearchInput");
+
+    const searchResults =
+        document.getElementById("searchResults");
+
+
+    if (
+        !searchOverlay ||
+        !searchClose ||
+        !searchInput ||
+        !searchResults
+    ) {
+        return;
+    }
+
+
+    /* =====================================================
+       OPEN SEARCH
+    ===================================================== */
+
+    searchToggle.addEventListener("click", function () {
+
+        searchOverlay.classList.add("active");
+
+        document.body.classList.add("search-open");
+
+        setTimeout(function () {
+
+            searchInput.focus();
+
+        }, 300);
 
     });
+
+
+    /* =====================================================
+       CLOSE SEARCH
+    ===================================================== */
+
+    function closeSearch() {
+
+        searchOverlay.classList.remove("active");
+
+        document.body.classList.remove("search-open");
+
+    }
+
+
+    searchClose.addEventListener(
+        "click",
+        closeSearch
+    );
+
+
+    /* =====================================================
+       CLOSE WHEN CLICKING OUTSIDE PANEL
+    ===================================================== */
+
+    searchOverlay.addEventListener(
+        "click",
+        function (event) {
+
+            if (
+                event.target === searchOverlay
+            ) {
+
+                closeSearch();
+
+            }
+
+        }
+    );
+
+
+    /* =====================================================
+       CLOSE WITH ESCAPE
+    ===================================================== */
+
+    document.addEventListener(
+        "keydown",
+        function (event) {
+
+            if (
+                event.key === "Escape" &&
+                searchOverlay.classList.contains("active")
+            ) {
+
+                closeSearch();
+
+            }
+
+        }
+    );
+
+
+    /* =====================================================
+       SEARCH FUNCTION
+    ===================================================== */
+
+    searchInput.addEventListener(
+        "input",
+        function () {
+
+            const query =
+                searchInput.value
+                    .trim()
+                    .toLowerCase();
+
+
+            /* EMPTY SEARCH */
+
+            if (query === "") {
+
+                searchResults.innerHTML = `
+
+                    <p class="search-empty">
+                        Start typing to discover our collections.
+                    </p>
+
+                `;
+
+                return;
+
+            }
+
+
+            /* FIND MATCHES */
+
+            const matches =
+                searchItems.filter(function (item) {
+
+                    return (
+
+                        item.name
+                            .toLowerCase()
+                            .includes(query)
+
+                        ||
+
+                        item.keywords
+                            .toLowerCase()
+                            .includes(query)
+
+                    );
+
+                });
+
+
+            /* NO RESULTS */
+
+            if (matches.length === 0) {
+
+                searchResults.innerHTML = `
+
+                    <p class="search-empty">
+                        No matching collection found.
+                    </p>
+
+                `;
+
+                return;
+
+            }
+
+
+            /* SHOW RESULTS */
+
+            searchResults.innerHTML =
+                matches.map(function (item) {
+
+                    return `
+
+                        <a
+                            href="${getSearchUrl(item.url)}"
+                            class="search-result-item">
+
+                            <i class="fa-solid fa-arrow-right"></i>
+
+                            <span>
+                                ${item.name}
+                            </span>
+
+                        </a>
+
+                    `;
+
+                }).join("");
+
+        }
+    );
+
+
+    /* =====================================================
+       GENERATE CORRECT URL
+       FOR ROOT + COLLECTION PAGES
+    ===================================================== */
+
+    function getSearchUrl(url) {
+
+        const path =
+            window.location.pathname;
+
+
+        /*
+         * If current page is inside /collections/
+         * we need to go one level up.
+         */
+
+        if (
+            path.includes("/collections/")
+        ) {
+
+            return "../" + url;
+
+        }
+
+
+        /*
+         * Root pages and product pages
+         */
+
+        return url;
+
+    }
+
 
 });
 
