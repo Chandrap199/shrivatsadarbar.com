@@ -1,7 +1,7 @@
 /*======================================================
         SHRIVATSADARBAR
         PREMIUM ENQUIRY SYSTEM
-        MASTER VERSION
+        MASTER VERSION — FIXED
 ======================================================*/
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -16,9 +16,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     /* =====================================================
        CREATE MODAL IF PAGE DOES NOT HAVE ONE
-       This allows all collection pages to use the
-       same enquiry system without manually adding
-       modal HTML to every page.
     ===================================================== */
 
     if (!enquiryModal) {
@@ -133,41 +130,15 @@ document.addEventListener("DOMContentLoaded", function () {
                                 Select Size
                             </option>
 
-                            <option value="0">
-                                Size 0
-                            </option>
-
-                            <option value="1">
-                                Size 1
-                            </option>
-
-                            <option value="2">
-                                Size 2
-                            </option>
-
-                            <option value="3">
-                                Size 3
-                            </option>
-
-                            <option value="4">
-                                Size 4
-                            </option>
-
-                            <option value="5">
-                                Size 5
-                            </option>
-
-                            <option value="6">
-                                Size 6
-                            </option>
-
-                            <option value="7">
-                                Size 7
-                            </option>
-
-                            <option value="8">
-                                Size 8
-                            </option>
+                            <option value="0">Size 0</option>
+                            <option value="1">Size 1</option>
+                            <option value="2">Size 2</option>
+                            <option value="3">Size 3</option>
+                            <option value="4">Size 4</option>
+                            <option value="5">Size 5</option>
+                            <option value="6">Size 6</option>
+                            <option value="7">Size 7</option>
+                            <option value="8">Size 8</option>
 
                         </select>
 
@@ -218,11 +189,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     /* =====================================================
-       ELEMENTS
+       FIND MODAL ELEMENTS
     ===================================================== */
 
     const overlay =
         enquiryModal.querySelector(".enquiry-overlay");
+
+    const enquiryBox =
+        enquiryModal.querySelector(".enquiry-modal");
 
     const closeBtn =
         document.getElementById("closeEnquiry");
@@ -241,7 +215,12 @@ document.addEventListener("DOMContentLoaded", function () {
        SAFETY CHECK
     ===================================================== */
 
-    if (!overlay || !closeBtn || !form) {
+    if (
+        !overlay ||
+        !enquiryBox ||
+        !closeBtn ||
+        !form
+    ) {
 
         console.error(
             "ShriVatsaDarbar Enquiry System: Required elements missing."
@@ -254,6 +233,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
     /* =====================================================
        OPEN ENQUIRY
+       IMPORTANT FIX:
+       Activate BOTH parent + popup box
     ===================================================== */
 
     function openEnquiry(productName, productImage) {
@@ -261,9 +242,10 @@ document.addEventListener("DOMContentLoaded", function () {
         if (popupProductName) {
 
             popupProductName.textContent =
-                productName || "Product";
+                productName || "Product Enquiry";
 
         }
+
 
         if (popupProductImage) {
 
@@ -277,6 +259,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
             } else {
 
+                popupProductImage.removeAttribute("src");
+
                 popupProductImage.style.display =
                     "none";
 
@@ -284,7 +268,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
         }
 
+
+        /* FIX */
+
         enquiryModal.classList.add("active");
+
+        enquiryBox.classList.add("active");
+
 
         document.body.style.overflow =
             "hidden";
@@ -300,6 +290,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
         enquiryModal.classList.remove("active");
 
+        enquiryBox.classList.remove("active");
+
+
         document.body.style.overflow =
             "";
 
@@ -312,7 +305,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
     closeBtn.addEventListener(
         "click",
-        closeEnquiry
+        function (event) {
+
+            event.preventDefault();
+
+            closeEnquiry();
+
+        }
     );
 
 
@@ -322,7 +321,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
     overlay.addEventListener(
         "click",
-        closeEnquiry
+        function () {
+
+            closeEnquiry();
+
+        }
     );
 
 
@@ -349,7 +352,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     /* =====================================================
        ENQUIRY BUTTONS
-       Works across ALL collection pages
+       WORKS ACROSS ALL COLLECTION PAGES
     ===================================================== */
 
     const enquiryButtons =
@@ -371,13 +374,18 @@ document.addEventListener("DOMContentLoaded", function () {
 
                     event.preventDefault();
 
+                    event.stopPropagation();
+
+
                     const productName =
                         button.dataset.product ||
+                        button.getAttribute("data-product") ||
                         "Product Enquiry";
 
 
                     const productImage =
                         button.dataset.image ||
+                        button.getAttribute("data-image") ||
                         "";
 
 
