@@ -647,8 +647,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
 /* =========================================================
    SHRI VATSADARBAR
-   PRODUCT IMAGE ZOOM
-   TEST VERSION — POSHAK 004
+   GLOBAL PRODUCT IMAGE ZOOM
+   Works automatically on all product pages
 ========================================================= */
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -656,21 +656,11 @@ document.addEventListener("DOMContentLoaded", function () {
     const mainImage =
         document.getElementById("mainProductImage");
 
-    const zoomIn =
-        document.getElementById("zoomIn");
+    /* -----------------------------------------------------
+       If this is not a product page, do nothing.
+    ----------------------------------------------------- */
 
-    const zoomOut =
-        document.getElementById("zoomOut");
-
-    const zoomReset =
-        document.getElementById("zoomReset");
-
-    if (
-        !mainImage ||
-        !zoomIn ||
-        !zoomOut ||
-        !zoomReset
-    ) {
+    if (!mainImage) {
         return;
     }
 
@@ -687,6 +677,119 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     /* =====================================================
+       FIND EXISTING ZOOM BUTTONS
+       OR CREATE THEM AUTOMATICALLY
+    ===================================================== */
+
+    let zoomIn =
+        document.getElementById("zoomIn");
+
+    let zoomOut =
+        document.getElementById("zoomOut");
+
+    let zoomReset =
+        document.getElementById("zoomReset");
+
+
+    /* -----------------------------------------------------
+       PRODUCT IMAGE CONTAINER
+    ----------------------------------------------------- */
+
+    const imageContainer =
+        mainImage.parentElement;
+
+
+    /* =====================================================
+       CREATE ZOOM CONTROLS IF MISSING
+    ===================================================== */
+
+    if (!zoomIn || !zoomOut || !zoomReset) {
+
+        let zoomControls =
+            document.querySelector(".product-zoom-controls");
+
+
+        if (!zoomControls) {
+
+            zoomControls =
+                document.createElement("div");
+
+            zoomControls.className =
+                "product-zoom-controls";
+
+            zoomControls.innerHTML = `
+
+                <button
+                    type="button"
+                    id="zoomOut"
+                    aria-label="Zoom out">
+                    −
+                </button>
+
+                <button
+                    type="button"
+                    id="zoomReset"
+                    aria-label="Reset zoom">
+                    ↺
+                </button>
+
+                <button
+                    type="button"
+                    id="zoomIn"
+                    aria-label="Zoom in">
+                    +
+                </button>
+
+            `;
+
+
+            /*
+             * Add controls after the product image.
+             */
+
+            if (imageContainer) {
+
+                imageContainer.appendChild(
+                    zoomControls
+                );
+
+            }
+
+        }
+
+
+        zoomIn =
+            document.getElementById("zoomIn");
+
+        zoomOut =
+            document.getElementById("zoomOut");
+
+        zoomReset =
+            document.getElementById("zoomReset");
+
+    }
+
+
+    /* =====================================================
+       IMAGE CONTAINER SETTINGS
+    ===================================================== */
+
+    if (imageContainer) {
+
+        imageContainer.style.overflow =
+            "hidden";
+
+    }
+
+
+    mainImage.style.transformOrigin =
+        "center center";
+
+    mainImage.style.transition =
+        "transform 0.25s ease";
+
+
+    /* =====================================================
        APPLY ZOOM
     ===================================================== */
 
@@ -695,13 +798,16 @@ document.addEventListener("DOMContentLoaded", function () {
         mainImage.style.transform =
             `scale(${currentZoom})`;
 
+
         if (currentZoom > 1) {
 
-            mainImage.style.cursor = "zoom-out";
+            mainImage.style.cursor =
+                "zoom-out";
 
         } else {
 
-            mainImage.style.cursor = "zoom-in";
+            mainImage.style.cursor =
+                "zoom-in";
 
         }
 
@@ -712,68 +818,104 @@ document.addEventListener("DOMContentLoaded", function () {
        ZOOM IN
     ===================================================== */
 
-    zoomIn.addEventListener("click", function () {
+    if (zoomIn) {
 
-        if (currentZoom < maxZoom) {
+        zoomIn.addEventListener(
+            "click",
+            function () {
 
-            currentZoom += zoomStep;
+                if (currentZoom < maxZoom) {
 
-            applyZoom();
+                    currentZoom += zoomStep;
 
-        }
+                    currentZoom =
+                        Math.min(
+                            currentZoom,
+                            maxZoom
+                        );
 
-    });
+                    applyZoom();
+
+                }
+
+            }
+        );
+
+    }
 
 
     /* =====================================================
        ZOOM OUT
     ===================================================== */
 
-    zoomOut.addEventListener("click", function () {
+    if (zoomOut) {
 
-        if (currentZoom > minZoom) {
+        zoomOut.addEventListener(
+            "click",
+            function () {
 
-            currentZoom -= zoomStep;
+                if (currentZoom > minZoom) {
 
-            applyZoom();
+                    currentZoom -= zoomStep;
 
-        }
+                    currentZoom =
+                        Math.max(
+                            currentZoom,
+                            minZoom
+                        );
 
-    });
+                    applyZoom();
+
+                }
+
+            }
+        );
+
+    }
 
 
     /* =====================================================
-       RESET
+       RESET ZOOM
     ===================================================== */
 
-    zoomReset.addEventListener("click", function () {
+    if (zoomReset) {
 
-        currentZoom = 1;
+        zoomReset.addEventListener(
+            "click",
+            function () {
 
-        applyZoom();
+                currentZoom = 1;
 
-    });
+                applyZoom();
+
+            }
+        );
+
+    }
 
 
     /* =====================================================
        DOUBLE CLICK / DOUBLE TAP
     ===================================================== */
 
-    mainImage.addEventListener("dblclick", function () {
+    mainImage.addEventListener(
+        "dblclick",
+        function () {
 
-        if (currentZoom === 1) {
+            if (currentZoom === 1) {
 
-            currentZoom = 2;
+                currentZoom = 2;
 
-        } else {
+            } else {
 
-            currentZoom = 1;
+                currentZoom = 1;
+
+            }
+
+            applyZoom();
 
         }
-
-        applyZoom();
-
-    });
+    );
 
 
     /* =====================================================
@@ -781,54 +923,82 @@ document.addEventListener("DOMContentLoaded", function () {
        DESKTOP
     ===================================================== */
 
-    mainImage.addEventListener("wheel", function (event) {
+    mainImage.addEventListener(
+        "wheel",
+        function (event) {
 
-        event.preventDefault();
+            event.preventDefault();
 
-        if (event.deltaY < 0) {
 
-            if (currentZoom < maxZoom) {
+            if (event.deltaY < 0) {
 
-                currentZoom += zoomStep;
+                if (currentZoom < maxZoom) {
+
+                    currentZoom += zoomStep;
+
+                }
+
+            } else {
+
+                if (currentZoom > minZoom) {
+
+                    currentZoom -= zoomStep;
+
+                }
 
             }
 
-        } else {
 
-            if (currentZoom > minZoom) {
+            currentZoom =
+                Math.max(
+                    minZoom,
+                    Math.min(
+                        currentZoom,
+                        maxZoom
+                    )
+                );
 
-                currentZoom -= zoomStep;
-
-            }
-
-        }
-
-        applyZoom();
-
-    }, { passive: false });
-
-
-    /* =====================================================
-       RESET ZOOM WHEN CHANGING THUMBNAIL
-    ===================================================== */
-
-    const thumbnails =
-        document.querySelectorAll(".product-gallery img");
-
-    thumbnails.forEach(function (thumb) {
-
-        thumb.addEventListener("click", function () {
-
-            currentZoom = 1;
 
             applyZoom();
 
-        });
+        },
+        {
+            passive: false
+        }
+    );
 
-    });
+
+    /* =====================================================
+       RESET WHEN CHANGING THUMBNAIL
+    ===================================================== */
+
+    const thumbnails =
+        document.querySelectorAll(
+            ".product-gallery img"
+        );
 
 
-    /* Initial state */
+    thumbnails.forEach(
+        function (thumb) {
+
+            thumb.addEventListener(
+                "click",
+                function () {
+
+                    currentZoom = 1;
+
+                    applyZoom();
+
+                }
+            );
+
+        }
+    );
+
+
+    /* =====================================================
+       INITIAL STATE
+    ===================================================== */
 
     applyZoom();
 
