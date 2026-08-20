@@ -1,526 +1,140 @@
-/*======================================================
-        SHRIVATSADARBAR
-        PREMIUM ENQUIRY SYSTEM
-        MASTER VERSION — FIXED
-======================================================*/
+/======================================================
+SHRIVATSADARBAR
+PREMIUM ENQUIRY POPUP
+======================================================/
 
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", () => {
 
-    /* =====================================================
-       FIND EXISTING ENQUIRY MODAL
-    ===================================================== */
+const enquiryModal = document.getElementById("enquiryModal");  
 
-    let enquiryModal =
-        document.getElementById("enquiryModal");
+if (!enquiryModal) return;  
 
+const overlay = enquiryModal.querySelector(".enquiry-overlay");
 
-    /* =====================================================
-       CREATE MODAL IF PAGE DOES NOT HAVE ONE
-    ===================================================== */
+const closeBtn = document.getElementById("closeEnquiry");
 
-    if (!enquiryModal) {
+if (!overlay || !closeBtn) {
+console.error("Enquiry popup HTML is incomplete.");
+return;
+}
+/* ======================================
+OPEN POPUP
+====================================== */
 
-        enquiryModal = document.createElement("div");
+function openEnquiry() {  
 
-        enquiryModal.id = "enquiryModal";
+    enquiryModal.classList.add("active");  
 
-        enquiryModal.innerHTML = `
+    document.body.style.overflow = "hidden";  
 
-            <div class="enquiry-overlay"></div>
+}  
 
-            <div class="enquiry-modal">
+/* ======================================  
+        CLOSE POPUP  
+====================================== */  
 
-                <button
-                    type="button"
-                    class="enquiry-close"
-                    id="closeEnquiry"
-                    aria-label="Close enquiry">
+function closeEnquiry() {  
 
-                    &times;
+    enquiryModal.classList.remove("active");  
 
-                </button>
+    document.body.style.overflow = "";  
 
-                <div class="enquiry-header">
+}  
 
-                    <span class="section-tag">
-                        ✨ Product Enquiry
-                    </span>
+/* ======================================  
+        CLOSE EVENTS  
+====================================== */  
 
-                    <h2>
-                        Enquire About This Product
-                    </h2>
+closeBtn.addEventListener("click", closeEnquiry);  
 
-                    <p>
-                        Share your details and we'll help you
-                        with price, availability and delivery.
-                    </p>
+overlay.addEventListener("click", closeEnquiry);  
 
-                </div>
+document.addEventListener("keydown", (event) => {  
 
-                <div class="enquiry-product">
+    if (event.key === "Escape") {  
 
-                    <img
-                        id="popupProductImage"
-                        src=""
-                        alt="Product">
+        closeEnquiry();  
 
-                    <div class="enquiry-product-info">
+    }  
 
-                        <h3 id="popupProductName">
-                            Product
-                        </h3>
+});  
 
-                    </div>
+/* ======================================  
+        OPEN BUTTONS  
+====================================== */  
 
-                </div>
+const enquiryButtons = document.querySelectorAll(".enquiry-btn");
 
-                <form id="whatsappEnquiryForm">
+console.log("Buttons found:", enquiryButtons.length);
+enquiryButtons.forEach(button => {
 
-                    <div class="enquiry-field">
+button.addEventListener("click", (e) => {  
 
-                        <label for="customerName">
-                            Name *
-                        </label>
+e.preventDefault();  
 
-                        <input
-                            type="text"
-                            id="customerName"
-                            placeholder="Enter your name"
-                            required>
+const productName = button.dataset.product;  
+const productImage = button.dataset.image;  
 
-                    </div>
+document.getElementById("popupProductName").innerText = productName;  
 
-                    <div class="enquiry-field">
+document.getElementById("popupProductImage").src = productImage;  
 
-                        <label for="customerPhone">
-                            Mobile Number *
-                        </label>
+openEnquiry();
 
-                        <input
-                            type="tel"
-                            id="customerPhone"
-                            placeholder="Enter your mobile number"
-                            required>
+});
 
-                    </div>
+});
 
-                    <div class="enquiry-field">
+});
+/====================================================
+WHATSAPP FORM SUBMISSION
+====================================================/
 
-                        <label for="customerCity">
-                            City / State *
-                        </label>
+document.addEventListener("DOMContentLoaded", () => {
 
-                        <input
-                            type="text"
-                            id="customerCity"
-                            placeholder="Enter your city / state"
-                            required>
+const form = document.getElementById("whatsappEnquiryForm");  
 
-                    </div>
+if (!form) return;  
 
-                    <div class="enquiry-field">
+form.addEventListener("submit", function(e){  
 
-                        <label for="customerSize">
-                            Size
-                        </label>
+    e.preventDefault();  
 
-                        <select id="customerSize">
+    const name = document.getElementById("customerName").value.trim();  
+    const phone = document.getElementById("customerPhone").value.trim();  
+    const city = document.getElementById("customerCity").value.trim();  
+    const sizeField = document.getElementById("customerSize");
 
-                            <option value="">
-                                Select Size
-                            </option>
+const size = sizeField ? sizeField.value : "";
+const colour = document.getElementById("customerColour").value.trim();
+const notes = document.getElementById("customerMessage").value.trim();
 
-                            <option value="0">Size 0</option>
-                            <option value="1">Size 1</option>
-                            <option value="2">Size 2</option>
-                            <option value="3">Size 3</option>
-                            <option value="4">Size 4</option>
-                            <option value="5">Size 5</option>
-                            <option value="6">Size 6</option>
-                            <option value="7">Size 7</option>
-                            <option value="8">Size 8</option>
+if (name === "" || phone === "" || city === "") {  
 
-                        </select>
+alert("Please complete all required fields.");  
 
-                    </div>
+return;
 
-                    <div class="enquiry-field">
+}
 
-                        <label for="customerColour">
-                            Preferred Colour
-                        </label>
+if (sizeField && size === "") {
 
-                        <input
-                            type="text"
-                            id="customerColour"
-                            placeholder="Optional">
+alert("Please select a size.");  
 
-                    </div>
+return;
 
-                    <div class="enquiry-field">
+}
+const productName =
+document.getElementById("popupProductName").innerText;
 
-                        <label for="customerMessage">
-                            Additional Notes
-                        </label>
-
-                        <textarea
-                            id="customerMessage"
-                            rows="4"
-                            placeholder="Anything else you'd like to tell us?"></textarea>
-
-                    </div>
-
-                    <button
-                        type="submit"
-                        class="enquiry-submit">
-
-                        💬 Continue on WhatsApp
-
-                    </button>
-
-                </form>
-
-            </div>
-        `;
-
-        document.body.appendChild(enquiryModal);
-
-    }
-
-
-    /* =====================================================
-       FIND MODAL ELEMENTS
-    ===================================================== */
-
-    const overlay =
-        enquiryModal.querySelector(".enquiry-overlay");
-
-    const enquiryBox =
-        enquiryModal.querySelector(".enquiry-modal");
-
-    const closeBtn =
-        document.getElementById("closeEnquiry");
-
-    const form =
-        document.getElementById("whatsappEnquiryForm");
-
-    const popupProductName =
-        document.getElementById("popupProductName");
-
-    const popupProductImage =
-        document.getElementById("popupProductImage");
-
-
-    /* =====================================================
-       SAFETY CHECK
-    ===================================================== */
-
-    if (
-        !overlay ||
-        !enquiryBox ||
-        !closeBtn ||
-        !form
-    ) {
-
-        console.error(
-            "ShriVatsaDarbar Enquiry System: Required elements missing."
-        );
-
-        return;
-
-    }
-
-
-    /* =====================================================
-       OPEN ENQUIRY
-       IMPORTANT FIX:
-       Activate BOTH parent + popup box
-    ===================================================== */
-
-    function openEnquiry(productName, productImage) {
-
-        if (popupProductName) {
-
-            popupProductName.textContent =
-                productName || "Product Enquiry";
-
-        }
-
-
-        if (popupProductImage) {
-
-            if (productImage) {
-
-                popupProductImage.src =
-                    productImage;
-
-                popupProductImage.style.display =
-                    "block";
-
-            } else {
-
-                popupProductImage.removeAttribute("src");
-
-                popupProductImage.style.display =
-                    "none";
-
-            }
-
-        }
-
-
-        /* FIX */
-
-        enquiryModal.classList.add("active");
-
-        enquiryBox.classList.add("active");
-
-
-        document.body.style.overflow =
-            "hidden";
-
-    }
-
-
-    /* =====================================================
-       CLOSE ENQUIRY
-    ===================================================== */
-
-    function closeEnquiry() {
-
-        enquiryModal.classList.remove("active");
-
-        enquiryBox.classList.remove("active");
-
-
-        document.body.style.overflow =
-            "";
-
-    }
-
-
-    /* =====================================================
-       CLOSE BUTTON
-    ===================================================== */
-
-    closeBtn.addEventListener(
-        "click",
-        function (event) {
-
-            event.preventDefault();
-
-            closeEnquiry();
-
-        }
-    );
-
-
-    /* =====================================================
-       CLOSE OVERLAY
-    ===================================================== */
-
-    overlay.addEventListener(
-        "click",
-        function () {
-
-            closeEnquiry();
-
-        }
-    );
-
-
-    /* =====================================================
-       ESCAPE KEY
-    ===================================================== */
-
-    document.addEventListener(
-        "keydown",
-        function (event) {
-
-            if (
-                event.key === "Escape" &&
-                enquiryModal.classList.contains("active")
-            ) {
-
-                closeEnquiry();
-
-            }
-
-        }
-    );
-
-
-    /* =====================================================
-       ENQUIRY BUTTONS
-       WORKS ACROSS ALL COLLECTION PAGES
-    ===================================================== */
-
-    const enquiryButtons =
-        document.querySelectorAll(".enquiry-btn");
-
-
-    console.log(
-        "ShriVatsaDarbar enquiry buttons found:",
-        enquiryButtons.length
-    );
-
-
-    enquiryButtons.forEach(
-        function (button) {
-
-            button.addEventListener(
-                "click",
-                function (event) {
-
-                    event.preventDefault();
-
-                    event.stopPropagation();
-
-
-                    const productName =
-                        button.dataset.product ||
-                        button.getAttribute("data-product") ||
-                        "Product Enquiry";
-
-
-                    const productImage =
-                        button.dataset.image ||
-                        button.getAttribute("data-image") ||
-                        "";
-
-
-                    openEnquiry(
-                        productName,
-                        productImage
-                    );
-
-                }
-            );
-
-        }
-    );
-
-
-    /* =====================================================
-       WHATSAPP FORM SUBMISSION
-    ===================================================== */
-
-    form.addEventListener(
-        "submit",
-        function (event) {
-
-            event.preventDefault();
-
-
-            /* ---------------------------------------------
-               CUSTOMER DETAILS
-            --------------------------------------------- */
-
-            const name =
-                document
-                    .getElementById("customerName")
-                    .value
-                    .trim();
-
-
-            const phone =
-                document
-                    .getElementById("customerPhone")
-                    .value
-                    .trim();
-
-
-            const city =
-                document
-                    .getElementById("customerCity")
-                    .value
-                    .trim();
-
-
-            const sizeField =
-                document.getElementById(
-                    "customerSize"
-                );
-
-
-            const size =
-                sizeField
-                    ? sizeField.value.trim()
-                    : "";
-
-
-            const colourField =
-                document.getElementById(
-                    "customerColour"
-                );
-
-
-            const colour =
-                colourField
-                    ? colourField.value.trim()
-                    : "";
-
-
-            const notesField =
-                document.getElementById(
-                    "customerMessage"
-                );
-
-
-            const notes =
-                notesField
-                    ? notesField.value.trim()
-                    : "";
-
-
-            /* ---------------------------------------------
-               VALIDATION
-            --------------------------------------------- */
-
-            if (
-                name === "" ||
-                phone === "" ||
-                city === ""
-            ) {
-
-                alert(
-                    "Please complete all required fields."
-                );
-
-                return;
-
-            }
-
-
-            /* ---------------------------------------------
-               PRODUCT
-            --------------------------------------------- */
-
-            const productName =
-                popupProductName
-                    ? popupProductName.textContent.trim()
-                    : "Product Enquiry";
-
-
-            /* ---------------------------------------------
-               SIZE TEXT
-            --------------------------------------------- */
-
-            const sizeText =
-                size
-                    ? `📏 Size
+const sizeText = size
+? `📏 Size
 ${size}
 
 `
-                    : "";
+: "";
 
-
-            /* ---------------------------------------------
-               WHATSAPP MESSAGE
-            --------------------------------------------- */
-
-            const message =
-`🙏 Jai Shri Krishna
+const message = `🙏 Jai Shri Krishna
 
 I would like to enquire about the following product.
 
@@ -567,37 +181,15 @@ ShriVatsaDarbar
 
 We look forward to serving you. 🌸`;
 
+const whatsappURL =  
+    "https://wa.me/918826196544?text=" +  
+    encodeURIComponent(message);  
 
-            /* ---------------------------------------------
-               WHATSAPP
-            --------------------------------------------- */
+    window.open(whatsappURL, "_blank");
 
-            const phoneNumber =
-                "918826196544";
-
-
-            const whatsappURL =
-                "https://wa.me/" +
-                phoneNumber +
-                "?text=" +
-                encodeURIComponent(message);
-
-
-            window.open(
-                whatsappURL,
-                "_blank"
-            );
-
-
-            /* ---------------------------------------------
-               CLOSE + RESET
-            --------------------------------------------- */
-
-            closeEnquiry();
-
-            form.reset();
-
-        }
-    );
+enquiryModal.classList.remove("active");
+document.body.style.overflow = "";
+form.reset();
+});
 
 });
