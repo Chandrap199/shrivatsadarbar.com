@@ -1,0 +1,92 @@
+name: Add Google Analytics to All HTML Pages
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+
+jobs:
+  add-google-analytics:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Add Google Analytics tag to all HTML files
+        run: |
+          python3 <<'PY'
+          from pathlib import Path
+          import re
+
+          MEASUREMENT_ID = "G-JFLKPDQXZF"
+
+          GOOGLE_TAG = f'''<!-- Google tag (gtag.js) -->
+          <script async src="https://www.googletagmanager.com/gtag/js?id={MEASUREMENT_ID}"></script>
+          <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){{dataLayer.push(arguments);}}
+            gtag('js', new Date());
+
+            gtag('config', '{MEASUREMENT_ID}');
+          </script>
+          '''
+
+          changed_files = []
+
+          for file in Path(".").rglob("*.html"):
+
+              # Skip files inside .git
+              if ".git" in file.parts:
+                  continue
+
+              content = file.read_text(encoding="utf-8")
+
+              # Don't add the tag if Google Analytics is already installed
+              if MEASUREMENT_ID in content:
+                  continue
+
+              # Add Google Analytics immediately after <head>
+              match = re.search(r"<head\s*>", content, re.IGNORECASE)
+
+              if not match:
+                  print(f"Skipped (no <head>): {file}")
+                  continue
+
+              insert_position = match.end()
+
+              new_content = (
+                  content[:insert_position]
+                  + "\n\n"
+                  + GOOGLE_TAG
+                  + "\n"
+                  + content[insert_position:]
+              )
+
+              file.write_text(new_content, encoding="utf-8")
+              changed_files.append(str(file))
+
+          print("\nFiles updated:")
+          for file in changed_files:
+              print(f"  {file}")
+
+          print(f"\nTotal files updated: {len(changed_files)}")
+          PY
+
+      - name: Commit Google Analytics changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add '*.html'
+
+          if git diff --cached --quiet; then
+            echo "No HTML files needed Google Analytics."
+          else
+            git commit -m "Add Google Analytics to all HTML pages"
+            git push
+          fi
