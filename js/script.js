@@ -875,44 +875,6 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 
-
-    /* =====================================================
-       GENERATE CORRECT URL
-       FOR ROOT + COLLECTION PAGES
-    ===================================================== */
-
-    function getSearchUrl(url) {
-
-        const path =
-            window.location.pathname;
-
-
-        /*
-         * If current page is inside /collections/
-         * we need to go one level up.
-         */
-
-        if (
-            path.includes("/collections/")
-        ) {
-
-            return "../" + url;
-
-        }
-
-
-        /*
-         * Root pages and product pages
-         */
-
-        return url;
-
-    }
-
-
-});
-
-
 /* =========================================================
    SHRI VATSADARBAR
    GLOBAL PRODUCT IMAGE ZOOM
