@@ -1,0 +1,275 @@
+name: Add Open Graph Social Preview
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+
+jobs:
+  add-open-graph:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Add Open Graph metadata
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import html
+          import re
+
+          SITE_URL = "https://shrivatsadarbar.com"
+
+          def clean(value):
+              value = re.sub(r"\s+", " ", value)
+              return html.unescape(value).strip()
+
+          def strip_tags(value):
+              return clean(re.sub(r"<[^>]+>", "", value))
+
+          def get_title(content):
+              match = re.search(
+                  r'<section[^>]*class=["\'][^"\']*product-title[^"\']*["\'][^>]*>.*?<h1[^>]*>(.*?)</h1>',
+                  content,
+                  re.I | re.S
+              )
+
+              if match:
+                  title = strip_tags(match.group(1))
+
+                  if title:
+                      return title
+
+              match = re.search(
+                  r"<title[^>]*>(.*?)</title>",
+                  content,
+                  re.I | re.S
+              )
+
+              if match:
+                  title = strip_tags(match.group(1))
+
+                  title = re.sub(
+                      r"\s*\|\s*ShriVatsaDarbar\s*$",
+                      "",
+                      title,
+                      flags=re.I
+                  )
+
+                  if title:
+                      return title
+
+              return "ShriVatsaDarbar"
+
+          def get_description(content, title):
+              match = re.search(
+                  r'<p[^>]*class=["\'][^"\']*short-description[^"\']*["\'][^>]*>(.*?)</p>',
+                  content,
+                  re.I | re.S
+              )
+
+              if match:
+                  description = strip_tags(match.group(1))
+
+                  if description:
+                      return description
+
+              return (
+                  f"{title} — Handcrafted with devotion "
+                  "for Laddu Gopal Ji by ShriVatsaDarbar."
+              )
+
+          def get_image(content):
+              patterns = [
+                  r'<img[^>]*id=["\']mainProductImage["\'][^>]*src=["\']([^"\']+)["\']',
+                  r'<img[^>]*src=["\']([^"\']+)["\'][^>]*id=["\']mainProductImage["\']',
+                  r'<img[^>]*class=["\'][^"\']*active-thumb[^"\']*["\'][^>]*src=["\']([^"\']+)["\']',
+                  r'<img[^>]*src=["\']([^"\']+)["\'][^>]*class=["\'][^"\']*active-thumb[^"\']*["\']'
+              ]
+
+              image_path = None
+
+              for pattern in patterns:
+                  match = re.search(
+                      pattern,
+                      content,
+                      re.I | re.S
+                  )
+
+                  if match:
+                      image_path = match.group(1)
+                      break
+
+              if not image_path:
+                  return (
+                      SITE_URL +
+                      "/images/logo/logo-icon.webp"
+                  )
+
+              if image_path.startswith(
+                  ("http://", "https://")
+              ):
+                  return image_path
+
+              image_path = image_path.replace(
+                  "../",
+                  "",
+                  1
+              )
+
+              image_path = image_path.replace(
+                  "./",
+                  "",
+                  1
+              )
+
+              image_path = image_path.lstrip("/")
+
+              return (
+                  SITE_URL +
+                  "/" +
+                  image_path
+              )
+
+          def get_url(file):
+              return (
+                  SITE_URL +
+                  "/" +
+                  file.as_posix()
+              )
+
+          def build_metadata(
+              title,
+              description,
+              image,
+              url
+          ):
+              values = [
+
+                  '<!-- ShriVatsaDarbar Open Graph Metadata -->',
+
+                  '<meta property="og:type" content="website">',
+
+                  f'<meta property="og:title" content="{html.escape(title, quote=True)}">',
+
+                  f'<meta property="og:description" content="{html.escape(description, quote=True)}">',
+
+                  f'<meta property="og:image" content="{html.escape(image, quote=True)}">',
+
+                  f'<meta property="og:url" content="{html.escape(url, quote=True)}">',
+
+                  '<meta property="og:site_name" content="ShriVatsaDarbar">',
+
+                  '<meta name="twitter:card" content="summary_large_image">',
+
+                  f'<meta name="twitter:title" content="{html.escape(title, quote=True)}">',
+
+                  f'<meta name="twitter:description" content="{html.escape(description, quote=True)}">',
+
+                  f'<meta name="twitter:image" content="{html.escape(image, quote=True)}">',
+
+                  '<!-- End ShriVatsaDarbar Open Graph Metadata -->'
+              ]
+
+              return "\n".join(values)
+
+          changed = 0
+
+          for file in Path(".").rglob("*.html"):
+
+              if ".git" in file.parts:
+                  continue
+
+              content = file.read_text(
+                  encoding="utf-8"
+              )
+
+              head = re.search(
+                  r"<head\b[^>]*>",
+                  content,
+                  re.I
+              )
+
+              if not head:
+                  continue
+
+              title = get_title(content)
+
+              description = get_description(
+                  content,
+                  title
+              )
+
+              image = get_image(content)
+
+              url = get_url(file)
+
+              content = re.sub(
+                  r"<!-- ShriVatsaDarbar Open Graph Metadata -->.*?<!-- End ShriVatsaDarbar Open Graph Metadata -->",
+                  "",
+                  content,
+                  flags=re.I | re.S
+              )
+
+              head = re.search(
+                  r"<head\b[^>]*>",
+                  content,
+                  re.I
+              )
+
+              insert_at = head.end()
+
+              meta = build_metadata(
+                  title,
+                  description,
+                  image,
+                  url
+              )
+
+              content = (
+                  content[:insert_at]
+                  + "\n"
+                  + meta
+                  + content[insert_at:]
+              )
+
+              file.write_text(
+                  content,
+                  encoding="utf-8"
+              )
+
+              changed += 1
+
+              print(
+                  "Updated:",
+                  file
+              )
+
+          print(
+              "Total HTML files updated:",
+              changed
+          )
+
+          PY
+
+      - name: Commit changes
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add -- '*.html'
+
+          if git diff --cached --quiet; then
+            echo "No changes to commit."
+          else
+            git commit -m "Add Open Graph social preview metadata"
+            git push
+          fi
