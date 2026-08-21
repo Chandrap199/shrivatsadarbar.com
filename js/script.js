@@ -107,7 +107,8 @@ document.addEventListener("DOMContentLoaded", () => {
    PRODUCT WHATSAPP ORDER
 =========================================== */
 
-const whatsappButton = document.getElementById("whatsapp-order");
+const whatsappButton =
+    document.getElementById("whatsapp-order");
 
 if (whatsappButton) {
 
@@ -115,39 +116,95 @@ if (whatsappButton) {
 
         e.preventDefault();
 
-        const productName = "Premium Handmade Poshak";
+        /* Product Name */
 
-let selectedSize = "Not Selected";
-let selectedPrice = "Not Selected";
+        const productTitle =
+            document.querySelector(".product-title h1");
 
-const activeSize = document.querySelector(".size.active");
+        const informationTitle =
+            document.querySelector(".product-information h2");
 
-if (activeSize) {
+        const productName =
+            productTitle && productTitle.textContent.trim()
+                ? productTitle.textContent.trim()
+                : informationTitle && informationTitle.textContent.trim()
+                    ? informationTitle.textContent.trim()
+                    : document.title.replace("| ShriVatsaDarbar", "").trim();
 
-    selectedSize = activeSize.textContent.trim();
 
-    selectedPrice = activeSize.dataset.price
-        ? `₹${activeSize.dataset.price}`
-        : "Not Available";
+        /* Selected Size */
 
-}
-        const message = `Jai Shri Krishna 🙏
+        let selectedSize = "Not Selected";
 
-I would like to order:
+        const activeSize =
+            document.querySelector(".size.active");
+
+        if (activeSize) {
+
+            selectedSize =
+                activeSize.textContent.trim();
+
+        }
+
+
+        /* Current Product Price */
+
+        let selectedPrice = "Price on Request";
+
+        const currentPrice =
+            document.getElementById("productPrice");
+
+        if (
+            currentPrice &&
+            currentPrice.textContent.trim()
+        ) {
+
+            selectedPrice =
+                currentPrice.textContent.trim();
+
+        } else {
+
+            const staticPrice =
+                document.querySelector(".product-price");
+
+            if (
+                staticPrice &&
+                staticPrice.textContent.trim()
+            ) {
+
+                selectedPrice =
+                    staticPrice.textContent.trim();
+
+            }
+
+        }
+
+
+        /* WhatsApp Message */
+
+        const message =
+`🙏 Jai Shri Krishna
+
+I would like to enquire about:
 
 Product: ${productName}
 
 Size: ${selectedSize}
 
-Price: ${price}
+Price: ${selectedPrice}
 
 Product Link:
 ${window.location.href}
 
-Please share the payment details.
+Please share the availability, final price and shipping details.
 
-Thank you.`;
-        const phone = "918826196544";
+Thank you.
+`;
+
+
+        const phone =
+            "918826196544";
+
 
         window.open(
             `https://wa.me/${phone}?text=${encodeURIComponent(message)}`,
@@ -157,6 +214,7 @@ Thank you.`;
     });
 
 }
+
 /* ===========================================
    POSHAK SIZE & DYNAMIC PRICING
 =========================================== */
