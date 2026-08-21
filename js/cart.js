@@ -4,7 +4,7 @@
    Version 1.0
 ========================================================= */
 
-document.addEventListener("DOMContentLoaded", function () {
+function initializeUniversalCart() {
 
     "use strict";
 
@@ -1269,4 +1269,17 @@ ShriVatsaDarbar
         "ShriVatsaDarbar: Universal cart initialized."
     );
 
-});
+}
+
+if (document.readyState === "loading") {
+
+    document.addEventListener(
+        "DOMContentLoaded",
+        initializeUniversalCart
+    );
+
+} else {
+
+    initializeUniversalCart();
+
+}
