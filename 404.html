@@ -1,1 +1,667 @@
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Page Not Found | ShriVatsaDarbar</title>
+
+    <meta
+        name="description"
+        content="The page you are looking for could not be found. Explore ShriVatsaDarbar's divine collections of handcrafted Laddu Gopal Shringar."
+    >
+
+    <meta
+        name="robots"
+        content="noindex, follow"
+    >
+
+    <link
+        rel="icon"
+        type="image/webp"
+        href="/images/logo/logo-icon.webp"
+    >
+
+    <link
+        rel="stylesheet"
+        href="/css/style.css"
+    >
+
+
+    <style>
+
+        /* =========================================================
+           SHRI VATSADARBAR
+           PREMIUM 404 PAGE
+        ========================================================= */
+
+        * {
+            box-sizing: border-box;
+        }
+
+
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            min-height: 100%;
+        }
+
+
+        body {
+            background: #faf8f3;
+            color: #3f2020;
+            font-family:
+                "Poppins",
+                "Segoe UI",
+                Arial,
+                sans-serif;
+        }
+
+
+        .error-page {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background:
+                radial-gradient(
+                    circle at 15% 20%,
+                    rgba(184, 145, 58, 0.08),
+                    transparent 30%
+                ),
+                radial-gradient(
+                    circle at 85% 80%,
+                    rgba(128, 29, 29, 0.05),
+                    transparent 30%
+                ),
+                #faf8f3;
+        }
+
+
+        /* =====================================================
+           HEADER
+        ===================================================== */
+
+        .error-header {
+            width: 100%;
+            padding: 22px 6%;
+            border-bottom: 1px solid rgba(160, 128, 70, 0.18);
+            background: rgba(255, 255, 255, 0.88);
+            backdrop-filter: blur(10px);
+        }
+
+
+        .error-header-inner {
+            max-width: 1240px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 30px;
+        }
+
+
+        .error-logo {
+            display: inline-flex;
+            align-items: center;
+            gap: 14px;
+            text-decoration: none;
+            color: inherit;
+        }
+
+
+        .error-logo img {
+            width: 52px;
+            height: 52px;
+            object-fit: contain;
+        }
+
+
+        .error-logo-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+
+        .error-logo-name {
+            font-family:
+                Georgia,
+                "Times New Roman",
+                serif;
+            font-size: 25px;
+            font-weight: 700;
+            letter-spacing: -0.3px;
+            color: #7d2020;
+        }
+
+
+        .error-logo-tagline {
+            margin-top: 2px;
+            font-size: 10px;
+            letter-spacing: 0.3px;
+            color: #777;
+        }
+
+
+        .error-header-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 44px;
+            padding: 0 20px;
+            border: 1px solid #b99a54;
+            border-radius: 8px;
+            color: #6f2020;
+            background: #fff;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 500;
+            transition:
+                background 0.25s ease,
+                color 0.25s ease,
+                transform 0.25s ease;
+        }
+
+
+        .error-header-link:hover {
+            background: #7d2020;
+            color: #fff;
+            transform: translateY(-1px);
+        }
+
+
+        /* =====================================================
+           MAIN
+        ===================================================== */
+
+        .error-main {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 70px 24px 90px;
+        }
+
+
+        .error-content {
+            width: 100%;
+            max-width: 850px;
+            text-align: center;
+        }
+
+
+        .error-symbol {
+            width: 92px;
+            height: 92px;
+            margin: 0 auto 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: #f5ead8;
+            border: 1px solid rgba(185, 154, 84, 0.35);
+            box-shadow:
+                0 15px 35px rgba(83, 53, 20, 0.08);
+        }
+
+
+        .error-symbol span {
+            font-family:
+                Georgia,
+                "Times New Roman",
+                serif;
+            font-size: 35px;
+            font-weight: 700;
+            color: #8a2020;
+        }
+
+
+        .error-number {
+            margin: 0;
+            font-family:
+                Georgia,
+                "Times New Roman",
+                serif;
+            font-size: clamp(76px, 13vw, 150px);
+            line-height: 0.9;
+            font-weight: 700;
+            letter-spacing: -5px;
+            color: #7d2020;
+        }
+
+
+        .error-title {
+            margin: 25px 0 12px;
+            font-family:
+                Georgia,
+                "Times New Roman",
+                serif;
+            font-size: clamp(28px, 4vw, 44px);
+            line-height: 1.15;
+            color: #4d2222;
+        }
+
+
+        .error-description {
+            max-width: 620px;
+            margin: 0 auto;
+            font-size: 15px;
+            line-height: 1.9;
+            color: #777;
+        }
+
+
+        .error-divider {
+            width: 70px;
+            height: 1px;
+            margin: 30px auto;
+            background: #b99a54;
+            position: relative;
+        }
+
+
+        .error-divider::after {
+            content: "✦";
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform:
+                translate(-50%, -50%);
+            padding: 0 10px;
+            background: #faf8f3;
+            color: #b99a54;
+            font-size: 12px;
+        }
+
+
+        .error-message {
+            margin: 0 auto 34px;
+            font-family:
+                Georgia,
+                "Times New Roman",
+                serif;
+            font-size: 17px;
+            font-style: italic;
+            color: #8a6a36;
+        }
+
+
+        /* =====================================================
+           BUTTONS
+        ===================================================== */
+
+        .error-actions {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 14px;
+            flex-wrap: wrap;
+        }
+
+
+        .error-button {
+            min-width: 175px;
+            min-height: 50px;
+            padding: 0 25px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 9px;
+            border-radius: 7px;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 600;
+            transition:
+                transform 0.25s ease,
+                box-shadow 0.25s ease,
+                background 0.25s ease;
+        }
+
+
+        .error-button-primary {
+            background: #7d2020;
+            color: #fff;
+            box-shadow:
+                0 10px 25px rgba(125, 32, 32, 0.18);
+        }
+
+
+        .error-button-primary:hover {
+            background: #641919;
+            transform: translateY(-2px);
+            box-shadow:
+                0 14px 30px rgba(125, 32, 32, 0.22);
+        }
+
+
+        .error-button-secondary {
+            background: #fff;
+            color: #6f2020;
+            border: 1px solid #b99a54;
+        }
+
+
+        .error-button-secondary:hover {
+            background: #f8f0e3;
+            transform: translateY(-2px);
+        }
+
+
+        /* =====================================================
+           FOOTER
+        ===================================================== */
+
+        .error-footer {
+            padding: 20px 24px;
+            text-align: center;
+            border-top: 1px solid rgba(160, 128, 70, 0.15);
+            background: rgba(255, 255, 255, 0.65);
+        }
+
+
+        .error-footer p {
+            margin: 0;
+            font-size: 11px;
+            color: #888;
+            letter-spacing: 0.2px;
+        }
+
+
+        .error-footer strong {
+            color: #7d2020;
+            font-weight: 600;
+        }
+
+
+        /* =====================================================
+           MOBILE
+        ===================================================== */
+
+        @media (max-width: 700px) {
+
+            .error-header {
+                padding: 16px 20px;
+            }
+
+
+            .error-header-inner {
+                gap: 15px;
+            }
+
+
+            .error-logo {
+                gap: 9px;
+            }
+
+
+            .error-logo img {
+                width: 42px;
+                height: 42px;
+            }
+
+
+            .error-logo-name {
+                font-size: 19px;
+            }
+
+
+            .error-logo-tagline {
+                display: none;
+            }
+
+
+            .error-header-link {
+                min-height: 40px;
+                padding: 0 13px;
+                font-size: 11px;
+            }
+
+
+            .error-main {
+                padding:
+                    55px 20px
+                    65px;
+            }
+
+
+            .error-symbol {
+                width: 76px;
+                height: 76px;
+                margin-bottom: 22px;
+            }
+
+
+            .error-symbol span {
+                font-size: 29px;
+            }
+
+
+            .error-number {
+                font-size: 92px;
+                letter-spacing: -3px;
+            }
+
+
+            .error-title {
+                margin-top: 20px;
+                font-size: 29px;
+            }
+
+
+            .error-description {
+                font-size: 13px;
+                line-height: 1.8;
+            }
+
+
+            .error-message {
+                font-size: 15px;
+            }
+
+
+            .error-actions {
+                flex-direction: column;
+                width: 100%;
+            }
+
+
+            .error-button {
+                width: 100%;
+                max-width: 300px;
+            }
+
+        }
+
+
+    </style>
+
+</head>
+
+
+<body>
+
+    <div class="error-page">
+
+
+        <!-- =====================================================
+             HEADER
+        ====================================================== -->
+
+        <header class="error-header">
+
+            <div class="error-header-inner">
+
+
+                <a
+                    href="/"
+                    class="error-logo"
+                    aria-label="ShriVatsaDarbar Home"
+                >
+
+                    <img
+                        src="/images/logo/logo-icon.webp"
+                        alt="ShriVatsaDarbar"
+                    >
+
+                    <span class="error-logo-text">
+
+                        <span class="error-logo-name">
+                            ShriVatsaDarbar
+                        </span>
+
+                        <span class="error-logo-tagline">
+                            Where Every Shringar is an Offering
+                        </span>
+
+                    </span>
+
+                </a>
+
+
+                <a
+                    href="/"
+                    class="error-header-link"
+                >
+                    Return Home
+                </a>
+
+
+            </div>
+
+        </header>
+
+
+
+        <!-- =====================================================
+             MAIN 404 CONTENT
+        ====================================================== -->
+
+        <main class="error-main">
+
+            <section
+                class="error-content"
+                aria-labelledby="errorTitle"
+            >
+
+
+                <div
+                    class="error-symbol"
+                    aria-hidden="true"
+                >
+
+                    <span>
+                        ✦
+                    </span>
+
+                </div>
+
+
+                <p class="error-number">
+                    404
+                </p>
+
+
+                <h1
+                    id="errorTitle"
+                    class="error-title"
+                >
+                    This Page Has Wandered Away
+                </h1>
+
+
+                <p class="error-description">
+
+                    The page you are looking for could not be found.
+                    It may have been moved, updated, or the link may
+                    no longer be available.
+
+                </p>
+
+
+                <div
+                    class="error-divider"
+                    aria-hidden="true"
+                ></div>
+
+
+                <p class="error-message">
+
+                    Let us guide you back to the divine world
+                    of ShriVatsaDarbar.
+
+                </p>
+
+
+                <div class="error-actions">
+
+
+                    <a
+                        href="/"
+                        class="error-button error-button-primary"
+                    >
+
+                        <span aria-hidden="true">
+                            ⌂
+                        </span>
+
+                        Back to Home
+
+                    </a>
+
+
+                    <a
+                        href="/collections.html"
+                        class="error-button error-button-secondary"
+                    >
+
+                        <span aria-hidden="true">
+                            ✦
+                        </span>
+
+                        Explore Collections
+
+                    </a>
+
+
+                </div>
+
+
+            </section>
+
+        </main>
+
+
+
+        <!-- =====================================================
+             FOOTER
+        ====================================================== -->
+
+        <footer class="error-footer">
+
+            <p>
+
+                <strong>
+                    ShriVatsaDarbar
+                </strong>
+
+                &nbsp;•&nbsp;
+
+                Handcrafted with devotion in Varanasi
+
+            </p>
+
+        </footer>
+
+
+    </div>
+
+
+</body>
+
+</html>
