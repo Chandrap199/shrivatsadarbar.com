@@ -1295,6 +1295,90 @@ document.addEventListener("DOMContentLoaded", function () {
 
 /* =========================================================
    SHRI VATSADARBAR
+   UNIVERSAL FONT AWESOME LOADER
+   Ensures icons work on every page
+========================================================= */
+
+(function () {
+
+    "use strict";
+
+    /*
+     * Check whether Font Awesome is already loaded.
+     */
+
+    const fontAwesomeLoaded =
+        Array.from(
+            document.querySelectorAll('link[rel="stylesheet"]')
+        ).some(function (link) {
+
+            return (
+                link.href.includes("font-awesome") ||
+                link.href.includes("fontawesome")
+            );
+
+        });
+
+
+    /*
+     * If Font Awesome is already available,
+     * do nothing.
+     */
+
+    if (fontAwesomeLoaded) {
+
+        console.log(
+            "ShriVatsaDarbar: Font Awesome already loaded."
+        );
+
+        return;
+
+    }
+
+
+    /*
+     * Load Font Awesome universally.
+     */
+
+    const fontAwesome =
+        document.createElement("link");
+
+
+    fontAwesome.rel =
+        "stylesheet";
+
+
+    fontAwesome.href =
+        "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css";
+
+
+    fontAwesome.onload = function () {
+
+        console.log(
+            "ShriVatsaDarbar: Font Awesome loaded."
+        );
+
+    };
+
+
+    fontAwesome.onerror = function () {
+
+        console.error(
+            "ShriVatsaDarbar: Font Awesome failed to load."
+        );
+
+    };
+
+
+    document.head.appendChild(
+        fontAwesome
+    );
+
+})();
+
+
+/* =========================================================
+   SHRI VATSADARBAR
    UNIVERSAL CART LOADER
    Automatically loads cart.js on all pages
 ========================================================= */
