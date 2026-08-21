@@ -1291,3 +1291,122 @@ document.addEventListener("DOMContentLoaded", function () {
     applyZoom();
 
 });
+
+
+/* =========================================================
+   SHRI VATSADARBAR
+   UNIVERSAL CART LOADER
+   Automatically loads cart.js on all pages
+========================================================= */
+
+(function () {
+
+    "use strict";
+
+
+    /*
+     * Check whether cart.js is already included
+     * on the current page.
+     */
+
+    const cartScriptExists =
+        Array.from(
+            document.querySelectorAll("script[src]")
+        ).some(function (script) {
+
+            return script.src.endsWith("/js/cart.js");
+
+        });
+
+
+    /*
+     * If cart.js already exists on this page,
+     * do nothing.
+     *
+     * This protects the Poshak page because
+     * it already contains cart.js.
+     */
+
+    if (cartScriptExists) {
+
+        console.log(
+            "ShriVatsaDarbar: cart.js already included."
+        );
+
+        return;
+
+    }
+
+
+    /*
+     * Find the current script.js file.
+     */
+
+    const currentScript =
+        Array.from(
+            document.querySelectorAll("script[src]")
+        ).find(function (script) {
+
+            return script.src.endsWith("/js/script.js");
+
+        });
+
+
+    if (!currentScript) {
+
+        console.error(
+            "ShriVatsaDarbar: script.js location not found."
+        );
+
+        return;
+
+    }
+
+
+    /*
+     * Build the correct cart.js path
+     * relative to script.js.
+     */
+
+    const cartURL =
+        new URL(
+            "cart.js",
+            currentScript.src
+        ).href;
+
+
+    /*
+     * Create cart.js script.
+     */
+
+    const cartScript =
+        document.createElement("script");
+
+
+    cartScript.src =
+        cartURL;
+
+
+    cartScript.onload = function () {
+
+        console.log(
+            "ShriVatsaDarbar: Universal cart loaded."
+        );
+
+    };
+
+
+    cartScript.onerror = function () {
+
+        console.error(
+            "ShriVatsaDarbar: Unable to load cart.js."
+        );
+
+    };
+
+
+    document.body.appendChild(
+        cartScript
+    );
+
+})();
