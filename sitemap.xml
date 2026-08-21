@@ -1,1 +1,276 @@
+<?xml version="1.0" encoding="UTF-8"?>
 
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+    <!-- MAIN WEBSITE PAGES -->
+
+    <url>
+        <loc>https://shrivatsadarbar.com/</loc>
+    </url>
+
+    <url>
+        <loc>https://shrivatsadarbar.com/about.html</loc>
+    </url>
+
+    <url>
+        <loc>https://shrivatsadarbar.com/collections.html</loc>
+    </url>
+
+    <url>
+        <loc>https://shrivatsadarbar.com/reviews.html</loc>
+    </url>
+
+    <url>
+        <loc>https://shrivatsadarbar.com/faq.html</loc>
+    </url>
+
+    <url>
+        <loc>https://shrivatsadarbar.com/contact.html</loc>
+    </url>
+
+
+    <!-- COLLECTION PAGES -->
+
+    <url>
+        <loc>https://shrivatsadarbar.com/collections/poshak.html</loc>
+    </url>
+
+    <url>
+        <loc>https://shrivatsadarbar.com/collections/mukut.html</loc>
+    </url>
+
+    <url>
+        <loc>https://shrivatsadarbar.com/collections/necklace.html</loc>
+    </url>
+
+    <url>
+        <loc>https://shrivatsadarbar.com/collections/earrings.html</loc>
+    </url>
+
+    <url>
+        <loc>https://shrivatsadarbar.com/collections/hair-accessories.html</loc>
+    </url>
+
+    <url>
+        <loc>https://shrivatsadarbar.com/collections/flute.html</loc>
+    </url>
+
+    <url>
+        <loc>https://shrivatsadarbar.com/collections/jhula.html</loc>
+    </url>
+
+    <url>
+        <loc>https://shrivatsadarbar.com/collections/accessories.html</loc>
+    </url>
+
+    <url>
+        <loc>https://shrivatsadarbar.com/collections/rakhi.html</loc>
+    </url>
+
+
+    <!-- POSHAK PRODUCTS -->
+
+    <url>
+        <loc>https://shrivatsadarbar.com/collections/poshak-001.html</loc>
+    </url>
+
+    <url>
+        <loc>https://shrivatsadarbar.com/collections/poshak-002.html</loc>
+    </url>
+
+    <url>
+        <loc>https://shrivatsadarbar.com/collections/poshak-003.html</loc>
+    </url>
+
+    <url>
+        <loc>https://shrivatsadarbar.com/collections/poshak-004.html</loc>
+    </url>
+
+    <url>
+        <loc>https://shrivatsadarbar.com/collections/poshak-005.html</loc>
+    </url>
+
+    <url>
+        <loc>https://shrivatsadarbar.com/collections/poshak-006.html</loc>
+    </url>
+
+    <url>
+        <loc>https://shrivatsadarbar.com/collections/poshak-007.html</loc>
+    </url>
+
+    <url>
+        <loc>https://shrivatsadarbar.com/collections/poshak-008.html</loc>
+    </url>
+
+
+    <!-- MUKUT PRODUCTS -->
+
+    <url>
+        <loc>https://shrivatsadarbar.com/collections/mukut-001.html</loc>
+    </url>
+
+    <url>
+        <loc>https://shrivatsadarbar.com/collections/mukut-002.html</loc>
+    </url>
+
+
+    <!-- NECKLACE PRODUCTS -->
+
+    <url>
+        <loc>https://shrivatsadarbar.com/collections/necklace-001.html</loc>
+    </url>
+
+    <url>
+        <loc>https://shrivatsadarbar.com/collections/necklace-002.html</loc>
+    </url>
+
+    <url>
+        <loc>https://shrivatsadarbar.com/collections/necklace-003.html</loc>
+    </url>
+
+    <url>
+        <loc>https://shrivatsadarbar.com/collections/necklace-004.html</loc>
+    </url>
+
+    <url>
+        <loc>https://shrivatsadarbar.com/collections/necklace-005.html</loc>
+    </url>
+
+
+    <!-- EARRINGS PRODUCTS -->
+
+    <url>
+        <loc>https://shrivatsadarbar.com/collections/earrings-001.html</loc>
+    </url>
+
+    <url>
+        <loc>https://shrivatsadarbar.com/collections/earrings-002.html</loc>
+    </url>
+
+    <url>
+        <loc>https://shrivatsadarbar.com/collections/earrings-003.html</loc>
+    </url>
+
+
+    <!-- FLUTE PRODUCTS -->
+
+    <url>
+        <loc>https://shrivatsadarbar.com/collections/flute-001.html</loc>
+    </url>
+
+    <url>
+        <loc>https://shrivatsadarbar.com/collections/flute-002.html</loc>
+    </url>
+
+    <url>
+        <loc>https://shrivatsadarbar.com/collections/flute-003.html</loc>
+    </url>
+
+    <url>
+        <loc>https://shrivatsadarbar.com/collections/flute-004.html</loc>
+    </url>
+
+
+    <!-- HAIR ACCESSORIES PRODUCTS -->
+
+    <url>
+        <loc>https://shrivatsadarbar.com/collections/hair-001.html</loc>
+    </url>
+
+    <url>
+        <loc>https://shrivatsadarbar.com/collections/hair-002.html</loc>
+    </url>
+
+
+    <!-- JHULA PRODUCTS -->
+
+    <url>
+        <loc>https://shrivatsadarbar.com/collections/jhula-001.html</loc>
+    </url>
+
+
+    <!-- ACCESSORIES PRODUCTS -->
+
+    <url>
+        <loc>https://shrivatsadarbar.com/collections/accessories-001.html</loc>
+    </url>
+
+    <url>
+        <loc>https://shrivatsadarbar.com/collections/accessories-002.html</loc>
+    </url>
+
+    <url>
+        <loc>https://shrivatsadarbar.com/collections/accessories-003.html</loc>
+    </url>
+
+    <url>
+        <loc>https://shrivatsadarbar.com/collections/accessories-004.html</loc>
+    </url>
+
+    <url>
+        <loc>https://shrivatsadarbar.com/collections/accessories-005.html</loc>
+    </url>
+
+    <url>
+        <loc>https://shrivatsadarbar.com/collections/accessories-006.html</loc>
+    </url>
+
+
+    <!-- RAKHI PRODUCTS -->
+
+    <url>
+        <loc>https://shrivatsadarbar.com/collections/rakhi-001.html</loc>
+    </url>
+
+    <url>
+        <loc>https://shrivatsadarbar.com/collections/rakhi-002.html</loc>
+    </url>
+
+    <url>
+        <loc>https://shrivatsadarbar.com/collections/rakhi-003.html</loc>
+    </url>
+
+    <url>
+        <loc>https://shrivatsadarbar.com/collections/rakhi-004.html</loc>
+    </url>
+
+    <url>
+        <loc>https://shrivatsadarbar.com/collections/rakhi-005.html</loc>
+    </url>
+
+    <url>
+        <loc>https://shrivatsadarbar.com/collections/rakhi-006.html</loc>
+    </url>
+
+    <url>
+        <loc>https://shrivatsadarbar.com/collections/rakhi-007.html</loc>
+    </url>
+
+    <url>
+        <loc>https://shrivatsadarbar.com/collections/rakhi-008.html</loc>
+    </url>
+
+
+    <!-- POLICY PAGES -->
+
+    <url>
+        <loc>https://shrivatsadarbar.com/policies/privacy-policy.html</loc>
+    </url>
+
+    <url>
+        <loc>https://shrivatsadarbar.com/policies/shipping-policy.html</loc>
+    </url>
+
+    <url>
+        <loc>https://shrivatsadarbar.com/policies/return-refund-policy.html</loc>
+    </url>
+
+    <url>
+        <loc>https://shrivatsadarbar.com/policies/cancellation-policy.html</loc>
+    </url>
+
+    <url>
+        <loc>https://shrivatsadarbar.com/policies/terms-conditions.html</loc>
+    </url>
+
+</urlset>
