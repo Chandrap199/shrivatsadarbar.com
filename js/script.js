@@ -1494,3 +1494,39 @@ document.addEventListener("DOMContentLoaded", function () {
     );
 
 })();
+
+
+/* =========================================================
+   SHARED MASTER FOOTER
+========================================================= */
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const footerContainer = document.getElementById("site-footer");
+
+    if (!footerContainer) {
+        return;
+    }
+
+    fetch("/footer.html")
+        .then(response => {
+
+            if (!response.ok) {
+                throw new Error("Unable to load footer.html");
+            }
+
+            return response.text();
+
+        })
+        .then(html => {
+
+            footerContainer.innerHTML = html;
+
+        })
+        .catch(error => {
+
+            console.error("Shared footer failed to load:", error);
+
+        });
+
+});
